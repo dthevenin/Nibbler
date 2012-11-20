@@ -4,6 +4,16 @@ body {
   pos
 }
 
+.vs_ui_textlabel {
+  width: 30%;
+  display: inline-block;
+}
+
+.vs_ui_combobox {
+  width: 60%;
+  display: inline-block;
+}
+
 .vs_ui_textarea {
   margin: 10px 0 10px 0;
   width: 100%;

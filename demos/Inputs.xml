@@ -1,6 +1,7 @@
 <component xmlns="http://bender.igel.co.jp">
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <instance href="../lib/ui/Application.xml">
+      <instance href="../lib/ui/TextLabel.xml" text="Select a Value:"/>
       <instance id="combo" href="../lib/ui/ComboBox.xml" data='["item", "item2", "item3"]'/>
       <instance id="textarea" href="../lib/ui/TextArea.xml" value='Tap your text'/>
       <instance href="../lib/ui/TextInput.xml" placeholder='Text...'/>
