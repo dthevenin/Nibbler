@@ -1,0 +1,47 @@
+<component xmlns="http://bender.igel.co.jp">
+
+  <property name="data" type="dynamic" value="[]"/>
+
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <html:div class="vs_ui_picker">
+      <html:div class="slots" />
+      <html:div class="frame" />
+    </html:div>
+  </view>
+
+  <watch>
+    <get instance="$self" event="@rendered"/>
+    <set>
+      var instance = this;
+
+      instance.__vs_instance = new vs.ui.Picker ({
+        node: instance._views.$root,
+        data: instance._properties.data
+      }).init ();
+
+      instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
+        flexo.notify (instance, '@change', {data: e.data});
+      })
+
+      vs.util.defineProperty (instance._properties, 'selectedKeys', {
+        get : function () {
+          return instance.__vs_instance.selectedKeys;
+        }
+      })
+
+      vs.util.defineProperty (instance._properties, 'selectedValues', {
+        get : function () {
+          return instance.__vs_instance.selectedValues;
+        }
+      })
+    </set>
+  </watch>
+
+  <watch>
+    <get instance="$self" property="data">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.data = value;
+    </get>
+  </watch>
+
+</component>
