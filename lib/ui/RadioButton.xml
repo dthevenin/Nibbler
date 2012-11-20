@@ -25,6 +25,12 @@
           instance.__vs_instance.model = v;
         }
       })
+
+      vs.util.defineProperty (instance._properties, 'selectedIndex', {
+        get : function () {
+          return instance.__vs_instance.selectedIndex;
+        }
+      })
     </set>
   </watch>
 
