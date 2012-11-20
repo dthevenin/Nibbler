@@ -1,0 +1,38 @@
+<component xmlns="http://bender.igel.co.jp">
+
+  <property name="data" type="dynamic"/>
+
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <html:div class="vs_ui_radiobutton"><html:fieldset x-hag-hole="item_children" /></html:div>
+  </view>
+
+  <watch>
+    <get instance="$self" event="@rendered"/>
+    <set>
+      var instance = this;
+
+      instance.__vs_instance = new vs.ui.RadioButton ({
+        node: instance._views.$root,
+        data: instance._properties.data
+      }).init ();
+
+      instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
+        flexo.notify (instance, '@change', {data: e.data});
+      })
+
+      vs.util.defineProperty (instance, 'model', {
+        set : function (v) {
+          instance.__vs_instance.model = v;
+        }
+      })
+    </set>
+  </watch>
+
+  <watch>
+    <get instance="$self" property="data">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.data = value;
+    </get>
+  </watch>
+
+</component>

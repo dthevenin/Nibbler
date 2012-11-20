@@ -1,0 +1,28 @@
+<component xmlns="http://bender.igel.co.jp">
+
+  <property name="text" type="string"/>
+
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <html:div class="vs_ui_textlabel"></html:div>
+  </view>
+
+  <watch>
+    <get instance="$self" event="@rendered"/>
+    <set>
+      var instance = this;
+
+      instance.__vs_instance = new vs.ui.TextLabel ({
+        node: instance._views.$root,
+        text: instance._properties.text
+      }).init ();
+    </set>
+  </watch>
+
+  <watch>
+    <get instance="$self" property="text">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.text = value;
+    </get>
+  </watch>
+
+</component>
