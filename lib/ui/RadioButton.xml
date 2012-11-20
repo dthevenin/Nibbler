@@ -19,7 +19,6 @@
 
       instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
         instance.properties.selectedIndex = instance.__vs_instance._selected_index;
-        console.log (instance.properties.selectedIndex)
         flexo.notify (instance, '@change', {data: e.data});
       })
 
