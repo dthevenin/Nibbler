@@ -14,6 +14,8 @@
       <instance href="../lib/ui/Button.xml" text="Button" type="nav_forward"/>
       <instance href="../lib/ui/Button.xml" text="Button" type="nav_forward" style="silver_style"/>
       <instance href="../lib/ui/Button.xml" text="Button" type="nav_forward" style="black_style"/>
+      <instance id="segButton1" href="../lib/ui/SegmentedButton.xml" items="['1', '2', '3']"/>
+      <instance id="segButton2" href="../lib/ui/SegmentedButton.xml" items="['1', '2', '3']" type="bar"/>
     </instance>
 
     <target q="head" unique="true">
@@ -25,5 +27,12 @@
     </target>
   </view>
 
+  <watch>
+    <get instance="segButton1" event="@select" />
+    <get instance="segButton2" event="@select" />
+    <set>
+      console.log (value);
+    </set>
+  </watch>
 
 </component>

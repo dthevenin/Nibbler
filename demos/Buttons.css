@@ -12,7 +12,11 @@ body {
 
 .vs_ui_button.nav,
 .vs_ui_button.nav_forward,
-.vs_ui_button.nav_back
-{
+.vs_ui_button.nav_back {
   width: 25%;
+}
+
+.vs_ui_segmentedbutton {
+  margin: 10px;
+  width: 50%;
 }
