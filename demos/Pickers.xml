@@ -1,0 +1,39 @@
+<component xmlns="http://bender.igel.co.jp">
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <instance href="../lib/ui/Application.xml">
+      <instance id="picker1" href="../lib/ui/Picker.xml"
+        data='[
+          \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\},
+          \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\}]'
+      />
+      <instance id="picker2" href="../lib/ui/Picker.xml"
+        data='[
+          \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\},
+          \{"values": \{1:"one",2:"two",3:"three",4:"four",\}, "style": "right shrink"\},
+          \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\}]'
+      />
+      <instance id="label1" href="../lib/ui/TextLabel.xml"/>
+      <instance id="label2" href="../lib/ui/TextLabel.xml"/>
+
+    </instance>
+
+    <target q="head" unique="true">
+      <html:link rel="stylesheet"
+        href="{ this._absolute_uri('font-awesome.css') }"/>
+      <html:link rel="stylesheet" href="{ this._absolute_uri('../vstoolkit/css/vs_ui.css') }"/>
+      <html:link rel="stylesheet" href="{ this._absolute_uri('../vstoolkit/css/vs_ui_ios.css') }"/>
+      <html:link rel="stylesheet" href="{ this._absolute_uri('Pickers.css') }"/>
+    </target>
+  </view>
+
+  <watch>
+    <get instance="picker1" property="selectedKeys" />
+    <set instance="label1" property="text" />
+  </watch>
+
+  <watch>
+    <get instance="picker2" property="selectedKeys" />
+    <set instance="label2" property="text"/>
+  </watch>
+
+</component>

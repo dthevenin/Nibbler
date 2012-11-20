@@ -2,6 +2,7 @@
 
   <property name="value"/>
   <property name="placeholder"/>
+  <property name="type"/>
 
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <html:div class="vs_ui_inputfield"><html:input type="text" value="" placeholder="type ..." incremental="incremental"/><html:div class='clear_button'/>
@@ -17,6 +18,7 @@
         node: instance.views.$root,
         value: instance.properties.value,
         placeholder: instance.properties.placeholder
+        type: instance.properties.type,
       }).init ();
 
       instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
@@ -30,12 +32,15 @@
       if (!this.__vs_instance) return;
       this.__vs_instance.value = value;
     </get>
-  </watch>
 
-  <watch>
     <get instance="$self" property="placeholder">
       if (!this.__vs_instance) return;
       this.__vs_instance.placeholder = value;
+    </get>
+
+    <get instance="$self" property="type">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.type = value;
     </get>
   </watch>
 
