@@ -1,6 +1,7 @@
 <component xmlns="http://bender.igel.co.jp">
 
   <property name="data" as="dynamic" value="[]"/>
+  <property name="selectedIndex" as="dynamic"/>
 
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <html:div class="vs_ui_radiobutton"><html:fieldset x-hag-hole="item_children" /></html:div>
@@ -17,6 +18,8 @@
       }).init ();
 
       instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
+        instance.properties.selectedIndex = instance.__vs_instance._selected_index;
+        console.log (instance.properties.selectedIndex)
         flexo.notify (instance, '@change', {data: e.data});
       })
 
@@ -26,11 +29,6 @@
         }
       })
 
-      vs.util.defineProperty (instance.properties, 'selectedIndex', {
-        get : function () {
-          return instance.__vs_instance.selectedIndex;
-        }
-      })
     </set>
   </watch>
 
