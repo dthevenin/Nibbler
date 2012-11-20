@@ -1,24 +1,18 @@
 <component xmlns="http://bender.igel.co.jp">
   <view xmlns:html="http://www.w3.org/1999/xhtml">
-    <instance href="../lib/ui/Application.xml">
-      <instance href="../lib/ui/TextLabel.xml" text="Select a Value:"/>
-      <instance id="combo" href="../lib/ui/ComboBox.xml" data='["item", "item2", "item3"]'/>
-      <instance id="textarea" href="../lib/ui/TextArea.xml" value='Tap your text'/>
-      <instance href="../lib/ui/TextInput.xml" placeholder='Text...'/>
-      <instance href="../lib/ui/Switch.xml"/>
-      <instance href="../lib/ui/TextInput.xml" placeholder='Search...' type="search"/>
-      <instance href="../lib/ui/Switch.xml" textOn="I" textOff="O" toggled="false"/>
-      <instance href="../lib/ui/TextInput.xml" placeholder='password...' type="password"/>
-      <instance href="../lib/ui/Switch.xml" textOn="red" textOff="blue"/>
-    </instance>
-
-    <target q="head" unique="true">
-      <html:link rel="stylesheet"
-        href="{ this._absolute_uri('font-awesome.css') }"/>
-      <html:link rel="stylesheet" href="{ this._absolute_uri('../vstoolkit/css/vs_ui.css') }"/>
-      <html:link rel="stylesheet" href="{ this._absolute_uri('../vstoolkit/css/vs_ui_ios.css') }"/>
-      <html:link rel="stylesheet" href="{ this._absolute_uri('Inputs.css') }"/>
-    </target>
+    <component href="../lib/ui/Application.xml">
+      <html:div>
+      <component href="../lib/ui/TextLabel.xml" text="Select a Value:"/>
+      <component id="combo" href="../lib/ui/ComboBox.xml" data='["item", "item2", "item3"]'/>
+      <component id="textarea" href="../lib/ui/TextArea.xml" value='Tap your text'/>
+      <component href="../lib/ui/TextInput.xml" placeholder='Text...'/>
+      <component href="../lib/ui/Switch.xml"/>
+      <component href="../lib/ui/TextInput.xml" placeholder='Search...' type="search"/>
+      <component href="../lib/ui/Switch.xml" textOn="I" textOff="O" toggled="false"/>
+      <component href="../lib/ui/TextInput.xml" placeholder='password...' type="password"/>
+      <component href="../lib/ui/Switch.xml" textOn="red" textOff="blue"/>
+      </html:div>
+    </component>
   </view>
 
   <watch>
