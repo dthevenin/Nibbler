@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ToDo</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="cache-control" content="no-cache">
+    <script src="../bender/flexo.js"></script>
+    <script src="../bender/bender.js"></script>
+    <script type="text/javascript" src="../vstoolkit/js/vs_util.js"></script>
+    <script type="text/javascript" src="../vstoolkit/js/vs_core.js"></script>
+    <script type="text/javascript" src="../vstoolkit/js/vs_data.js"></script>
+    <script type="text/javascript" src="../vstoolkit/js/vs_ui.js"></script>
+    <script type="text/javascript" src="../vstoolkit/js/vs_fx.js"></script>
+    <script type="text/javascript" src="../lib/vs_bender_wrapper.js"></script>
+  </head>
+  <body>
+    <script>
+//"use strict";
+
+var context = bender.create_context(document.body);
+var instance = context.$("instance", flexo.get_args({ href: "Pickers.xml" }));
+flexo.listen(instance, "@error", function (e) {
+  alert("Error loading {0}: {1}".fmt(e.uri, e.message));
+});
+
+flexo.listen(instance, "@rendered", function (e) {
+  var rem = function (node) {
+    Array.prototype.forEach.call(node.childNodes, rem);
+    if (node && node.nodeType === window.Node.ELEMENT_NODE &&
+      node.namespaceURI === bender.ns && node.localName === "placeholder") {
+      var p = node.parentNode;
+      Array.prototype.slice.call(node.childNodes).forEach(function (ch) {
+        p.insertBefore(ch, node);
+      });
+      p.removeChild(node);
+    }
+  };
+  rem(instance._placeholder);
+});
+
+context._add_instance(instance);
+
+    </script>
+  </body>
+</html>
