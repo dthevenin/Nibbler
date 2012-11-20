@@ -1,0 +1,36 @@
+<component xmlns="http://bender.igel.co.jp">
+
+  <property name="value" type="string"/>
+
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <html:textarea class="vs_ui_textarea"></html:textarea>
+  </view>
+
+  <watch>
+    <get instance="$self" event="@rendered"/>
+    <set>
+      var instance = this;
+
+      instance.__vs_instance = new vs.ui.TextArea ({
+        node: instance._views.$root,
+        value: instance._properties.value
+      }).init ();
+
+      instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
+        flexo.notify (instance, '@change', {data: e.data});
+      })
+
+      instance.__vs_instance.bind ('continuous_change', instance.__vs_instance, function (e) {
+        flexo.notify (instance, '@continuous_change', {data: e.data});
+      })
+    </set>
+  </watch>
+
+  <watch>
+    <get instance="$self" property="value">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.value = value;
+    </get>
+  </watch>
+
+</component>
