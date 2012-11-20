@@ -1,6 +1,8 @@
 <component xmlns="http://bender.igel.co.jp">
 
   <property name="data" type="dynamic" value="[]"/>
+  <property name="selectedKeys" type="dynamic"/>
+  <property name="selectedValues" type="dynamic"/>
 
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <html:div class="vs_ui_picker">
@@ -20,19 +22,11 @@
       }).init ();
 
       instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
+        instance._properties.selectedKeys =
+          instance.__vs_instance.selectedKeys;
+        instance._properties.selectedValues =
+          instance.__vs_instance.selectedValues;
         flexo.notify (instance, '@change', {data: e.data});
-      })
-
-      vs.util.defineProperty (instance._properties, 'selectedKeys', {
-        get : function () {
-          return instance.__vs_instance.selectedKeys;
-        }
-      })
-
-      vs.util.defineProperty (instance._properties, 'selectedValues', {
-        get : function () {
-          return instance.__vs_instance.selectedValues;
-        }
       })
     </set>
   </watch>
