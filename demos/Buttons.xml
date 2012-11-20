@@ -1,0 +1,29 @@
+<component xmlns="http://bender.igel.co.jp">
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <instance href="../lib/ui/Application.xml">
+      <instance href="../lib/ui/Button.xml" text="Button"/>
+      <instance href="../lib/ui/Button.xml" text="Button" style="green"/>
+      <instance href="../lib/ui/Button.xml" text="Button" style="red"/>
+      <instance href="../lib/ui/Button.xml" text="Button" style="grey"/>
+      <instance href="../lib/ui/Button.xml" text="Button" type="nav"/>
+      <instance href="../lib/ui/Button.xml" text="Button" type="nav" style="silver_style"/>
+      <instance href="../lib/ui/Button.xml" text="Button" type="nav" style="black_style"/>
+      <instance href="../lib/ui/Button.xml" text="Button" type="nav_back"/>
+      <instance href="../lib/ui/Button.xml" text="Button" type="nav_back" style="silver_style"/>
+      <instance href="../lib/ui/Button.xml" text="Button" type="nav_back" style="black_style"/>
+      <instance href="../lib/ui/Button.xml" text="Button" type="nav_forward"/>
+      <instance href="../lib/ui/Button.xml" text="Button" type="nav_forward" style="silver_style"/>
+      <instance href="../lib/ui/Button.xml" text="Button" type="nav_forward" style="black_style"/>
+    </instance>
+
+    <target q="head" unique="true">
+      <html:link rel="stylesheet"
+        href="{ this._absolute_uri('font-awesome.css') }"/>
+      <html:link rel="stylesheet" href="{ this._absolute_uri('../vstoolkit/css/vs_ui.css') }"/>
+      <html:link rel="stylesheet" href="{ this._absolute_uri('../vstoolkit/css/vs_ui_ios.css') }"/>
+      <html:link rel="stylesheet" href="{ this._absolute_uri('Buttons.css') }"/>
+    </target>
+  </view>
+
+
+</component>

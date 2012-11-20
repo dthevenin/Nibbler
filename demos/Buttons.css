@@ -1,0 +1,18 @@
+body {
+  background-color: rgb(67,107,118);
+  margin: 10px;
+  pos
+}
+
+.vs_ui_button {
+  margin: 10px;
+  width: 40%;
+  display: inline-block;
+}
+
+.vs_ui_button.nav,
+.vs_ui_button.nav_forward,
+.vs_ui_button.nav_back
+{
+  width: 25%;
+}
