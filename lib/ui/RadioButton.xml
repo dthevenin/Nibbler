@@ -1,6 +1,6 @@
 <component xmlns="http://bender.igel.co.jp">
 
-  <property name="data" type="dynamic"/>
+  <property name="data" type="dynamic" value="[]"/>
 
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <html:div class="vs_ui_radiobutton"><html:fieldset x-hag-hole="item_children" /></html:div>
