@@ -1,6 +1,6 @@
 <component xmlns="http://bender.igel.co.jp">
 
-  <property name="value" type="string"/>
+  <property name="value"/>
 
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <html:textarea class="vs_ui_textarea"></html:textarea>
@@ -12,8 +12,8 @@
       var instance = this;
 
       instance.__vs_instance = new vs.ui.TextArea ({
-        node: instance._views.$root,
-        value: instance._properties.value
+        node: instance.views.$root,
+        value: instance.properties.value
       }).init ();
 
       instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {

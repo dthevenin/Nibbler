@@ -1,45 +1,37 @@
 <component xmlns="http://bender.igel.co.jp">
   <view xmlns:html="http://www.w3.org/1999/xhtml">
-    <instance href="../lib/ui/Application.xml">
-      <instance id="my_data" href="../lib/core/Array.xml"/>
-      <instance id="my_input" href="../lib/ui/TextInput.xml" placeholder="What needs to be done?"/>
-      <instance id="my_check_box" href="../lib/ui/CheckBox.xml"/>
-      <instance id="my_button1" href="../lib/ui/Button.xml" text="Remove"/>
-    </instance>
-
-    <target q="head" unique="true">
-      <html:link rel="stylesheet"
-        href="{ this._absolute_uri('font-awesome.css') }"/>
-      <html:link rel="stylesheet" href="{ this._absolute_uri('../vstoolkit/css/vs_ui.css') }"/>
-      <html:link rel="stylesheet" href="{ this._absolute_uri('../vstoolkit/css/vs_ui_ios.css') }"/>
-      <html:link rel="stylesheet" href="{ this._absolute_uri('ToDo.css') }"/>
-    </target>
+    <component href="../lib/ui/Application.xml">
+        <component id="my_data" href="../lib/core/Array.xml"/>
+        <component id="my_input" href="../lib/ui/TextInput.xml" placeholder="What needs to be done?"/>
+        <component id="my_check_box" href="../lib/ui/CheckBox.xml"/>
+        <component id="my_button1" href="../lib/ui/Button.xml" text="Remove"/>
+    </component>
   </view>
 
   <watch>
     <get instance="$self" event="@rendered"/>
     <set>
       var instance = this;
-      var my_data = this._instances.my_data;
-      var my_check_box = this._instances.my_check_box;
+      var my_data = this.instances.my_data;
+      var my_check_box = this.instances.my_check_box;
       my_check_box.model = my_data;
     </set>
   </watch>
 
   <watch>
     <get instance="my_input" event="@change">
-      var my_data = this._instances.my_data;
-      var my_check_box = this._instances.my_check_box;
-      var my_input = this._instances.my_input;
-      my_input._properties.value = "";
+      var my_data = this.instances.my_data;
+      var my_check_box = this.instances.my_check_box;
+      var my_input = this.instances.my_input;
+      my_input.properties.value = "";
       my_data.add (value.data);
     </get>
     <get instance="my_button1" event="@select">
-      var my_data = this._instances.my_data;
-      var my_check_box = this._instances.my_check_box;
+      var my_data = this.instances.my_data;
+      var my_check_box = this.instances.my_check_box;
 
       my_data.stopPropagation ();
-      var selectedIndexes = my_check_box._properties.selectedIndexes;
+      var selectedIndexes = my_check_box.properties.selectedIndexes;
       selectedIndexes.sort ();
 
       var i = selectedIndexes.length

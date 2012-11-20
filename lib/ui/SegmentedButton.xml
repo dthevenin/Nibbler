@@ -1,7 +1,7 @@
 <component xmlns="http://bender.igel.co.jp">
 
-  <property name="items" type="dynamic" value="[]"/>
-  <property name="type" type="string" value="default"/>
+  <property name="items" as="dynamic" value="[]"/>
+  <property name="type" value="default"/>
 
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <html:div class="vs_ui_segmentedbutton"></html:div>
@@ -13,16 +13,16 @@
       var instance = this;
 
       instance.__vs_instance = new vs.ui.SegmentedButton ({
-        node: instance._views.$root,
-        items: instance._properties.items,
-        type: instance._properties.type
+        node: instance.views.$root,
+        items: instance.properties.items,
+        type: instance.properties.type
       }).init ();
 
       instance.__vs_instance.bind ('select', instance.__vs_instance, function (e) {
         flexo.notify (instance, '@select', {data: e.data});
       })
 
-      vs.util.defineProperty (instance._properties, 'selectedIndex', {
+      vs.util.defineProperty (instance.properties, 'selectedIndex', {
         get : function () {
           return instance.__vs_instance.selectedIndex;
         }
