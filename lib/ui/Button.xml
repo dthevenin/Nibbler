@@ -1,8 +1,8 @@
 <component xmlns="http://bender.igel.co.jp">
 
-  <property name="text" type="string"/>
-  <property name="type" type="string" value="default"/>
-  <property name="style" type="string" value="default_style"/>
+  <property name="text"/>
+  <property name="type" value="default"/>
+  <property name="style" value="default_style"/>
 
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <html:div class="vs_ui_button"><html:div></html:div></html:div>
@@ -14,10 +14,10 @@
       var instance = this;
 
       instance.__vs_instance = new vs.ui.Button ({
-        node: instance._views.$root,
-        text: instance._properties.text,
-        type: instance._properties.type,
-        style: instance._properties.style
+        node: instance.views.$root,
+        text: instance.properties.text,
+        type: instance.properties.type,
+        style: instance.properties.style
       }).init ();
 
       instance.__vs_instance.bind ('select', instance.__vs_instance, function (e) {

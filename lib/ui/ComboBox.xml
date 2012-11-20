@@ -1,6 +1,6 @@
 <component xmlns="http://bender.igel.co.jp">
 
-  <property name="data" type="dynamic" value="[]"/>
+  <property name="data" as="dynamic" value="[]"/>
 
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <html:div class="vs_ui_combobox"></html:div>
@@ -12,15 +12,15 @@
       var instance = this;
 
       instance.__vs_instance = new vs.ui.ComboBox ({
-        node: instance._views.$root,
-        data: instance._properties.data
+        node: instance.views.$root,
+        data: instance.properties.data
       }).init ();
 
       instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
         flexo.notify (instance, '@change', {data: e.data});
       })
 
-      vs.util.defineProperty (instance._properties, 'selectedItem', {
+      vs.util.defineProperty (instance.properties, 'selectedItem', {
         get : function () {
           return instance.__vs_instance.selectedIndex;
         }

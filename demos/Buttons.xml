@@ -1,30 +1,24 @@
 <component xmlns="http://bender.igel.co.jp">
   <view xmlns:html="http://www.w3.org/1999/xhtml">
-    <instance href="../lib/ui/Application.xml">
-      <instance href="../lib/ui/Button.xml" text="Button"/>
-      <instance href="../lib/ui/Button.xml" text="Button" style="green"/>
-      <instance href="../lib/ui/Button.xml" text="Button" style="red"/>
-      <instance href="../lib/ui/Button.xml" text="Button" style="grey"/>
-      <instance href="../lib/ui/Button.xml" text="Button" type="nav"/>
-      <instance href="../lib/ui/Button.xml" text="Button" type="nav" style="silver_style"/>
-      <instance href="../lib/ui/Button.xml" text="Button" type="nav" style="black_style"/>
-      <instance href="../lib/ui/Button.xml" text="Button" type="nav_back"/>
-      <instance href="../lib/ui/Button.xml" text="Button" type="nav_back" style="silver_style"/>
-      <instance href="../lib/ui/Button.xml" text="Button" type="nav_back" style="black_style"/>
-      <instance href="../lib/ui/Button.xml" text="Button" type="nav_forward"/>
-      <instance href="../lib/ui/Button.xml" text="Button" type="nav_forward" style="silver_style"/>
-      <instance href="../lib/ui/Button.xml" text="Button" type="nav_forward" style="black_style"/>
-      <instance id="segButton1" href="../lib/ui/SegmentedButton.xml" items="['1', '2', '3']"/>
-      <instance id="segButton2" href="../lib/ui/SegmentedButton.xml" items="['1', '2', '3']" type="bar"/>
-    </instance>
-
-    <target q="head" unique="true">
-      <html:link rel="stylesheet"
-        href="{ this._absolute_uri('font-awesome.css') }"/>
-      <html:link rel="stylesheet" href="{ this._absolute_uri('../vstoolkit/css/vs_ui.css') }"/>
-      <html:link rel="stylesheet" href="{ this._absolute_uri('../vstoolkit/css/vs_ui_ios.css') }"/>
-      <html:link rel="stylesheet" href="{ this._absolute_uri('Buttons.css') }"/>
-    </target>
+    <component href="../lib/ui/Application.xml">
+      <html:div>
+        <component href="../lib/ui/Button.xml" text="Button"/>
+        <component href="../lib/ui/Button.xml" text="Button" style="green"/>
+        <component href="../lib/ui/Button.xml" text="Button" style="red"/>
+        <component href="../lib/ui/Button.xml" text="Button" style="grey"/>
+        <component href="../lib/ui/Button.xml" text="Button" type="nav"/>
+        <component href="../lib/ui/Button.xml" text="Button" type="nav" style="silver_style"/>
+        <component href="../lib/ui/Button.xml" text="Button" type="nav" style="black_style"/>
+        <component href="../lib/ui/Button.xml" text="Button" type="nav_back"/>
+        <component href="../lib/ui/Button.xml" text="Button" type="nav_back" style="silver_style"/>
+        <component href="../lib/ui/Button.xml" text="Button" type="nav_back" style="black_style"/>
+        <component href="../lib/ui/Button.xml" text="Button" type="nav_forward"/>
+        <component href="../lib/ui/Button.xml" text="Button" type="nav_forward" style="silver_style"/>
+        <component href="../lib/ui/Button.xml" text="Button" type="nav_forward" style="black_style"/>
+        <component id="segButton1" href="../lib/ui/SegmentedButton.xml" items="['1', '2', '3']"/>
+        <component id="segButton2" href="../lib/ui/SegmentedButton.xml" items="['1', '2', '3']" type="bar"/>
+      </html:div>
+    </component>
   </view>
 
   <watch>

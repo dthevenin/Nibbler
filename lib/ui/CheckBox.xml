@@ -1,6 +1,6 @@
 <component xmlns="http://bender.igel.co.jp">
 
-  <property name="data" type="dynamic" value="[]"/>
+  <property name="data" as="dynamic" value="[]"/>
 
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <html:div class="vs_ui_checkbox"><html:fieldset x-hag-hole="item_children" /></html:div>
@@ -12,8 +12,8 @@
       var instance = this;
 
       instance.__vs_instance = new vs.ui.CheckBox ({
-        node: instance._views.$root,
-        data: instance._properties.data
+        node: instance.views.$root,
+        data: instance.properties.data
       }).init ();
 
       instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
@@ -26,7 +26,7 @@
         }
       })
 
-      vs.util.defineProperty (instance._properties, 'selectedIndexes', {
+      vs.util.defineProperty (instance.properties, 'selectedIndexes', {
         get : function () {
           return instance.__vs_instance.selectedIndexes;
         }

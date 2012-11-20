@@ -12,33 +12,28 @@
     <script type="text/javascript" src="../vstoolkit/js/vs_ui.js"></script>
     <script type="text/javascript" src="../vstoolkit/js/vs_fx.js"></script>
     <script type="text/javascript" src="../lib/vs_bender_wrapper.js"></script>
+    <link rel="stylesheet" href="../vstoolkit/css/vs_ui.css"/>
+    <link rel="stylesheet" href="../vstoolkit/css/vs_ui_ios.css"/>
+    <link rel="stylesheet" href="ToDo.css"/>
   </head>
   <body>
     <script>
 //"use strict";
 
-var context = bender.create_context(document.body);
-var instance = context.$("instance", flexo.get_args({ href: "ToDo.xml" }));
+var context = bender.create_context();
+var component =
+  context.create_component(flexo.get_args({ href: "ToDo.xml" }));
+var instance = component.create_instance();
 flexo.listen(instance, "@error", function (e) {
-  alert("Error loading {0}: {1}".fmt(e.uri, e.message));
+  alert("Error loading {0}: {1}.".fmt(e.uri, e.message));
 });
-
+flexo.listen(instance, "@rendering", function (e) {
+  console.log("[run] rendering", e.source);
+});
 flexo.listen(instance, "@rendered", function (e) {
-  var rem = function (node) {
-    Array.prototype.forEach.call(node.childNodes, rem);
-    if (node && node.nodeType === window.Node.ELEMENT_NODE &&
-      node.namespaceURI === bender.ns && node.localName === "placeholder") {
-      var p = node.parentNode;
-      Array.prototype.slice.call(node.childNodes).forEach(function (ch) {
-        p.insertBefore(ch, node);
-      });
-      p.removeChild(node);
-    }
-  };
-  rem(instance._placeholder);
+  console.log("[run] rendered", e.source);
 });
-
-context._add_instance(instance);
+context.add_instance(instance, document.body);
 
     </script>
   </body>

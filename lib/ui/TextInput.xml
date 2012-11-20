@@ -15,10 +15,10 @@
       var instance = this;
 
       instance.__vs_instance = new vs.ui.InputField ({
-        node: instance._views.$root,
-        value: instance._properties.value,
-        type: instance._properties.type,
-        placeholder: instance._properties.placeholder
+        node: instance.views.$root,
+        value: instance.properties.value,
+        type: instance.properties.type,
+        placeholder: instance.properties.placeholder
       }).init ();
 
       instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
