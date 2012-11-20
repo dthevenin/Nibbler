@@ -2,6 +2,7 @@
 
   <property name="value" type="string"/>
   <property name="placeholder" type="string"/>
+  <property name="type" type="string"/>
 
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <html:div class="vs_ui_inputfield"><html:input type="text" value="" placeholder="type ..." incremental="incremental"/><html:div class='clear_button'/>
@@ -16,6 +17,7 @@
       instance.__vs_instance = new vs.ui.InputField ({
         node: instance._views.$root,
         value: instance._properties.value,
+        type: instance._properties.type,
         placeholder: instance._properties.placeholder
       }).init ();
 
@@ -30,12 +32,15 @@
       if (!this.__vs_instance) return;
       this.__vs_instance.value = value;
     </get>
-  </watch>
 
-  <watch>
     <get instance="$self" property="placeholder">
       if (!this.__vs_instance) return;
       this.__vs_instance.placeholder = value;
+    </get>
+
+    <get instance="$self" property="type">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.type = value;
     </get>
   </watch>
 
