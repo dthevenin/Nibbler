@@ -1,4 +1,3 @@
-lib-cov
 *.seed
 *.log
 *.csv
@@ -6,9 +5,11 @@ lib-cov
 *.out
 *.pid
 *.gz
+.DS_Store
 
-pids
-logs
-results
+vstoolkit
+bender
+morbo.js
+node_modules
 
 npm-debug.log
