@@ -1,0 +1,19 @@
+body {
+  background-color: rgb(67,107,118);
+  margin: 10px;
+  pos
+}
+
+.vs_ui_checkbox {
+  position: absolute;
+  top: 50px;
+  bottom: 60px;
+  left: 10px;
+  right: 10px;
+}
+
+.vs_ui_button {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
