@@ -1,0 +1,53 @@
+<component xmlns="http://bender.igel.co.jp">
+
+  <property name="src"/>
+  <property name="pinch" as="dynamic" value="vs.ui.ScrollView.NO_PINCH"/>
+  <property name="scroll" as="dynamic" value="vs.ui.ScrollView.NO_SCROLL"/>
+  <property name="stretch" as="dynamic" value="vs.ui.ScrollImageView.STRETCH_FILL"/>
+
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <html:div class="vs_ui_scrollimageview"><html:img class="content" /></html:div>
+  </view>
+
+  <watch>
+    <get instance="$self" event="@rendered"/>
+    <set>
+      var instance = this;
+
+      instance.__vs_instance = new vs.ui.ScrollImageView ({
+        node: instance.views.$root,
+        src: instance.properties.src,
+        pinch: instance.properties.pinch,
+        scroll: instance.properties.scroll,
+        stretch: instance.properties.stretch
+      }).init ();
+
+      instance.__vs_instance.bind ('load', instance.__vs_instance, function (e) {
+        flexo.notify (instance, '@load');
+      })
+    </set>
+  </watch>
+
+  <watch>
+    <get instance="$self" property="src">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.src = value;
+    </get>
+
+    <get instance="$self" property="pinch">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.pinch = value;
+    </get>
+
+    <get instance="$self" property="scroll">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.scroll = value;
+    </get>
+
+    <get instance="$self" property="stretch">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.stretch = value;
+    </get>
+  </watch>
+
+</component>
