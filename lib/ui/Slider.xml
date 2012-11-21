@@ -19,7 +19,6 @@
         value: instance.properties.value,
         range: instance.properties.range
       }).init ();
-      console.log (instance.properties.orientation)
 
       instance.__vs_instance.bind ('continuous_change', instance.__vs_instance, function (e) {
         instance.properties.value = instance.__vs_instance._value;
