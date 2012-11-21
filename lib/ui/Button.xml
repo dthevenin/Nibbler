@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp">
+<component xmlns="http://bender.igel.co.jp" prototype="bender.$.Button">
 
   <property name="text"/>
   <property name="type" value="default"/>
@@ -9,34 +9,13 @@
   </view>
 
   <watch>
-    <get instance="$self" event="@rendered"/>
-    <set>
-      var instance = this;
-
-      instance.__vs_instance = new vs.ui.Button ({
-        node: instance.views.$root,
-        text: instance.properties.text,
-        type: instance.properties.type,
-        style: instance.properties.style
-      }).init ();
-
-      instance.__vs_instance.bind ('select', instance.__vs_instance, function (e) {
-        flexo.notify (instance, '@select');
-      })
-    </set>
-  </watch>
-
-  <watch>
     <get instance="$self" property="text">
-      if (!this.__vs_instance) return;
       this.__vs_instance.text = value;
     </get>
     <get instance="$self" property="type">
-      if (!this.__vs_instance) return;
       this.__vs_instance.type = value;
     </get>
     <get instance="$self" property="style">
-      if (!this.__vs_instance) return;
       this.__vs_instance.style = value;
     </get>
   </watch>
