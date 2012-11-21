@@ -1,10 +1,15 @@
 body {
   background-color: rgb(67,107,118);
   margin: 10px;
-  pos
+  font-family: Helvetica;
 }
 
 .vs_ui_textlabel {
   height: 15px;
   margin: 10px;
+}
+
+.vs_ui_textlabel:nth-of-type(1),
+.vs_ui_textlabel:nth-of-type(4) {
+  font-weight: bold;
 }
