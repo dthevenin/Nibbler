@@ -1,0 +1,28 @@
+<component xmlns="http://bender.igel.co.jp">
+
+  <property name="src"/>
+
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <html:img class="vs_ui_imageview"></html:img>
+  </view>
+
+  <watch>
+    <get instance="$self" event="@rendered"/>
+    <set>
+      var instance = this;
+
+      instance.__vs_instance = new vs.ui.ImageView ({
+        node: instance.views.$root,
+        src: instance.properties.src
+      }).init ();
+    </set>
+  </watch>
+
+  <watch>
+    <get instance="$self" property="src">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.src = value;
+    </get>
+  </watch>
+
+</component>
