@@ -1,0 +1,73 @@
+<component xmlns="http://bender.igel.co.jp">
+
+  <property name="data" as="dynamic" value="[]" />
+  <property name="hasArrow" as="boolean" />
+  <property name="scroll" as="boolean" value="false"/>
+  <property name="filters" as="dynamic" value="[]" />
+  <property name="selectedIndexes" as="dynamic" />
+  <property name="type" />
+
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <html:div class="vs_ui_list">
+      <html:ul x-hag-hole="item_children" />
+      <content />
+    </html:div>
+  </view>
+
+  <watch>
+    <get instance="$self" event="@rendered" />
+    <set>
+      var instance = this;
+
+      instance.__vs_instance = new vs.ui.List ({
+        node: instance.views.$root,
+        data: instance.properties.data,
+        hasArrow : instance.properties.hasArrow,
+        filters : instance.properties.filters,
+        scroll : instance.properties.scroll,
+        type : instance.properties.type
+      }).init ();
+
+      instance.__vs_instance.bind ('itemselect', instance.__vs_instance,
+        function (e) {
+        instance.properties.selectedIndexes =
+          instance.__vs_instance._selected_indexes;
+        flexo.notify (instance, '@itemselect', {data: e.data});
+      })
+
+      vs.util.defineProperty (instance, 'model', {
+        set : function (v) {
+          instance.__vs_instance.model = v.__vs_instance;
+        }
+      })
+    </set>
+  </watch>
+
+  <watch>
+    <get instance="$self" property="data">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.data = value;
+    </get>
+
+    <get instance="$self" property="hasArrow">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.hasArrow = value;
+    </get>
+
+    <get instance="$self" property="filters">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.filters = value;
+    </get>
+
+    <get instance="$self" property="scroll">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.scroll = value;
+    </get>
+
+    <get instance="$self" property="type">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.type = value;
+    </get>
+  </watch>
+
+</component>
