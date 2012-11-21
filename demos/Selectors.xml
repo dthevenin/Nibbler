@@ -1,0 +1,25 @@
+<component xmlns="http://bender.igel.co.jp">
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <component href="../lib/ui/Application.xml">
+      <html:div>
+      <component id="my_check_box" href="../lib/ui/CheckBox.xml"
+        data='["item1", "item2", "item3"]'/>
+      <component id="label1" href="../lib/ui/TextLabel.xml"/>
+      <component id="my_radio_button" href="../lib/ui/RadioButton.xml"
+        data='["item1", "item2", "item3"]'/>
+      <component id="label2" href="../lib/ui/TextLabel.xml"/>
+      </html:div>
+    </component>
+  </view>
+
+  <watch>
+    <get instance="my_check_box" property="selectedIndexes" />
+    <set instance="label1" property="text" />
+  </watch>
+
+  <watch>
+    <get instance="my_radio_button" property="selectedIndex" />
+    <set instance="label2" property="text" />
+  </watch>
+
+</component>

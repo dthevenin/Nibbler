@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Selectors</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="cache-control" content="no-cache">
+    <script src="../bender/flexo.js"></script>
+    <script src="../bender/bender.js"></script>
+    <script type="text/javascript" src="../vstoolkit/js/vs_util.js"></script>
+    <script type="text/javascript" src="../vstoolkit/js/vs_core.js"></script>
+    <script type="text/javascript" src="../vstoolkit/js/vs_data.js"></script>
+    <script type="text/javascript" src="../vstoolkit/js/vs_ui.js"></script>
+    <script type="text/javascript" src="../vstoolkit/js/vs_fx.js"></script>
+    <script type="text/javascript" src="../lib/vs_bender_wrapper.js"></script>
+    <link rel="stylesheet" href="../vstoolkit/css/vs_ui.css"/>
+    <link rel="stylesheet" href="../vstoolkit/css/vs_ui_ios.css"/>
+    <link rel="stylesheet" href="Selectors.css"/>
+  </head>
+  <body>
+    <script>
+
+//"use strict";
+var context = bender.create_context();
+var component =
+  context.create_component(flexo.get_args({ href: "Selectors.xml" }));
+var instance = component.create_instance();
+flexo.listen(instance, "@error", function (e) {
+  alert("Error loading {0}: {1}.".fmt(e.uri, e.message));
+});
+flexo.listen(instance, "@rendering", function (e) {
+  console.log("[run] rendering", e.source);
+});
+flexo.listen(instance, "@rendered", function (e) {
+  console.log("[run] rendered", e.source);
+});
+context.add_instance(instance, document.body);
+
+    </script>
+  </body>
+</html>
