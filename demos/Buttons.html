@@ -12,6 +12,7 @@
     <script type="text/javascript" src="../vstoolkit/js/vs_ui.js"></script>
     <script type="text/javascript" src="../vstoolkit/js/vs_fx.js"></script>
     <script type="text/javascript" src="../lib/vs_bender_wrapper.js"></script>
+    <script type="text/javascript" src="../lib/ui/Button.js"></script>
     <link rel="stylesheet" href="../vstoolkit/css/vs_ui.css"/>
     <link rel="stylesheet" href="../vstoolkit/css/vs_ui_ios.css"/>
     <link rel="stylesheet" href="Buttons.css"/>
@@ -23,7 +24,7 @@
 var context = bender.create_context();
 var component =
   context.create_component(flexo.get_args({ href: "Buttons.xml" }));
-var instance = component.create_instance();
+var instance = bender.create_instance({ reference: component });
 flexo.listen(instance, "@error", function (e) {
   alert("Error loading {0}: {1}.".fmt(e.uri, e.message));
 });
@@ -32,6 +33,10 @@ flexo.listen(instance, "@rendering", function (e) {
 });
 flexo.listen(instance, "@rendered", function (e) {
   console.log("[run] rendered", e.source);
+  if (e.instance) {
+    console.log("[run] updating instance:", e.instance);
+    instance = e.instance;
+  }
 });
 context.add_instance(instance, document.body);
 
