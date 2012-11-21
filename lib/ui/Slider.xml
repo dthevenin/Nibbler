@@ -1,0 +1,51 @@
+<component xmlns="http://bender.igel.co.jp">
+
+  <property name="orientation" as="dynamic" value="vs.ui.Slider.HORIZONTAL"/>
+  <property name="value" as="number" value="0"/>
+  <property name="range" as="dynamic" value="[0, 100]"/>
+
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <html:div class="vs_ui_slider"><html:div class="handle"></html:div></html:div>
+  </view>
+
+  <watch>
+    <get instance="$self" event="@rendered"/>
+    <set>
+      var instance = this;
+
+      instance.__vs_instance = new vs.ui.Slider ({
+        node: instance.views.$root,
+        orientation: instance.properties.orientation,
+        value: instance.properties.value,
+        range: instance.properties.range
+      }).init ();
+      console.log (instance.properties.orientation)
+
+      instance.__vs_instance.bind ('continuous_change', instance.__vs_instance, function (e) {
+        instance.properties.value = instance.__vs_instance._value;
+        flexo.notify (instance, '@continuous_change');
+      })
+
+      instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
+        instance.properties.value = instance.__vs_instance._value;
+        flexo.notify (instance, '@change');
+      })
+    </set>
+  </watch>
+
+  <watch>
+    <get instance="$self" property="orientation">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.orientation = value;
+    </get>
+    <get instance="$self" property="value">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.value = value;
+    </get>
+    <get instance="$self" property="range">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.range = value;
+    </get>
+  </watch>
+
+</component>
