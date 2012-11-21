@@ -1,0 +1,59 @@
+<component xmlns="http://bender.igel.co.jp">
+
+  <property name="searchEngine" as="dynamic" />
+  <property name="address" as="string" />
+  <property name="addresses" as="dynamic"/>
+  <property name="position" as="dynamic" />
+
+  <watch>
+    <get instance="$self" event="@rendered"/>
+    <set>
+      var instance = this;
+
+      instance.__vs_instance = new vs.data.GoogleSearch ().init ();
+      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
+
+      instance.__vs_instance.bind ('engineload', instance.__vs_instance, function (e) {
+        flexo.notify (instance, '@engineload');
+      })
+
+      console.log (instance.properties.searchEngine)
+      if (instance.properties.searchEngine) {
+        instance.setSearchEngine (instance.properties.searchEngine);
+      }
+    </set>
+  </watch>
+
+  <watch>
+    <get instance="$self" property="searchEngine">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.setSearchEngine (value);
+    </get>
+  </watch>
+
+  <watch>
+    <get instance="$self" property="address">
+      if (!this.__vs_instance) return;
+
+      // Full address search
+      this.__vs_instance.searchAddress (value, function (result) {
+        this.properties.addresses = result;
+
+        // GPS coordinate search
+        this.__vs_instance.addressToGPSCoordinate (value, function (coord) {
+          this.properties.position = coord;
+        }, this);
+      }, this);
+    </get>
+
+    <get instance="$self" property="position">
+      if (!this.__vs_instance) return;
+
+      // Full address search
+      this.__vs_instance.GPSCoordinateToAddress (value, function (result) {
+        this.properties.addresses = result;
+      }, this);
+    </get>
+  </watch>
+
+</component>
