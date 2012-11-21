@@ -22,6 +22,7 @@
       }).init ();
 
       instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
+        instance.properties.value = e.data;
         flexo.notify (instance, '@change', {data: e.data});
       })
     </set>
