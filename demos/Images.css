@@ -1,0 +1,19 @@
+body {
+  background-color: rgb(67,107,118);
+  margin: 10px;
+  font-family: Helvetica;
+}
+
+.vs_ui_imageview {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  z-index: 10;
+  border: 1px red solid;
+}
+
+.vs_ui_scrollimageview {
+  width: 49%;
+  height: 49%;
+  display: inline-block;
+}
