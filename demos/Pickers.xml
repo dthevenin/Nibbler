@@ -1,6 +1,6 @@
 <component xmlns="http://bender.igel.co.jp">
   <view xmlns:html="http://www.w3.org/1999/xhtml">
-    <component href="../lib/ui/Application.xml">
+    <component id="panel" href="../lib/ui/Application.xml">
       <html:div>
       <component id="picker1" href="../lib/ui/Picker.xml"
         data='[

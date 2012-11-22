@@ -1,6 +1,6 @@
 <component xmlns="http://bender.igel.co.jp">
   <view xmlns:html="http://www.w3.org/1999/xhtml">
-    <component href="../lib/ui/Application.xml">
+    <component id="panel" href="../lib/ui/Application.xml">
       <component href="../lib/ui/List.xml"
         type="TabList" hasArrow="true" scroll="true"
         data='["First tab",\{"title":"one"\},\{"title":"two"\},"Second tab",\{"title":"two","label":"two"\},\{"title":"three","label":"two"\},\{"title":"one"\},\{"title":"two"\},\{"title":"tree","label":"two"\},"Third tab",\{"title":"one"\},\{"title":"two"\},\{"title":"tree","label":"two"\}]'
