@@ -1,0 +1,19 @@
+body {
+  background-color: rgb(67,107,118);
+}
+.my_tab > *{
+  top:6px;
+}
+
+.navb1 {
+  right: 5px;
+}
+
+.navb2 {
+  left: 5px;
+}
+
+.segButton2 {
+  margin-left: 50%;
+  -webkit-transform: translate(-50%,0);
+}
