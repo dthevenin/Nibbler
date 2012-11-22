@@ -22,7 +22,6 @@
 
   <watch>
     <get instance="my_input" event="@change">
-    console.log ('huh')
       var my_data = this.instances.my_data;
       var my_check_box = this.instances.my_check_box;
       var my_input = this.instances.my_input;
