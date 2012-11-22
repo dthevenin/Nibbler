@@ -1,0 +1,28 @@
+<component xmlns="http://bender.igel.co.jp">
+
+  <property name="style" as="dynamic" value="vs.ui.NavigationBar.DEFAULT_STYLE"/>
+
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <html:div class="vs_ui_navbar" x-hag-hole="children"><content /></html:div>
+  </view>
+
+  <watch>
+    <get instance="$self" event="@rendered"/>
+    <set>
+      var instance = this;
+
+      instance.__vs_instance = new vs.ui.NavigationBar ({
+        node: instance.views.$root,
+        style: instance.properties.style
+      }).init ();
+    </set>
+  </watch>
+
+  <watch>
+    <get instance="$self" property="style">
+      if (!this.__vs_instance) return;
+      this.__vs_instance.style = value;
+    </get>
+  </watch>
+
+</component>
