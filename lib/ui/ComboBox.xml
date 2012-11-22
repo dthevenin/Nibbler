@@ -16,6 +16,8 @@
         data: instance.properties.data
       }).init ();
 
+      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
+
       instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
         flexo.notify (instance, '@change', {data: e.data});
       })

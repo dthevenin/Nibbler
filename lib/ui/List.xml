@@ -28,6 +28,8 @@
         type : instance.properties.type
       }).init ();
 
+      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
+
       instance.__vs_instance.bind ('itemselect', instance.__vs_instance,
         function (e) {
         instance.properties.selectedIndexes =

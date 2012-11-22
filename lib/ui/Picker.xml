@@ -21,6 +21,8 @@
         data: instance.properties.data
       }).init ();
 
+      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
+
       instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
         instance.properties.selectedKeys =
           instance.__vs_instance.selectedKeys;

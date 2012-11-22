@@ -10,6 +10,8 @@
       this.__vs_instance = new vs.ui.Application ({
         node: document.querySelector ('html')
       }).init ();
+
+      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
     </set>
   </watch>
 

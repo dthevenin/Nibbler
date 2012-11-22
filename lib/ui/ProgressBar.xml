@@ -19,6 +19,8 @@
         index: instance.properties.index,
         range: instance.properties.range
       }).init ();
+
+      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
     </set>
   </watch>
 

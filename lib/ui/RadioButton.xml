@@ -17,6 +17,8 @@
         data: instance.properties.data
       }).init ();
 
+      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
+
       instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
         instance.properties.selectedIndex = instance.__vs_instance._selected_index;
         flexo.notify (instance, '@change', {data: e.data});

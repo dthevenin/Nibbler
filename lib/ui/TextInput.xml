@@ -25,6 +25,8 @@
         instance.properties.value = e.data;
         flexo.notify (instance, '@change', {data: e.data});
       })
+
+      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
     </set>
   </watch>
 

@@ -22,6 +22,8 @@
         stretch: instance.properties.stretch
       }).init ();
 
+      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
+
       instance.__vs_instance.bind ('load', instance.__vs_instance, function (e) {
         flexo.notify (instance, '@load');
       })
