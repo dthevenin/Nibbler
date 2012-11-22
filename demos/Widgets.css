@@ -1,0 +1,31 @@
+body {
+  background-color: rgb(67,107,118);
+}
+
+.main_navbar > *{
+  top:6px;
+}
+
+.back_button {
+  left: 5px;
+//  visibility: hidden;
+}
+
+.panel, .widgets_list {
+  position: absolute;
+  top:44px; bottom: 0px;
+  left: 0px; right: 0px;
+  -webkit-transition: -webkit-transform 200ms ease-out;
+}
+
+.panel {
+  -webkit-transform: translate3d(100%,0,0);
+}
+
+.panel.show {
+  -webkit-transform: translate3d(0,0,0);
+}
+
+.widgets_list.hide {
+  -webkit-transform: translate3d(-100%,0,0);
+}
