@@ -19,7 +19,6 @@ bender.$.Widgets.onBack = function (e) {
 bender.$.Widgets.onListSelect = function (e) {
   this._current_panel.addClassName ('hide');
 
-  console.log (this.instances.buttons)
   switch (e.index) {
     case 0: this._current_panel = this.instances.buttons.instances.buttons; break;
     case 1: this._current_panel = this.instances.inputs.instances.inputs; break;
