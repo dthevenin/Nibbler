@@ -1,6 +1,6 @@
 <component xmlns="http://bender.igel.co.jp">
   <view xmlns:html="http://www.w3.org/1999/xhtml">
-    <component id="panel" href="../lib/ui/Application.xml">
+    <component id="tabs" href="../lib/ui/Application.xml">
       <html:div>
         <component id="my_tab" href="../lib/ui/NavigationBar.xml">
           <component id="navb1" href="../lib/ui/Button.xml" text="Button" type="nav" style="silver_style"/>

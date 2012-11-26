@@ -1,6 +1,6 @@
 <component xmlns="http://bender.igel.co.jp">
   <view xmlns:html="http://www.w3.org/1999/xhtml">
-    <component id="panel" href="../lib/ui/Application.xml">
+    <component id="images" href="../lib/ui/Application.xml">
       <html:div>
       <component href="../lib/ui/Image.xml" src="http://www.freewebs.com/fantania/nibbler01.png"/>
       <component href="../lib/ui/ScrollImage.xml" src="http://www.freewebs.com/fantania/nibbler01.png"
