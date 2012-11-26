@@ -1,22 +1,25 @@
 body {
   background-color: rgb(67,107,118);
-  margin: 10px;
   font-family: Helvetica;
 }
 
-.vs_ui_slider {
+.map {
+  padding: 10px;
+}
+
+.map .slider {
   position: absolute;
   display: inline-block;
   top: 60px; left: 10px;
 }
 
-.vs_ext_ui_gmap {
+.map .the_map {
   position: absolute;
   top: 0px; left: 0px;
   right: 0px; bottom: 0px;
 }
 
-.vs_ui_inputfield {
+.map .address_field {
   position: absolute;
   top: 10px; left: 40px; right: 10px;
 }

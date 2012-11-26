@@ -1,19 +1,24 @@
 body {
   background-color: rgb(67,107,118);
 }
-.my_tab > *{
+
+.tabs {
+  padding: 10px;
+}
+
+.tabs .my_tab > *{
   top:6px;
 }
 
-.navb1 {
+.tabs .navb1 {
   right: 5px;
 }
 
-.navb2 {
+.tabs .navb2 {
   left: 5px;
 }
 
-.segButton2 {
+.tabs .segButton2 {
   margin-left: 50%;
   -webkit-transform: translate(-50%,0);
 }

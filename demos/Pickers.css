@@ -1,15 +1,17 @@
 body {
   background-color: rgb(67,107,118);
-  margin: 10px;
-  pos
 }
 
-.vs_ui_picker:nth-of-type(1) {
+.pickers {
+  padding: 10px;
+}
+
+.pickers .vs_ui_picker:nth-of-type(1) {
   width: 100px;
   margin-bottom: 20px;
 }
 
-.vs_ui_button {
+.pickers .vs_ui_button {
   position: fixed;
   bottom: 10px;
   right: 10px;

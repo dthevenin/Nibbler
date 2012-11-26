@@ -1,24 +1,27 @@
 body {
   background-color: rgb(67,107,118);
-  margin: 10px;
   font-family: Helvetica;
 }
 
-.vs_ui_progressbar {
+.sliders {
+  padding: 20px;
+}
+
+.sliders .vs_ui_progressbar {
   margin: 10px 0 10px 0;
 }
 
-.vs_ui_slider {
+.sliders .vs_ui_slider {
   margin: 10px 0 10px 0;
   position: relative;
 }
 
-.vs_ui_textlabel {
+.sliders .vs_ui_textlabel {
   display: inline-block;
   width: 30%;
 }
 
-.vs_ui_slider.vertical {
+.sliders .vs_ui_slider.vertical {
   display: inline-block;
 }
 
