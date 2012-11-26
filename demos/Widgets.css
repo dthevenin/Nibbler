@@ -1,5 +1,15 @@
+@import url("Buttons.css");
+@import url("Images.css");
+@import url("Inputs.css");
+@import url("Sliders.css");
+@import url("Selectors.css");
+@import url("Tabs.css");
+@import url("ToDo.css");
+@import url("Map.css");
+
 body {
   background-color: rgb(67,107,118);
+  margin: 0px;
 }
 
 .main_navbar > *{
@@ -8,22 +18,42 @@ body {
 
 .back_button {
   left: 5px;
-//  visibility: hidden;
 }
 
-.panel, .widgets_list {
+.main_navbar .nav_title {
+  top: 11px;
+  left: 100px;
+  right: 100px;
+  font-size: 1.1em;
+}
+
+.panels, .widgets_list {
   position: absolute;
   top:44px; bottom: 0px;
   left: 0px; right: 0px;
-  -webkit-transition: -webkit-transform 200ms ease-out;
 }
 
-.panel {
+.panels {
   -webkit-transform: translate3d(100%,0,0);
 }
 
-.panel.show {
+.panels > *, .widgets_list {
+  -webkit-transition: -webkit-transform 200ms ease-out;
+}
+
+.panels > * {
+  position: absolute;
+  left: 0px; right: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.panels > * {
   -webkit-transform: translate3d(0,0,0);
+}
+
+.panels > *.show {
+  -webkit-transform: translate3d(-100%,0,0);
 }
 
 .widgets_list.hide {
