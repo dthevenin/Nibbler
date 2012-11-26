@@ -35,6 +35,7 @@ body {
 
 .panels {
   -webkit-transform: translate3d(100%,0,0);
+  overflow: visible;
 }
 
 .panels > *, .widgets_list {
