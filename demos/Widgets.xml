@@ -4,23 +4,28 @@
       <html:div>
         <component id="main_navbar" href="../lib/ui/NavigationBar.xml">
           <component id="back_button" href="../lib/ui/Button.xml" text="Back" type="nav_back" style="silver_style"/>
+          <component id="nav_title" href="../lib/ui/TextLabel.xml" text="Back" />
         </component>
 
         <component id="widgets_list" href="../lib/ui/List.xml"
           data='[\{"title": "Buttons"\}, \{"title": "Fields and Combobox"\},
             \{"title": "Selectors"\}, \{"title": "Sliders"\},
             \{"title": "List"\}, \{"title": "TabList"\},
-            \{"title": "BlockList"\}, \{"title": "Map"\}]' hasArrow="true">
+            \{"title": "BlockList"\}, \{"title": "Map"\},
+            \{"title": "ToDo"\}]' hasArrow="true">
         </component>
 
-        <component id="buttons" href="Buttons.xml" />
-        <component id="inputs" href="Inputs.xml" />
-        <component id="selectors" href="Selectors.xml" />
-        <component id="sliders" href="Sliders.xml" />
-        <component id="standard_list" href="StandardList.xml" />
-        <component id="tab_list" href="TabList.xml" />
-        <component id="block_list" href="BlockList.xml" />
-        <component id="map" href="Map.xml" />
+        <html:div class="panels">
+          <component id="buttons" href="Buttons.xml" />
+          <component id="inputs" href="Inputs.xml" />
+          <component id="selectors" href="Selectors.xml" />
+          <component id="sliders" href="Sliders.xml" />
+          <component id="standard_list" href="StandardList.xml" />
+          <component id="tab_list" href="TabList.xml" />
+          <component id="block_list" href="BlockList.xml" />
+          <component id="map" href="Map.xml" />
+          <component id="todo" href="Todo.xml" />
+        </html:div>
       </html:div>
     </component>
   </view>
