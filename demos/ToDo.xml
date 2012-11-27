@@ -32,20 +32,10 @@
       var my_data = this.instances.my_data;
       var my_check_box = this.instances.my_check_box;
 
-      my_data.stopPropagation ();
-      var selectedIndexes = my_check_box.properties.selectedIndexes;
-      selectedIndexes.sort ();
-
-      var i = selectedIndexes.length
-      while (i--) {
-        my_data.remove (selectedIndexes [i]);
-      }
-      my_data.change ();
+      my_data.remove (my_check_box.properties.selectedIndexes);
     </get>
     <get instance="my_check_box" event="@change">
       console.log (value);
     </get>
   </watch>
-
-
 </component>
