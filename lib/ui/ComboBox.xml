@@ -9,16 +9,17 @@
   <watch>
     <get instance="$self" event="@rendered"/>
     <set>
-      var instance = this;
+      var instance = this, config = {};
+ 
+      config.data = instance.properties.data;
+      config.node = instance.views.$root;
 
-      instance.__vs_instance = new vs.ui.ComboBox ({
-        node: instance.views.$root,
-        data: instance.properties.data
-      }).init ();
+      instance.__vs_instance = new vs.ui.ComboBox (config).init ();
 
       vs.util.extendsBenderInstance (instance, instance.__vs_instance);
 
-      instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
+      instance.__vs_instance.bind ('change', instance.__vs_instance,
+        function (e) {
         flexo.notify (instance, '@change', {data: e.data});
       })
 
