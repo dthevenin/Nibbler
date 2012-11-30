@@ -1,7 +1,6 @@
 <component xmlns="http://bender.igel.co.jp">
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <component id="inputs" href="../lib/ui/Application.xml">
-      <html:div>
       <component href="../lib/ui/TextLabel.xml" text="Select a Value:"/>
       <component id="combo" href="../lib/ui/ComboBox.xml" data='["item", "item2", "item3"]'/>
       <component id="textarea" href="../lib/ui/TextArea.xml" value='Tap your text'/>
@@ -11,7 +10,6 @@
       <component href="../lib/ui/Switch.xml" textOn="I" textOff="O" toggled="false"/>
       <component href="../lib/ui/TextInput.xml" placeholder='password...' type="password"/>
       <component href="../lib/ui/Switch.xml" textOn="red" textOff="blue"/>
-      </html:div>
     </component>
   </view>
 

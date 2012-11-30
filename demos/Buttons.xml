@@ -1,23 +1,21 @@
 <component xmlns="http://bender.igel.co.jp">
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <component id="buttons" href="../lib/ui/Application.xml">
-      <html:div>
-        <component href="../lib/ui/Button.xml" text="Button"/>
-        <component href="../lib/ui/Button.xml" text="Button" style="green"/>
-        <component href="../lib/ui/Button.xml" text="Button" style="red"/>
-        <component href="../lib/ui/Button.xml" text="Button" style="grey"/>
-        <component href="../lib/ui/Button.xml" text="Button" type="nav"/>
-        <component href="../lib/ui/Button.xml" text="Button" type="nav" style="silver_style"/>
-        <component href="../lib/ui/Button.xml" text="Button" type="nav" style="black_style"/>
-        <component href="../lib/ui/Button.xml" text="Button" type="nav_back"/>
-        <component href="../lib/ui/Button.xml" text="Button" type="nav_back" style="silver_style"/>
-        <component href="../lib/ui/Button.xml" text="Button" type="nav_back" style="black_style"/>
-        <component href="../lib/ui/Button.xml" text="Button" type="nav_forward"/>
-        <component href="../lib/ui/Button.xml" text="Button" type="nav_forward" style="silver_style"/>
-        <component href="../lib/ui/Button.xml" text="Button" type="nav_forward" style="black_style"/>
-        <component id="segButton1" href="../lib/ui/SegmentedButton.xml" items="['1', '2', '3']"/>
-        <component id="segButton2" href="../lib/ui/SegmentedButton.xml" items="['1', '2', '3']" type="bar"/>
-      </html:div>
+      <component href="../lib/ui/Button.xml" text="Button"/>
+      <component href="../lib/ui/Button.xml" text="Button" style="green"/>
+      <component href="../lib/ui/Button.xml" text="Button" style="red"/>
+      <component href="../lib/ui/Button.xml" text="Button" style="grey"/>
+      <component href="../lib/ui/Button.xml" text="Button" type="nav"/>
+      <component href="../lib/ui/Button.xml" text="Button" type="nav" style="silver_style"/>
+      <component href="../lib/ui/Button.xml" text="Button" type="nav" style="black_style"/>
+      <component href="../lib/ui/Button.xml" text="Button" type="nav_back"/>
+      <component href="../lib/ui/Button.xml" text="Button" type="nav_back" style="silver_style"/>
+      <component href="../lib/ui/Button.xml" text="Button" type="nav_back" style="black_style"/>
+      <component href="../lib/ui/Button.xml" text="Button" type="nav_forward"/>
+      <component href="../lib/ui/Button.xml" text="Button" type="nav_forward" style="silver_style"/>
+      <component href="../lib/ui/Button.xml" text="Button" type="nav_forward" style="black_style"/>
+      <component id="segButton1" href="../lib/ui/SegmentedButton.xml" items="['1', '2', '3']"/>
+      <component id="segButton2" href="../lib/ui/SegmentedButton.xml" items="['1', '2', '3']" type="bar"/>
     </component>
   </view>
 

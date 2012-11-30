@@ -1,7 +1,6 @@
 <component xmlns="http://bender.igel.co.jp">
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <component id="selectors" href="../lib/ui/Application.xml">
-      <html:div>
       <component href="../lib/ui/TextLabel.xml" text="RadioButton:"/>
       <component id="my_check_box" href="../lib/ui/CheckBox.xml"
         data='["item1", "item2", "item3"]'/>
@@ -10,7 +9,6 @@
       <component id="my_radio_button" href="../lib/ui/RadioButton.xml"
         data='["item1", "item2", "item3"]'/>
       <component id="label2" href="../lib/ui/TextLabel.xml"/>
-      </html:div>
     </component>
   </view>
 

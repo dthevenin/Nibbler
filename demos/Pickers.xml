@@ -1,7 +1,6 @@
 <component xmlns="http://bender.igel.co.jp">
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <component id="pickers" href="../lib/ui/Application.xml">
-      <html:div>
       <component id="picker1" href="../lib/ui/Picker.xml"
         data='[
           \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\},
@@ -15,8 +14,6 @@
       />
       <component id="label1" href="../lib/ui/TextLabel.xml"/>
       <component id="label2" href="../lib/ui/TextLabel.xml"/>
-      </html:div>
-
     </component>
   </view>
 

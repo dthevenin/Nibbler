@@ -1,14 +1,12 @@
 <component xmlns="http://bender.igel.co.jp">
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <component id="tabs" href="../lib/ui/Application.xml">
-      <html:div>
-        <component id="my_tab" href="../lib/ui/NavigationBar.xml">
-          <component id="navb1" href="../lib/ui/Button.xml" text="Button" type="nav" style="silver_style"/>
-          <component id="navb2" href="../lib/ui/Button.xml" text="Button" type="nav_back"/>
-          <component id="segButton2" href="../lib/ui/SegmentedButton.xml" items="['1', '2', '3']" type="bar"/>
-        </component>
-      <component id="image" href="../lib/ui/Image.xml" src="http://www.freewebs.com/fantania/nibbler01.png"/>
-      </html:div>
+      <component id="my_tab" href="../lib/ui/NavigationBar.xml">
+        <component id="navb1" href="../lib/ui/Button.xml" text="Button" type="nav" style="silver_style"/>
+        <component id="navb2" href="../lib/ui/Button.xml" text="Button" type="nav_back"/>
+        <component id="segButton2" href="../lib/ui/SegmentedButton.xml" items="['1', '2', '3']" type="bar"/>
+      </component>
+    <component id="image" href="../lib/ui/Image.xml" src="http://www.freewebs.com/fantania/nibbler01.png"/>
     </component>
   </view>
 

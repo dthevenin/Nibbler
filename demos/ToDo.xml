@@ -1,12 +1,10 @@
 <component xmlns="http://bender.igel.co.jp">
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <component id="todo" href="../lib/ui/Application.xml">
-      <html:div>
-        <component id="my_data" href="../lib/core/Array.xml"/>
-        <component id="my_input" href="../lib/ui/TextInput.xml" placeholder="What needs to be done?"/>
-        <component id="my_check_box" href="../lib/ui/CheckBox.xml"/>
-        <component id="my_button1" href="../lib/ui/Button.xml" text="Remove"/>
-      </html:div>
+      <component id="my_data" href="../lib/core/Array.xml"/>
+      <component id="my_input" href="../lib/ui/TextInput.xml" placeholder="What needs to be done?"/>
+      <component id="my_check_box" href="../lib/ui/CheckBox.xml"/>
+      <component id="my_button1" href="../lib/ui/Button.xml" text="Remove"/>
     </component>
   </view>
 
