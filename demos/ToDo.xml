@@ -16,7 +16,8 @@
       var instance = this;
       var my_data = this.instances.my_data;
       var my_check_box = this.instances.my_check_box;
-      my_check_box.model = my_data;
+
+      my_check_box.properties.model = my_data;
     </set>
   </watch>
 
