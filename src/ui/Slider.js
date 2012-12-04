@@ -18,10 +18,10 @@ nibbler.ui.Slider.rendering = function () {
     instance.__vs_instance, function (e) {
     instance.properties.value = instance.__vs_instance._value;
     flexo.notify (instance, '@continuous_change');
-  })
+  });
 
   instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
     instance.properties.value = instance.__vs_instance._value;
     flexo.notify (instance, '@change');
-  }
+  });
 };
