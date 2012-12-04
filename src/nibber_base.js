@@ -16,8 +16,6 @@
   along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-(function (window, undefined) {
-
 function extendsBenderInstance (instance, vs_object) {
 
   for (var property in vs_object)
@@ -45,4 +43,13 @@ vs.util.extend (vs.util, {
   extendsBenderInstance:              extendsBenderInstance,
 });
 
-})(window);
+var nibbler = {
+  core: {},
+  data: {},
+  ui: {},
+  fx: {},
+  ext: {
+    fx: {},
+    ui: {}
+  }
+};
