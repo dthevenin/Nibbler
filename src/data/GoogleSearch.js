@@ -13,7 +13,6 @@ nibbler.data.GoogleSearch.rendering = function () {
     flexo.notify (instance, '@engineload');
   })
 
-  console.log (instance.properties.searchEngine)
   if (instance.properties.searchEngine) {
     instance.setSearchEngine (instance.properties.searchEngine);
   }
