@@ -15,7 +15,7 @@
     </get>
 
     <get instance="$self" property="position">
-      this.__set_position(value)}
+      this.__set_position(value);
     </get>
   </watch>
 
