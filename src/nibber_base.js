@@ -53,3 +53,5 @@ var nibbler = {
     ui: {}
   }
 };
+
+exports.nibbler = nibbler;
