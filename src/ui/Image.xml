@@ -1,0 +1,15 @@
+<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.Image">
+
+  <property name="src"/>
+
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <html:img class="vs_ui_imageview"></html:img>
+  </view>
+
+  <watch>
+    <get instance="$self" property="src">
+      this.__vs_instance.src = value;
+    </get>
+  </watch>
+
+</component>
