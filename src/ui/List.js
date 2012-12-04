@@ -37,6 +37,8 @@ nibbler.ui.List.rendering = function () {
 nibbler.ui.List.__set_model = function (value) {
   if (value instanceof vs.core.Model)
     this.__vs_instance.model = value;
+  else if (vs.util.isArray (value))
+    this.__vs_instance.data = value;
   else if (value && value.__vs_instance instanceof vs.core.Model)
     this.__vs_instance.model = value.__vs_instance;
   else console.log ("Unsupported model property");
