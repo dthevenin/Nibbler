@@ -10,9 +10,13 @@
       this.__vs_instance.setSearchEngine (value);
     </get>
 
-    <get instance="$self" property="address" value="this.__set_adress(value)" />
+    <get instance="$self" property="address">
+      this.__set_address(value);
+    </get>
 
-    <get instance="$self" property="position" value="this.__set_position(value)" />
+    <get instance="$self" property="position">
+      this.__set_position(value)}
+    </get>
   </watch>
 
 </component>

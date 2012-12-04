@@ -15,7 +15,9 @@
       this.__vs_instance.data = value;
     </get>
 
-    <get instance="$self" property="model" value="{this.__set_model(value)}" />
+    <get instance="$self" property="model">
+      this.__set_model(value)
+    </get>
   </watch>
 
 </component>
