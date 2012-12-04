@@ -1,7 +1,7 @@
 nibbler.ui.RadioButton = Object.create(bender.instance);
 
 nibbler.ui.RadioButton.rendering = function () {
-  var instance = this;
+  var instance = this, config = {};
 
   bender.instance.rendering.call(this);
 
