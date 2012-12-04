@@ -25,7 +25,7 @@
 SHELL = /bin/sh
 CHMOD = chmod
 CP = cp
-XTEMP = ../lib/manage_template.sh 
+XTEMP = ../src/manage_template.sh 
 MV = mv
 NOOP = $(SHELL) -c true
 RM_F = rm -f
@@ -41,69 +41,111 @@ OPEN = open
 ECHO = echo
 ECHO_N = echo -n
 JAVA = java
-COMPILE = $(JAVA) -jar ../lib/closurecompiler/compiler.jar --language_in=ECMASCRIPT5
-COMPILE_ADV = $(JAVA) -jar ../lib/closurecompiler/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS
-COMPILE_YUI = $(JAVA) -cp ../lib/yuicompressor/jargs-1.0.jar:../lib/yuicompressor/rhino-1.6R7.jar -jar ../lib/yuicompressor/yuicompressor-2.4.2.jar
-GENDOC = $(JAVA) -jar ../lib/jsdoc-toolkit/jsrun.jar ../lib/jsdoc-toolkit/app/run.js 
+COMPILE = $(JAVA) -jar ../src/closurecompiler/compiler.jar --language_in=ECMASCRIPT5
+COMPILE_ADV = $(JAVA) -jar ../src/closurecompiler/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS
+COMPILE_YUI = $(JAVA) -cp ../src/yuicompressor/jargs-1.0.jar:../src/yuicompressor/rhino-1.6R7.jar -jar ../src/yuicompressor/yuicompressor-2.4.2.jar
+GENDOC = $(JAVA) -jar ../src/jsdoc-toolkit/jsrun.jar ../src/jsdoc-toolkit/app/run.js 
 
 ###                         RELEASE
 ##############################################################
 
-all :: release
+all :: debug
 
 Debug :: debug
 Release :: release
 
-release :: clean makedirs vs util core ui fx data ext av export_api doc
-
-debug :: clean makedirs vs_debug util_debug core_debug ui_debug fx_debug data_debug ext_debug av_debug export_api doc
-
-clean :: clean_libs
-
-clean_libs:
-	-$(RM_RF) nibbler.js
-
-makedirs:
-	-$(MKPATH) ../kit/
-	-$(MKPATH) ../kit/js/
-	-$(MKPATH) ../kit/docs/
-	-$(MKPATH) ../kit/css/
-	-$(MKPATH) ../kit/resources/
-	
-EXPORT_HEADER = "(function (window, undefined) {"
+EXPORT_HEADER = "(function (exports, undefined) {"
 
 EXPORT_FOOTER = "})(window);"
 
 
+release :: clean_libs makedirs nibbler_tmp.js copy_xml
+	-$(COMPILE) --js=nibbler_tmp.js --js_output_file=lib/nibbler.js
+
+debug :: clean_libs makedirs nibbler_tmp.js copy_xml
+	-$(MV) nibbler_tmp.js lib/nibbler.js
+
+clean :: clean_libs
+
+clean_libs:
+	-$(RM_RF) lib/nibbler.js
+	$(RM) vs_core_tmp.js
+	$(RM) vs_data_tmp.js
+	$(RM) vs_ui_tmp.js
+	$(RM) vs_ext_tmp.js
+
+makedirs:
+	-$(MKPATH) lib/
+	-$(MKPATH) lib/core/
+	-$(MKPATH) lib/data/
+	-$(MKPATH) lib/ui/
+	-$(MKPATH) lib/ext/
+	-$(MKPATH) lib/ext/ui/
+
+nibbler_tmp.js :: vs_core_tmp.js vs_data_tmp.js vs_ui_tmp.js vs_ext_tmp.js
+	$(ECHO) $(EXPORT_HEADER) >> $@
+	$(CAT) src/nibber_base.js >> $@
+	$(CAT) vs_core_tmp.js >> $@
+	$(CAT) vs_data_tmp.js >> $@
+	$(CAT) vs_ui_tmp.js >> $@
+	$(CAT) vs_ext_tmp.js >> $@
+	$(ECHO) $(EXPORT_FOOTER) >> $@
+	$(RM) vs_core_tmp.js
+	$(RM) vs_data_tmp.js
+	$(RM) vs_ui_tmp.js
+	$(RM) vs_ext_tmp.js
+	
+copy_xml:
+	$(CP) src/core/Array.xml lib/core/
+	$(CP) src/data/GoogleSearch.xml lib/data/
+	$(CP) src/ui/View.xml lib/ui/
+	$(CP) src/ui/Application.xml lib/ui/
+	$(CP) src/ui/ScrollImage.xml lib/ui/
+	$(CP) src/ui/TextArea.xml lib/ui/
+	$(CP) src/ui/Button.xml lib/ui/
+	$(CP) src/ui/List.xml lib/ui/
+	$(CP) src/ui/ComboBox.xml lib/ui/
+	$(CP) src/ui/RadioButton.xml lib/ui/
+	$(CP) src/ui/CheckBox.xml lib/ui/
+	$(CP) src/ui/NavigationBar.xml lib/ui/
+	$(CP) src/ui/TextLabel.xml lib/ui/
+	$(CP) src/ui/ProgressBar.xml lib/ui/
+	$(CP) src/ui/Slider.xml lib/ui/
+	$(CP) src/ui/Image.xml lib/ui/
+	$(CP) src/ui/TextInput.xml lib/ui/
+	$(CP) src/ui/Switch.xml lib/ui/
+	$(CP) src/ui/Picker.xml lib/ui/
+	$(CP) src/ui/SegmentedButton.xml lib/ui/
+	$(CP) src/ext/ui/GMap.xml lib/ext/ui/
+
 ###                     Core
 ##############################################################
 
-vs_core_tmp.js: core/Array.js
-	$(CAT) core/Array.js >> $@
+vs_core_tmp.js: src/core/Array.js
+	$(CAT) src/core/Array.js >> $@
 
 ###                         GUI
 ##############################################################
 
-vs_ui_tmp.js: lib/ui/View.js lib/ui/Application.js lib/ui/TextArea.js lib/ui/Button.js lib/ui/AbstractList.js lib/ui/List.js lib/ui/NavigationBar.js lib/ui/ToolBar/ToolBar.js lib/ui/ProgressBar.js lib/ui/RadioButton.js lib/ui/ComboBox.js lib/ui/CheckBox.js lib/ui/Slider.js lib/ui/TextInput.js lib/ui/TextLabel.js lib/ui/Image.js lib/ui/Switch.js lib/ui/Picker.js lib/ui/SegmentedButton.js
-	$(CAT) lib/ui/View.js >> $@
-	$(CAT) lib/ui/Application.js >> $@
-	$(CAT) lib/ui/ScrollImageView.js >> $@
-	$(CAT) lib/ui/TextArea.js >> $@
-	$(CAT) lib/ui/Button.js >> $@
-	$(CAT) lib/ui/List.js >> $@
-	$(CAT) lib/ui/ComboBox.js >> $@
-	$(CAT) lib/ui/RadioButton.js >> $@
-	$(CAT) lib/ui/CheckBox.js >> $@
-	$(CAT) lib/ui/NavigationBar.js >> $@
-	$(CAT) lib/ui/ToolBar.js >> $@
-	$(CAT) lib/ui/TextLabel.js >> $@
-	$(CAT) lib/ui/ProgressBar.js >> $@
-	$(CAT) lib/ui/Slider.js >> $@
-	$(CAT) lib/ui/Image.js >> $@
-	$(CAT) lib/ui/TextInput.js >> $@
-	$(CAT) lib/ui/Switch.js >> $@
-	$(CAT) lib/ui/Picker.js >> $@
-	$(CAT) lib/ui/SegmentedButton.js >> $@
+vs_ui_tmp.js: src/ui/View.js src/ui/Application.js src/ui/TextArea.js src/ui/Button.js src/ui/List.js src/ui/NavigationBar.js src/ui/ProgressBar.js src/ui/RadioButton.js src/ui/ComboBox.js src/ui/CheckBox.js src/ui/Slider.js src/ui/TextInput.js src/ui/TextLabel.js src/ui/Image.js src/ui/Switch.js src/ui/Picker.js src/ui/SegmentedButton.js src/ui/ScrollImage.js
+	$(CAT) src/ui/View.js >> $@
+	$(CAT) src/ui/Application.js >> $@
+	$(CAT) src/ui/ScrollImage.js >> $@
+	$(CAT) src/ui/TextArea.js >> $@
+	$(CAT) src/ui/Button.js >> $@
+	$(CAT) src/ui/List.js >> $@
+	$(CAT) src/ui/ComboBox.js >> $@
+	$(CAT) src/ui/RadioButton.js >> $@
+	$(CAT) src/ui/CheckBox.js >> $@
+	$(CAT) src/ui/NavigationBar.js >> $@
+	$(CAT) src/ui/TextLabel.js >> $@
+	$(CAT) src/ui/ProgressBar.js >> $@
+	$(CAT) src/ui/Slider.js >> $@
+	$(CAT) src/ui/Image.js >> $@
+	$(CAT) src/ui/TextInput.js >> $@
+	$(CAT) src/ui/Switch.js >> $@
+	$(CAT) src/ui/Picker.js >> $@
+	$(CAT) src/ui/SegmentedButton.js >> $@
 
 ###                     FX
 ##############################################################
@@ -112,8 +154,8 @@ vs_ui_tmp.js: lib/ui/View.js lib/ui/Application.js lib/ui/TextArea.js lib/ui/But
 ###                     Data
 ##############################################################
 
-vs_data_tmp.js: data/GoogleSearch.js
-	$(CAT) data/GoogleSearch.js >> $@
+vs_data_tmp.js: src/data/GoogleSearch.js
+	$(CAT) src/data/GoogleSearch.js >> $@
 	
 ###                     AV
 ##############################################################
@@ -122,6 +164,6 @@ vs_data_tmp.js: data/GoogleSearch.js
 ###                     Extension
 ##############################################################
 
-vs_ext_tmp.js: ext/ui/GMap/GMap.js
-	$(CAT) ext/ui/GMap/GMap.js >> $@
+vs_ext_tmp.js: src/ext/ui/GMap.js
+	$(CAT) src/ext/ui/GMap.js >> $@
 
