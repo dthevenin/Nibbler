@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp">
+<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ext.ui.GMap">
 
   <property name="center" as="dynamic" value="[0,0]"/>
   <property name="maxZoom" as="number" value="0"/>
@@ -13,68 +13,33 @@
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <html:div class="vs_ext_ui_gmap"></html:div>
   </view>
-
-  <watch>
-    <get instance="$self" event="@rendered"/>
-    <set>
-      var instance = this;
-
-      instance.__vs_instance = new vs.ext.ui.GMap ({
-        node: instance.views.$root,
-        center: instance.properties.center,
-        maxZoom: instance.properties.maxZoom,
-        minZoom: instance.properties.minZoom,
-        scroll: instance.properties.scroll,
-        streetViewControl: instance.properties.streetViewControl,
-        tapToZoom: instance.properties.tapToZoom,
-        tilt: instance.properties.tilt,
-        zoom: instance.properties.zoom,
-        zoomControl: instance.properties.zoomControl
-      }).init ();
-
-      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
-
-      instance.__vs_instance.bind ('mapload', instance.__vs_instance, function (e) {
-        flexo.notify (instance, '@mapload');
-      })
-    </set>
-  </watch>
-
+  
   <watch>
     <get instance="$self" property="center">
-      if (!this.__vs_instance) return;
       this.__vs_instance.center = value;
     </get>
     <get instance="$self" property="maxZoom">
-      if (!this.__vs_instance) return;
       this.__vs_instance.maxZoom = value;
     </get>
     <get instance="$self" property="minZoom">
-      if (!this.__vs_instance) return;
       this.__vs_instance.minZoom = value;
     </get>
     <get instance="$self" property="scroll">
-      if (!this.__vs_instance) return;
       this.__vs_instance.scroll = value;
     </get>
     <get instance="$self" property="streetViewControl">
-      if (!this.__vs_instance) return;
       this.__vs_instance.streetViewControl = value;
     </get>
     <get instance="$self" property="tapToZoom">
-      if (!this.__vs_instance) return;
       this.__vs_instance.tapToZoom = value;
     </get>
     <get instance="$self" property="tilt">
-      if (!this.__vs_instance) return;
       this.__vs_instance.tilt = value;
     </get>
     <get instance="$self" property="zoom">
-      if (!this.__vs_instance) return;
       this.__vs_instance.zoom = value;
     </get>
     <get instance="$self" property="zoomControl">
-      if (!this.__vs_instance) return;
       this.__vs_instance.zoomControl = value;
     </get>
   </watch>

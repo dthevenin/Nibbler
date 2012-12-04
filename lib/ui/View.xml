@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp">
+<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.View">
 
   <property name="src"/>
   <property name="layout" as="string" value=""/>
@@ -8,31 +8,7 @@
   </view>
 
   <watch>
-    <get instance="$self" event="@rendered"/>
-    <set>
-      var instance = this;
-
-      instance.__vs_instance = new vs.ui.View ({
-        node: instance.views.$root,
-        layout: instance.properties.layout
-      }).init ();
-
-      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
-
-      // manage children
-      var i = this.children.length;
-      while (i--) {
-        var child = this.children [i];
-        if (child.__vs_instance) {
-          this.__vs_instance.add  (child.__vs_instance);
-        }
-      }
-    </set>
-  </watch>
-
-  <watch>
     <get instance="$self" property="layout">
-      if (!this.__vs_instance) return;
       this.__vs_instance.layout = value;
     </get>
   </watch>

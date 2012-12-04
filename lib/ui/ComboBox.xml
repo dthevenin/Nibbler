@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp">
+<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.ComboBox">
 
   <property name="data" as="dynamic" value="[]"/>
 
@@ -7,33 +7,7 @@
   </view>
 
   <watch>
-    <get instance="$self" event="@rendered"/>
-    <set>
-      var instance = this, config = {};
- 
-      config.data = instance.properties.data;
-      config.node = instance.views.$root;
-
-      instance.__vs_instance = new vs.ui.ComboBox (config).init ();
-
-      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
-
-      instance.__vs_instance.bind ('change', instance.__vs_instance,
-        function (e) {
-        flexo.notify (instance, '@change', {data: e.data});
-      })
-
-      vs.util.defineProperty (instance.properties, 'selectedItem', {
-        get : function () {
-          return instance.__vs_instance.selectedIndex;
-        }
-      })
-    </set>
-  </watch>
-
-  <watch>
     <get instance="$self" property="data">
-      if (!this.__vs_instance) return;
       this.__vs_instance.data = value;
     </get>
   </watch>

@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp">
+<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.Switch">
 
   <property name="textOff" as="string" value="Off" />
   <property name="textOn" as="string" value="On" />
@@ -16,36 +16,13 @@
   </view>
 
   <watch>
-    <get instance="$self" event="@rendered"/>
-    <set>
-      var instance = this;
-
-      instance.__vs_instance = new vs.ui.Switch ({
-        node: instance.views.$root,
-        textOff: instance.properties.textOff,
-        textOn: instance.properties.textOn,
-        toggled: instance.properties.toggled
-      }).init ();
-
-      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
-
-      instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
-        flexo.notify (instance, '@change', {data: e.data});
-      })
-    </set>
-  </watch>
-
-  <watch>
     <get instance="$self" property="textOff">
-      if (!this.__vs_instance) return;
       this.__vs_instance.textOff = value;
     </get>
     <get instance="$self" property="textOn">
-      if (!this.__vs_instance) return;
       this.__vs_instance.textOn = value;
     </get>
     <get instance="$self" property="toggled">
-      if (!this.__vs_instance) return;
       this.__vs_instance.toggled = value;
     </get>
   </watch>

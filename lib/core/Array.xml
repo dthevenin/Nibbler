@@ -1,18 +1,1 @@
-<component xmlns="http://bender.igel.co.jp">
-
-  <watch>
-    <get instance="$self" event="@rendered"/>
-    <set>
-      var instance = this;
-
-      instance.__vs_instance = new vs.core.Array ().init ();
-      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
-
-      vs.util.defineProperty (instance.properties, 'length', {
-        get : function () {
-          return instance.__vs_instance.length;
-        }
-      })
-    </set>
-  </watch>
-</component>
+<component xmlns="http://bender.igel.co.jp" prototype="nibbler.core.Array" />

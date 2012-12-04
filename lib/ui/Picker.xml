@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp">
+<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.Picker">
 
   <property name="data" as="dynamic" value="[]"/>
   <property name="selectedKeys" as="dynamic"/>
@@ -10,32 +10,9 @@
       <html:div class="frame" />
     </html:div>
   </view>
-
-  <watch>
-    <get instance="$self" event="@rendered"/>
-    <set>
-      var instance = this;
-
-      instance.__vs_instance = new vs.ui.Picker ({
-        node: instance.views.$root,
-        data: instance.properties.data
-      }).init ();
-
-      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
-
-      instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
-        instance.properties.selectedKeys =
-          instance.__vs_instance.selectedKeys;
-        instance.properties.selectedValues =
-          instance.__vs_instance.selectedValues;
-        flexo.notify (instance, '@change', {data: e.data});
-      })
-    </set>
-  </watch>
-
+  
   <watch>
     <get instance="$self" property="data">
-      if (!this.__vs_instance) return;
       this.__vs_instance.data = value;
     </get>
   </watch>

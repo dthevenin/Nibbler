@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp">
+<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.TextArea">
 
   <property name="value"/>
 
@@ -7,30 +7,7 @@
   </view>
 
   <watch>
-    <get instance="$self" event="@rendered"/>
-    <set>
-      var instance = this;
-
-      instance.__vs_instance = new vs.ui.TextArea ({
-        node: instance.views.$root,
-        value: instance.properties.value
-      }).init ();
-
-      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
-
-      instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
-        flexo.notify (instance, '@change', {data: e.data});
-      })
-
-      instance.__vs_instance.bind ('continuous_change', instance.__vs_instance, function (e) {
-        flexo.notify (instance, '@continuous_change', {data: e.data});
-      })
-    </set>
-  </watch>
-
-  <watch>
     <get instance="$self" property="value">
-      if (!this.__vs_instance) return;
       this.__vs_instance.value = value;
     </get>
   </watch>

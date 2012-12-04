@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp">
+<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.SegmentedButton">
 
   <property name="items" as="dynamic" value="[]"/>
   <property name="type" value="default"/>
@@ -8,41 +8,12 @@
   </view>
 
   <watch>
-    <get instance="$self" event="@rendered"/>
-    <set>
-      var instance = this;
-
-      instance.__vs_instance = new vs.ui.SegmentedButton ({
-        node: instance.views.$root,
-        items: instance.properties.items,
-        type: instance.properties.type
-      }).init ();
-
-      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
-
-      instance.__vs_instance.bind ('select', instance.__vs_instance, function (e) {
-        flexo.notify (instance, '@select', {data: e.data});
-      })
-
-      vs.util.defineProperty (instance.properties, 'selectedIndex', {
-        get : function () {
-          return instance.__vs_instance.selectedIndex;
-        }
-      })
-    </set>
-
-  </watch>
-
-  <watch>
     <get instance="$self" property="items">
-      if (!this.__vs_instance) return;
       this.__vs_instance.items = value;
     </get>
     <get instance="$self" property="type">
-      if (!this.__vs_instance) return;
       this.__vs_instance.type = value;
     </get>
-
   </watch>
 
 </component>

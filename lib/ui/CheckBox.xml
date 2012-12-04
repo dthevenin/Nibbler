@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp">
+<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.CheckBox">
 
   <property name="data" as="dynamic" value="[]"/>
   <property name="selectedIndexes" as="dynamic"/>
@@ -9,53 +9,13 @@
       <html:fieldset x-hag-hole="item_children" />
     </html:div>
   </view>
-
-  <watch>
-    <get instance="$self" event="@rendered"/>
-    <set><![CDATA[
-      var instance = this, config = {};
- 
-      if (instance.properties.model) {
-        if (instance.properties.model instanceof vs.core.Model)
-          config.model = instance.properties.model;
-        else if (instance.properties.model &&
-                instance.properties.model instanceof vs.core.Model)
-          config.model = instance.properties.model.__vs_instance;
-        else
-          config.data = instance.properties.model
-      }
-      else config.data = instance.properties.data;
-
-      config.node = instance.views.$root;
-
-      instance.__vs_instance = new vs.ui.CheckBox (config).init ();
-
-      vs.util.extendsBenderInstance (instance, instance.__vs_instance);
-
-      instance.__vs_instance.bind ('change', instance.__vs_instance,
-        function (e) {
-        instance.properties.selectedIndexes =
-           instance.__vs_instance._selected_indexes;
-        flexo.notify (instance, '@change', {data: e.data});
-      })
-    ]]></set>
-  </watch>
-
+  
   <watch>
     <get instance="$self" property="data">
-      if (!this.__vs_instance) return;
       this.__vs_instance.data = value;
     </get>
 
-    <get instance="$self" property="model"><![CDATA[
-      if (!this.__vs_instance) return;
-      
-      if (value instanceof vs.core.Model)
-        this.__vs_instance.model = value;
-      else if (value && value.__vs_instance instanceof vs.core.Model)
-        this.__vs_instance.model = value.__vs_instance;
-      else console.log ("Unsupported model property");
-    ]]></get>
+    <get instance="$self" property="model" value="{this.__set_model(value)}" />
   </watch>
 
 </component>
