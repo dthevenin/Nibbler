@@ -36,4 +36,4 @@ nibbler.ui.RadioButton.__set_model = function (value) {
   else if (value && value.__vs_instance instanceof vs.core.Model)
     this.__vs_instance.model = value.__vs_instance;
   else console.log ("Unsupported model property");
-}
+};

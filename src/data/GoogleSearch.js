@@ -36,4 +36,4 @@ nibbler.data.GoogleSearch.__set_position = function (value) {
   this.__vs_instance.GPSCoordinateToAddress (value, function (result) {
     this.properties.addresses = result;
   }, this);
-}
+};
