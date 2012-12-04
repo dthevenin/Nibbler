@@ -18,7 +18,7 @@ nibbler.data.GoogleSearch.rendering = function () {
   }
 };
 
-nibbler.data.GoogleSearch.__set_adress = function (value) {
+nibbler.data.GoogleSearch.__set_address = function (value) {
   // Full address search
   this.__vs_instance.searchAddress (value, function (result) {
     this.properties.addresses = result;

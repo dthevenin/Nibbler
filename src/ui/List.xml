@@ -20,7 +20,9 @@
       this.__vs_instance.data = value;
     </get>
 
-    <get instance="$self" property="model" value="{this.__set_model(value)}" />
+    <get instance="$self" property="model">
+      this.__set_model(value)
+    </get>
 
     <get instance="$self" property="hasArrow">
       this.__vs_instance.hasArrow = value;
