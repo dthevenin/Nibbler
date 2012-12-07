@@ -20,7 +20,7 @@ nibbler.ui.Application.rendering = function () {
     this.html._comp_ = undefined;
     this.view._comp_ = this;
     this.addClassName ('application');
-    this.addClassName ('absolute_layout');
+//    this.addClassName ('absolute_layout');
     
     this.html.removeAttribute ('id');
     this.html.removeAttribute ('x-hag-ref');
