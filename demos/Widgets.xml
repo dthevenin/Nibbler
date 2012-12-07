@@ -15,7 +15,7 @@
         <component id="tab_list" href="TabList.xml" />
         <component id="block_list" href="BlockList.xml" />
         <component id="map" href="Map.xml" />
-        <component id="todo" href="Todo.xml" />
+        <component id="todo" href="ToDo.xml" />
       </component>
 
       <component id="widgets_list" href="../lib/ui/List.xml"
