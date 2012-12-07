@@ -33,8 +33,6 @@ header > h1 {
 }
 
 header > h2 {
-//  float: left;
-//  font-size: 38px;
   margin: 5px 0px 0px 0px;
 }
 
@@ -73,35 +71,6 @@ header nav > ul {
 ul, ol {
   padding-left: 10px;
   margin-left: 15px;
-}
-
-header nav > ul > li {
-  float: left;
-  margin: 5px 5px 0 0;
-  display: block;
-  background-image: url('tile_bckgrd.png');
-}
-
-header nav > ul > li > a {
-  width: 85px; height:85px;
-}
-
-header nav > ul > li > a:hover {
-  background-color: #DDD;
-}
-
-header nav > ul > li > a:active {
-  background-color: #CCC;
-}
-
-header nav a {
-  display: block;
-  font-size: 15px;
-  padding: 5px 5px;
-  color: #555;
-}
-
-section {
 }
 
 section > h2 {
