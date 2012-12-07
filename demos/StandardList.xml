@@ -1,0 +1,10 @@
+<component xmlns="http://bender.igel.co.jp">
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <component id="standardlist" href="../lib/ui/Application.xml">
+      <component href="../lib/ui/List.xml"
+        type="DefaultList" hasArrow="true" scroll="true"
+        data='[\{"title":"one"\},\{"title":"two"\},\{"title":"tree","label":"two"\},\{"title":"one"\},\{"title":"two"\},\{"title":"tree","label":"two"\},\{"title":"one"\},\{"title":"two"\},\{"title":"tree","label":"two"\},\{"title":"one"\},\{"title":"two"\},\{"title":"tree","label":"two"\}]'
+      />
+    </component>
+  </view>
+</component>

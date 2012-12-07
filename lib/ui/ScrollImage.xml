@@ -1,0 +1,32 @@
+<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.ScrollImage">
+
+  <property name="src"/>
+  <property name="pinch" as="dynamic" value="vs.ui.ScrollView.NO_PINCH"/>
+  <property name="scroll" as="dynamic" value="vs.ui.ScrollView.NO_SCROLL"/>
+  <property name="stretch" as="dynamic" value="vs.ui.ScrollImageView.STRETCH_FILL"/>
+
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <html:div class="vs_ui_scrollimageview">
+      <html:img class="content" />
+    </html:div>
+  </view>
+
+  <watch>
+    <get instance="$self" property="src">
+      this.__vs_instance.src = value;
+    </get>
+
+    <get instance="$self" property="pinch">
+      this.__vs_instance.pinch = value;
+    </get>
+
+    <get instance="$self" property="scroll">
+      this.__vs_instance.scroll = value;
+    </get>
+
+    <get instance="$self" property="stretch">
+      this.__vs_instance.stretch = value;
+    </get>
+  </watch>
+
+</component>

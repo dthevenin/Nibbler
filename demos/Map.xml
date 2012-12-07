@@ -1,0 +1,26 @@
+<component xmlns="http://bender.igel.co.jp">
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <component id="map" href="../lib/ui/Application.xml">
+      <component id="the_map" href="../lib/ext/ui/GMap.xml"/>
+      <component id="search" href="../lib/data/GoogleSearch.xml" searchEngine="vs.data.GoogleSearch.LOCAL_SEARCH_ENGINE"/>
+      <component id="address_field" href="../lib/ui/TextInput.xml" placeholder='Tap your address...' type="search"/>
+      <component id="slider" href="../lib/ui/Slider.xml" orientation="vs.ui.Slider.VERTICAL" range="[3, 14]"/>
+    </component>
+  </view>
+
+  <watch>
+    <get instance="slider" property="value" />
+    <set instance="the_map" property="zoom" />
+  </watch>
+
+  <watch>
+    <get instance="address_field" property="value" />
+    <set instance="search" property="address" />
+  </watch>
+
+  <watch>
+    <get instance="search" property="position" />
+    <set instance="the_map" property="center" />
+  </watch>
+
+</component>

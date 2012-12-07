@@ -1,0 +1,44 @@
+<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.List">
+
+  <property name="data" as="dynamic" value="[]" />
+  <property name="model" as="dynamic"/>
+  <property name="hasArrow" as="boolean" />
+  <property name="scroll" as="boolean" value="false"/>
+  <property name="filters" as="dynamic" value="[]" />
+  <property name="selectedIndexes" as="dynamic" />
+  <property name="type" />
+
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <html:div class="vs_ui_list">
+      <html:ul x-hag-hole="item_children" />
+      <content />
+    </html:div>
+  </view>
+
+  <watch>
+    <get instance="$self" property="data">
+      this.__vs_instance.data = value;
+    </get>
+
+    <get instance="$self" property="model">
+      this.__set_model(value)
+    </get>
+
+    <get instance="$self" property="hasArrow">
+      this.__vs_instance.hasArrow = value;
+    </get>
+
+    <get instance="$self" property="filters">
+      this.__vs_instance.filters = value;
+    </get>
+
+    <get instance="$self" property="scroll">
+      this.__vs_instance.scroll = value;
+    </get>
+
+    <get instance="$self" property="type">
+      this.__vs_instance.type = value;
+    </get>
+  </watch>
+
+</component>

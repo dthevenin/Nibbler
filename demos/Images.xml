@@ -1,0 +1,16 @@
+<component xmlns="http://bender.igel.co.jp">
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <component id="images" href="../lib/ui/Application.xml">
+      <component href="../lib/ui/Image.xml" src="http://www.freewebs.com/fantania/nibbler01.png"/>
+      <component href="../lib/ui/ScrollImage.xml" src="http://www.freewebs.com/fantania/nibbler01.png"
+        stretch="vs.ui.ScrollImageView.STRETCH_NONE"/>
+      <component href="../lib/ui/ScrollImage.xml" src="http://www.freewebs.com/fantania/nibbler01.png"
+        stretch="vs.ui.ScrollImageView.STRETCH_FILL"/>
+      <component href="../lib/ui/ScrollImage.xml" src="http://www.freewebs.com/fantania/nibbler01.png"
+        stretch="vs.ui.ScrollImageView.STRETCH_UNIFORM"/>
+      <component href="../lib/ui/ScrollImage.xml" src="http://www.freewebs.com/fantania/nibbler01.png"
+        stretch="vs.ui.ScrollImageView.STRETCH_UNIFORM_FILL"/>
+    </component>
+  </view>
+
+</component>

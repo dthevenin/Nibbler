@@ -1,0 +1,34 @@
+body {
+  background-color: rgb(67,107,118);
+}
+
+.inputs {
+  padding: 10px;
+}
+
+.inputs .vs_ui_textlabel {
+  width: 30%;
+  display: inline-block;
+}
+
+.inputs .vs_ui_combobox {
+  width: 60%;
+  display: inline-block;
+}
+
+.inputs .vs_ui_textarea {
+  margin: 10px 0 10px 0;
+  width: 100%;
+  height: 100px;
+}
+
+.inputs .vs_ui_inputfield {
+  margin: 0 10px 10px 0;
+  width: 60%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.inputs .vs_ui_switch {
+  display: inline-block;
+}

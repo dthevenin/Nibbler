@@ -1,0 +1,24 @@
+body {
+  background-color: rgb(67,107,118);
+}
+
+.buttons {
+  padding: 10px;
+}
+
+.buttons .vs_ui_button {
+  margin: 10px;
+  width: 40%;
+  display: inline-block;
+}
+
+.buttons .vs_ui_button.nav,
+.buttons .vs_ui_button.nav_forward,
+.buttons .vs_ui_button.nav_back {
+  width: 25%;
+}
+
+.buttons .vs_ui_segmentedbutton {
+  margin: 10px;
+  width: 50%;
+}

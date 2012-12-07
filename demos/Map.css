@@ -1,0 +1,25 @@
+body {
+  background-color: rgb(67,107,118);
+  font-family: Helvetica;
+}
+
+.map {
+  padding: 10px;
+}
+
+.map .slider {
+  position: absolute;
+  display: inline-block;
+  top: 60px; left: 10px;
+}
+
+.map .the_map {
+  position: absolute;
+  top: 0px; left: 0px;
+  right: 0px; bottom: 0px;
+}
+
+.map .address_field {
+  position: absolute;
+  top: 10px; left: 40px; right: 10px;
+}
