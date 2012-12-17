@@ -6,7 +6,7 @@
   <component id="my_button1" href="../lib/ui/Button.xml" text="Remove"/>
 
   <watch>
-    <get instance="$self" event="@rendered"/>
+    <get instance="$self" event="@running"/>
     <set>
       var instance = this;
       var my_data = this.instances.my_data;
