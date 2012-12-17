@@ -1,21 +1,18 @@
-<component xmlns="http://bender.igel.co.jp">
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
-    <component id="pickers" href="../lib/ui/Application.xml">
-      <component id="picker1" href="../lib/ui/Picker.xml"
-        data='[
-          \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\},
-          \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\}]'
-      />
-      <component id="picker2" href="../lib/ui/Picker.xml"
-        data='[
-          \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\},
-          \{"values": \{1:"one",2:"two",3:"three",4:"four",\}, "style": "right shrink"\},
-          \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\}]'
-      />
-      <component id="label1" href="../lib/ui/TextLabel.xml"/>
-      <component id="label2" href="../lib/ui/TextLabel.xml"/>
-    </component>
-  </view>
+<component xmlns="http://bender.igel.co.jp" href="../lib/ui/Application.xml"
+  id="pickers">
+  <component id="picker1" href="../lib/ui/Picker.xml"
+    data='[
+      \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\},
+      \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\}]'
+  />
+  <component id="picker2" href="../lib/ui/Picker.xml"
+    data='[
+      \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\},
+      \{"values": \{1:"one",2:"two",3:"three",4:"four",\}, "style": "right shrink"\},
+      \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\}]'
+  />
+  <component id="label1" href="../lib/ui/TextLabel.xml"/>
+  <component id="label2" href="../lib/ui/TextLabel.xml"/>
 
   <watch>
     <get instance="picker1" property="selectedKeys" />

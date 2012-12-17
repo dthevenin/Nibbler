@@ -1,9 +1,9 @@
 nibbler.ui.NavigationBar = Object.create(bender.instance);
 
-nibbler.ui.NavigationBar.rendering = function () {
+nibbler.ui.NavigationBar.did_render = function () {
   var instance = this;
 
-  bender.instance.rendering.call(this);
+  bender.instance.did_render.call(this);
 
   instance.__vs_instance = new vs.ui.NavigationBar ({
     node: instance.views.$root,

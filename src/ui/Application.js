@@ -1,9 +1,9 @@
 nibbler.ui.Application = Object.create(bender.instance);
 
-nibbler.ui.Application.rendering = function () {
+nibbler.ui.Application.did_render = function () {
   var instance = this;
 
-  bender.instance.rendering.call(this);
+  bender.instance.did_render.call(this);
 
   instance.__vs_instance = new vs.ui.Application ({
     node: instance.views.$root,

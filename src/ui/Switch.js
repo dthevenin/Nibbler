@@ -1,9 +1,9 @@
 nibbler.ui.Switch = Object.create(bender.instance);
 
-nibbler.ui.Switch.rendering = function () {
+nibbler.ui.Switch.did_render = function () {
   var instance = this;
 
-  bender.instance.rendering.call(this);
+  bender.instance.did_render.call(this);
 
   instance.__vs_instance = new vs.ui.Switch ({
     node: instance.views.$root,

@@ -1,9 +1,9 @@
 nibbler.ui.ComboBox = Object.create(bender.instance);
 
-nibbler.ui.ComboBox.rendering = function () {
+nibbler.ui.ComboBox.did_render = function () {
   var instance = this, config = {};
 
-  bender.instance.rendering.call(this);
+  bender.instance.did_render.call(this);
 
   config.data = instance.properties.data;
   config.node = instance.views.$root;

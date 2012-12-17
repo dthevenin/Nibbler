@@ -1,16 +1,13 @@
-<component xmlns="http://bender.igel.co.jp">
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
-    <component id="selectors" href="../lib/ui/Application.xml">
-      <component href="../lib/ui/TextLabel.xml" text="RadioButton:"/>
-      <component id="my_check_box" href="../lib/ui/CheckBox.xml"
-        data='["item1", "item2", "item3"]'/>
-      <component id="label1" href="../lib/ui/TextLabel.xml"/>
-      <component href="../lib/ui/TextLabel.xml" text="ChechBox:"/>
-      <component id="my_radio_button" href="../lib/ui/RadioButton.xml"
-        data='["item1", "item2", "item3"]'/>
-      <component id="label2" href="../lib/ui/TextLabel.xml"/>
-    </component>
-  </view>
+<component xmlns="http://bender.igel.co.jp" href="../lib/ui/Application.xml"
+  id="selectors">
+  <component href="../lib/ui/TextLabel.xml" text="RadioButton:"/>
+  <component id="my_check_box" href="../lib/ui/CheckBox.xml"
+    data='["item1", "item2", "item3"]'/>
+  <component id="label1" href="../lib/ui/TextLabel.xml"/>
+  <component href="../lib/ui/TextLabel.xml" text="ChechBox:"/>
+  <component id="my_radio_button" href="../lib/ui/RadioButton.xml"
+    data='["item1", "item2", "item3"]'/>
+  <component id="label2" href="../lib/ui/TextLabel.xml"/>
 
   <watch>
     <get instance="my_check_box" property="selectedIndexes" />
