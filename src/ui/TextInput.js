@@ -1,9 +1,9 @@
 nibbler.ui.TextInput = Object.create(bender.instance);
 
-nibbler.ui.TextInput.rendering = function () {
+nibbler.ui.TextInput.did_render = function () {
   var instance = this;
 
-  bender.instance.rendering.call(this);
+  bender.instance.did_render.call(this);
 
   instance.__vs_instance = new vs.ui.InputField ({
     node: instance.views.$root,

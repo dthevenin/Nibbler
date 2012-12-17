@@ -1,17 +1,14 @@
-<component xmlns="http://bender.igel.co.jp">
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
-    <component id="inputs" href="../lib/ui/Application.xml">
-      <component href="../lib/ui/TextLabel.xml" text="Select a Value:"/>
-      <component id="combo" href="../lib/ui/ComboBox.xml" data='["item", "item2", "item3"]'/>
-      <component id="textarea" href="../lib/ui/TextArea.xml" value='Tap your text'/>
-      <component href="../lib/ui/TextInput.xml" placeholder='Text...'/>
-      <component href="../lib/ui/Switch.xml"/>
-      <component href="../lib/ui/TextInput.xml" placeholder='Search...' type="search"/>
-      <component href="../lib/ui/Switch.xml" textOn="I" textOff="O" toggled="false"/>
-      <component href="../lib/ui/TextInput.xml" placeholder='password...' type="password"/>
-      <component href="../lib/ui/Switch.xml" textOn="red" textOff="blue"/>
-    </component>
-  </view>
+<component xmlns="http://bender.igel.co.jp" href="../lib/ui/Application.xml"
+  id="inputs">
+  <component href="../lib/ui/TextLabel.xml" text="Select a Value:"/>
+  <component id="combo" href="../lib/ui/ComboBox.xml" data='["item", "item2", "item3"]'/>
+  <component id="textarea" href="../lib/ui/TextArea.xml" value='Tap your text'/>
+  <component href="../lib/ui/TextInput.xml" placeholder='Text...'/>
+  <component href="../lib/ui/Switch.xml"/>
+  <component href="../lib/ui/TextInput.xml" placeholder='Search...' type="search"/>
+  <component href="../lib/ui/Switch.xml" textOn="I" textOff="O" toggled="false"/>
+  <component href="../lib/ui/TextInput.xml" placeholder='password...' type="password"/>
+  <component href="../lib/ui/Switch.xml" textOn="red" textOff="blue"/>
 
   <watch>
     <get instance="combo" event="@change">

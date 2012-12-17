@@ -1,9 +1,9 @@
 nibbler.ui.List = Object.create(bender.instance);
 
-nibbler.ui.List.rendering = function () {
+nibbler.ui.List.did_render = function () {
   var instance = this, config = {};
 
-  bender.instance.rendering.call(this);
+  bender.instance.did_render.call(this);
 
   if (instance.properties.model) {
     if (instance.properties.model instanceof vs.core.Model)

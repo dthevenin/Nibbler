@@ -1,9 +1,9 @@
 nibbler.ui.RadioButton = Object.create(bender.instance);
 
-nibbler.ui.RadioButton.rendering = function () {
+nibbler.ui.RadioButton.did_render = function () {
   var instance = this, config = {};
 
-  bender.instance.rendering.call(this);
+  bender.instance.did_render.call(this);
 
   if (instance.properties.model) {
     if (instance.properties.model instanceof vs.core.Model)
