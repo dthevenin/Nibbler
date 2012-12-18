@@ -1,9 +1,9 @@
 nibbler.ui.TextArea = Object.create(bender.instance);
 
-nibbler.ui.TextArea.rendering = function () {
+nibbler.ui.TextArea.did_render = function () {
   var instance = this;
 
-  bender.instance.rendering.call(this);
+  bender.instance.did_render.call(this);
 
   instance.__vs_instance = new vs.ui.TextArea ({
     node: instance.views.$root,

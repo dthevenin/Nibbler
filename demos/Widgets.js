@@ -1,6 +1,6 @@
 bender.$.Widgets = Object.create(bender.instance);
 
-bender.$.Widgets.rendering = function () {
+bender.$.Widgets.did_render = function () {
   this._current_panel = this.instances.widgets_list;
   this.instances.back_button.hide ();
   this.instances.nav_title.hide ();

@@ -1,9 +1,9 @@
 nibbler.ui.SegmentedButton = Object.create(bender.instance);
 
-nibbler.ui.SegmentedButton.rendering = function () {
+nibbler.ui.SegmentedButton.did_render = function () {
   var instance = this;
 
-  bender.instance.rendering.call(this);
+  bender.instance.did_render.call(this);
 
   instance.__vs_instance = new vs.ui.SegmentedButton ({
     node: instance.views.$root,

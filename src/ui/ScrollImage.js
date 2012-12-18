@@ -1,9 +1,9 @@
 nibbler.ui.ScrollImage = Object.create(bender.instance);
 
-nibbler.ui.ScrollImage.rendering = function () {
+nibbler.ui.ScrollImage.did_render = function () {
   var instance = this;
 
-  bender.instance.rendering.call(this);
+  bender.instance.did_render.call(this);
 
   instance.__vs_instance = new vs.ui.ScrollImageView ({
     node: instance.views.$root,

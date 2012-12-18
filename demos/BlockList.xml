@@ -1,10 +1,7 @@
-<component xmlns="http://bender.igel.co.jp">
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
-    <component id="blocklist" href="../lib/ui/Application.xml">
-      <component href="../lib/ui/List.xml"
-        type="BlockList" hasArrow="true" scroll="true"
-        data='["First tab",\{"title":"one"\},\{"title":"two"\},"Second tab",\{"title":"two","label":"two"\},\{"title":"three","label":"two"\},\{"title":"one"\},\{"title":"two"\},\{"title":"tree","label":"two"\},"Third tab",\{"title":"one"\},\{"title":"two"\},\{"title":"tree","label":"two"\}]'
+<component xmlns="http://bender.igel.co.jp" href="../lib/ui/Application.xml"
+  id="blocklist">
+  <component href="../lib/ui/List.xml" type="BlockList" hasArrow="true"
+    scroll="true"
+    data='["First tab",\{"title":"one"\},\{"title":"two"\},"Second tab",\{"title":"two","label":"two"\},\{"title":"three","label":"two"\},\{"title":"one"\},\{"title":"two"\},\{"title":"tree","label":"two"\},"Third tab",\{"title":"one"\},\{"title":"two"\},\{"title":"tree","label":"two"\}]'
       />
-    </component>
-  </view>
 </component>

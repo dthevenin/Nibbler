@@ -1,9 +1,9 @@
 nibbler.ui.ProgresseBar = Object.create(bender.instance);
 
-nibbler.ui.ProgresseBar.rendering = function () {
+nibbler.ui.ProgresseBar.did_render = function () {
   var instance = this;
 
-  bender.instance.rendering.call(this);
+  bender.instance.did_render.call(this);
 
   instance.__vs_instance = new vs.ui.ProgressBar ({
     node: instance.views.$root,

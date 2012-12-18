@@ -1,9 +1,9 @@
 nibbler.ext.ui.GMap = Object.create(bender.instance);
 
-nibbler.ext.ui.GMap.rendering = function () {
+nibbler.ext.ui.GMap.did_render = function () {
   var instance = this;
 
-  bender.instance.rendering.call(this);
+  bender.instance.did_render.call(this);
 
   instance.__vs_instance = new vs.ext.ui.GMap ({
     node: instance.views.$root,

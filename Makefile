@@ -84,7 +84,7 @@ makedirs:
 
 nibbler_tmp.js :: vs_core_tmp.js vs_data_tmp.js vs_ui_tmp.js vs_ext_tmp.js
 	$(ECHO) $(EXPORT_HEADER) >> $@
-	$(CAT) src/nibber_base.js >> $@
+	$(CAT) src/nibbler_base.js >> $@
 	$(CAT) vs_core_tmp.js >> $@
 	$(CAT) vs_data_tmp.js >> $@
 	$(CAT) vs_ui_tmp.js >> $@
