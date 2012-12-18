@@ -55,3 +55,41 @@ var nibbler = {
 };
 
 exports.nibbler = nibbler;
+
+nibbler._isInstanceOf = function (obj, klass)
+{
+  if (!obj || !klass) return false;
+  
+  if (vs.util.isFunction (klass)) return (obj instanceof klass);
+  
+  var proto = Object.getPrototypeOf (obj);
+  
+  if (proto === klass) return true;
+  else return (nibbler._isInstanceOf (proto, klass));
+}
+
+nibbler.__retrieve_vs_array_from = function (value) {
+  if (!value) return null;
+  if (nibbler._isInstanceOf (value, vs.core.Array)) return value
+  if (nibbler._isInstanceOf (value, nibbler.core.Array))
+    return value.__vs_instance;
+  
+  return null;
+};
+
+nibbler.__retrieve_vs_model_from = function (value) {
+  if (!value) return null;
+  if (nibbler._isInstanceOf (value, vs.core.Model)) return value
+  if (vnibbler._isInstanceOf (value, nibbler.core.Model))
+    return value.__vs_instance;
+      
+  return null;
+};
+
+nibbler.__retrieve_array_from = function (value) {
+  if (!value) return null;
+  if (nibbler._isInstanceOf (value, vs.core.Array)) return value.data
+  if (vs.util.isArray (value)) return value;
+  
+  return null;
+};
