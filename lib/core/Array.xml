@@ -1,1 +1,18 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.core.Array" />
+<component xmlns="http://bender.igel.co.jp" prototype="nibbler.core.Array">
+
+  <property name="data" as="dynamic" />
+  <property name="length" as="number" />
+  <property name="modelClass" as="dynamic"/>
+
+  <watch>
+    <get instance="$self" property="data">
+      this.__vs_instance.data = value;
+    </get>
+
+    <get instance="$self" property="modelClass">
+      this.__vs_instance.modelClass = value;
+    </get>
+
+  </watch>
+
+</component>
