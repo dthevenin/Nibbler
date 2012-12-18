@@ -1,6 +1,7 @@
 <component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.SegmentedButton">
 
   <property name="items" as="dynamic" value="[]"/>
+  <property name="istogglebuttons" value="true"/>
   <property name="type" value="default"/>
 
   <view xmlns:html="http://www.w3.org/1999/xhtml">
@@ -13,6 +14,11 @@
     </get>
     <get instance="$self" property="type">
       this.__vs_instance.type = value;
+    </get>
+    <get instance="$self" property="istogglebuttons">
+      if (value == "false") value = false;
+      else if (value == "true") value = true;      
+      this.__vs_instance.isToggleButtons = value;
     </get>
   </watch>
 

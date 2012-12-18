@@ -7,6 +7,7 @@ nibbler.ui.SegmentedButton.rendering = function () {
 
   instance.__vs_instance = new vs.ui.SegmentedButton ({
     node: instance.views.$root,
+    isToggleButtons: instance.properties.istogglebuttons,
     items: instance.properties.items,
     type: instance.properties.type
   }).init ();
