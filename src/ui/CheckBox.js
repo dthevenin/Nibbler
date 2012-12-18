@@ -3,19 +3,12 @@ nibbler.ui.CheckBox = Object.create(bender.instance);
 nibbler.ui.CheckBox.did_render = function () {
   var instance = this, config = {};
 
-  bender.instance.did_render.call(this);
+  bender.instance.did_render.call (this);
 
-  if (instance.properties.model) {
-    if (instance.properties.model instanceof vs.core.Model)
-      config.model = instance.properties.model;
-    else if (instance.properties.model &&
-            instance.properties.model instanceof vs.core.Model)
-      config.model = instance.properties.model.__vs_instance;
-    else
-      config.data = instance.properties.model
-  }
-  else config.data = instance.properties.data;
-
+  var model = nibbler.__retrieve_vs_array_from (instance.properties.model);
+  if (model) config.model = model;
+  else config.data = nibbler.__retrieve_array_from (instance.properties.data);
+  
   config.node = instance.views.$root;
 
   instance.__vs_instance = new vs.ui.CheckBox (config).init ();
@@ -31,11 +24,13 @@ nibbler.ui.CheckBox.did_render = function () {
 };
 
 nibbler.ui.CheckBox.__set_model = function (value) {
-  if (value instanceof vs.core.Model)
-    this.__vs_instance.model = value;
-  else if (vs.util.isArray (value))
-    this.__vs_instance.data = value;
-  else if (value && value.__vs_instance instanceof vs.core.Model)
-    this.__vs_instance.model = value.__vs_instance;
+  var model = nibbler.__retrieve_vs_array_from (value);
+  if (model) this.__vs_instance.model = model;
   else console.log ("Unsupported model property");
+};
+
+nibbler.ui.CheckBox.__set_data = function (value) {
+  var data = nibbler.__retrieve_array_from (value);
+  if (data) this.__vs_instance.data = data;
+  else console.log ("Unsupported data property");
 };
