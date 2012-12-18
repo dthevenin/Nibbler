@@ -99,6 +99,7 @@ copy_xml:
 	$(CP) src/core/Array.xml lib/core/
 	$(CP) src/data/GoogleSearch.xml lib/data/
 	$(CP) src/ui/View.xml lib/ui/
+	$(CP) src/ui/ScrollView.xml lib/ui/
 	$(CP) src/ui/Application.xml lib/ui/
 	$(CP) src/ui/ScrollImage.xml lib/ui/
 	$(CP) src/ui/TextArea.xml lib/ui/
@@ -129,6 +130,7 @@ vs_core_tmp.js: src/core/Array.js
 
 vs_ui_tmp.js: src/ui/View.js src/ui/Application.js src/ui/TextArea.js src/ui/Button.js src/ui/List.js src/ui/NavigationBar.js src/ui/ProgressBar.js src/ui/RadioButton.js src/ui/ComboBox.js src/ui/CheckBox.js src/ui/Slider.js src/ui/TextInput.js src/ui/TextLabel.js src/ui/Image.js src/ui/Switch.js src/ui/Picker.js src/ui/SegmentedButton.js src/ui/ScrollImage.js
 	$(CAT) src/ui/View.js >> $@
+	$(CAT) src/ui/ScrollView.js >> $@
 	$(CAT) src/ui/Application.js >> $@
 	$(CAT) src/ui/ScrollImage.js >> $@
 	$(CAT) src/ui/TextArea.js >> $@
