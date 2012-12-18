@@ -25,7 +25,7 @@ function extendsBenderInstance (instance, vs_object) {
     {
       if (property == "parent") continue;
 
-      if (instance.hasOwnProperty(property)) {
+      if (property in instance) {
         console.warn("Not overloading property `{0}` on".fmt(property),
           instance);
       } else {
