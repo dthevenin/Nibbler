@@ -1,5 +1,5 @@
 <component xmlns="http://bender.igel.co.jp" href="../lib/ui/Application.xml"
-  id="buttons">
+  id="buttons"  layout="absolute_layout">
   <component href="../lib/ui/Button.xml" text="Button"/>
   <component href="../lib/ui/Button.xml" text="Button" style="green"/>
   <component href="../lib/ui/Button.xml" text="Button" style="red"/>
