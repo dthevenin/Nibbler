@@ -1,6 +1,6 @@
 nibbler.data.GoogleSearch = Object.create (bender.instance);
 
-nibbler.data.GoogleSearch.init = function () {
+nibbler.data.GoogleSearch.did_render = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.data.GoogleSearch ().init ();

@@ -1,6 +1,6 @@
 nibbler.core.Array = Object.create(bender.instance);
 
-nibbler.core.Array.init = function () {
+nibbler.core.Array.did_render = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.core.Array ().init ();
