@@ -2,6 +2,7 @@
 
   <property name="items" as="dynamic" value="[]"/>
   <property name="istogglebuttons" as="boolean" value="true"/>
+  <property name="orientation" value="horizontal"/>
   <property name="type" value="default"/>
 
   <view xmlns:html="http://www.w3.org/1999/xhtml">
@@ -14,6 +15,9 @@
     </get>
     <get instance="$self" property="type">
       this.__vs_instance.type = value;
+    </get>
+    <get instance="$self" property="orientation">
+      this.__vs_instance.orientation = value;
     </get>
     <get instance="$self" property="istogglebuttons">
       if (value == "false") value = false;
