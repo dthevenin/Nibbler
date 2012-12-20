@@ -1,19 +1,27 @@
-nibbler.ui.CheckBox = Object.create(bender.instance);
+nibbler.ui.CheckBox = Object.create (nibbler.ui.View);
 
 nibbler.ui.CheckBox.did_render = function () {
-  var instance = this, config = {};
+  var instance = this;
+  
+  instance.__vs_instance = new vs.ui.CheckBox ({
+    node: instance.views.$root
+  }).init ();
 
-  bender.instance.did_render.call (this);
+  vs.util.extendsBenderInstance (instance, instance.__vs_instance);
+  
+  this.vs_init ();
+};
+
+nibbler.ui.CheckBox.vs_init = function () {
+  nibbler.ui.View.vs_init.call (this);
+  
+  var instance = this, config = {};
 
   var model = nibbler.__retrieve_vs_array_from (instance.properties.model);
   if (model) config.model = model;
   else config.data = nibbler.__retrieve_array_from (instance.properties.data);
   
-  config.node = instance.views.$root;
-
-  instance.__vs_instance = new vs.ui.CheckBox (config).init ();
-
-  vs.util.extendsBenderInstance (instance, instance.__vs_instance);
+  instance.__vs_instance.configure (config);
 
   instance.__vs_instance.bind ('change', instance.__vs_instance,
     function (e) {

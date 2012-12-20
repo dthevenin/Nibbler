@@ -1,21 +1,30 @@
-nibbler.ui.TextInput = Object.create(bender.instance);
+nibbler.ui.TextInput = Object.create (nibbler.ui.View);
 
 nibbler.ui.TextInput.did_render = function () {
   var instance = this;
 
-  bender.instance.did_render.call(this);
-
   instance.__vs_instance = new vs.ui.InputField ({
-    node: instance.views.$root,
+    node: instance.views.$root
+  }).init ();
+
+  vs.util.extendsBenderInstance (instance, instance.__vs_instance);
+  
+  this.vs_init ();
+};
+
+nibbler.ui.TextInput.vs_init = function () {
+  var instance = this;
+
+  nibbler.ui.View.vs_init.call (this);
+
+  instance.__vs_instance.configure ({
     value: instance.properties.value,
     type: instance.properties.type,
     placeholder: instance.properties.placeholder
-  }).init ();
+  });
 
   instance.__vs_instance.bind ('change', instance.__vs_instance, function (e) {
     instance.properties.value = e.data;
     flexo.notify (instance, '@change', {data: e.data});
   })
-
-  vs.util.extendsBenderInstance (instance, instance.__vs_instance);
 };

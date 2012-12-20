@@ -1,15 +1,26 @@
-nibbler.ui.List = Object.create(bender.instance);
+nibbler.ui.List = Object.create (nibbler.ui.View);
 
 nibbler.ui.List.did_render = function () {
+  var instance = this;
+
+  instance.__vs_instance = new vs.ui.List ({
+    node: instance.views.$root
+  }).init ();
+
+  vs.util.extendsBenderInstance (instance, instance.__vs_instance);
+
+  this.vs_init ();
+};
+
+nibbler.ui.List.vs_init = function () {
   var instance = this, config = {};
 
-  bender.instance.did_render.call(this);
+  nibbler.ui.View.vs_init.call(this);
 
   var model = nibbler.__retrieve_vs_array_from (instance.properties.model);
   if (model) config.model = model;
   else config.data = nibbler.__retrieve_array_from (instance.properties.data);
 
-  config.node = instance.views.$root;
   config.hasArrow = instance.properties.hasArrow;
   config.filters = instance.properties.filters;
   config.scroll = instance.properties.scroll;
@@ -17,9 +28,7 @@ nibbler.ui.List.did_render = function () {
 
   instance.__vs_instance = new vs.ui.List (config).init ();
 
-  vs.util.extendsBenderInstance (instance, instance.__vs_instance);
-
-  instance.__vs_instance.bind ('itemselect', instance.__vs_instance,
+  this.__vs_instance.bind ('itemselect', instance.__vs_instance,
     function (e) {
     instance.properties.selectedIndexes =
       instance.__vs_instance._selected_indexes;

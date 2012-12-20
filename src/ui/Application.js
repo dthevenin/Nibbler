@@ -1,13 +1,10 @@
-nibbler.ui.Application = Object.create(bender.instance);
+nibbler.ui.Application = Object.create (nibbler.ui.View);
 
 nibbler.ui.Application.did_render = function () {
   var instance = this;
 
-  bender.instance.did_render.call(this);
-
   instance.__vs_instance = new vs.ui.Application ({
-    node: instance.views.$root,
-    layout: instance.properties.layout
+    node: instance.views.$root
   });
   
   instance.__vs_instance.initComponent = function () {
@@ -42,15 +39,18 @@ nibbler.ui.Application.did_render = function () {
   
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
      
-  // manage children
-  var i = instance.children.length;
-  while (i--) {
-    var child = instance.children [i];
-    if (child.__vs_instance) {
-      instance.__vs_instance.add  (child.__vs_instance);
-    }
-  }
-  
+  this.vs_init ();
+};
+
+nibbler.ui.Application.vs_init = function () {
+  var instance = this;
+
+  nibbler.ui.View.vs_init.call (this);
+
+  instance.__vs_instance.configure ({
+    layout: instance.properties.layout
+  });
+
   var _app_ = instance.__vs_instance;
   setTimeout (function () {
     _app_.refresh ();

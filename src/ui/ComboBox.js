@@ -1,16 +1,25 @@
-nibbler.ui.ComboBox = Object.create(bender.instance);
+nibbler.ui.ComboBox = Object.create (nibbler.ui.View);
 
 nibbler.ui.ComboBox.did_render = function () {
-  var instance = this, config = {};
+  var instance = this;
 
-  bender.instance.did_render.call(this);
-
-  config.data = instance.properties.data;
-  config.node = instance.views.$root;
-
-  instance.__vs_instance = new vs.ui.ComboBox (config).init ();
+  instance.__vs_instance = new vs.ui.ComboBox ({
+    ndoe: instance.views.$root
+  }).init ();
 
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
+
+  this.vs_init ();
+};
+
+nibbler.ui.ComboBox.vs_init = function () {
+  var instance = this;
+
+  nibbler.ui.View.vs_init.call (this);
+
+  instance.__vs_instance.configure ({
+    data: instance.properties.data
+  });
 
   instance.__vs_instance.bind ('change', instance.__vs_instance,
     function (e) {
