@@ -1,13 +1,18 @@
 // Automatically add the id of a component as the class name of its root element
-bender.instance.did_render = function () {
-  if (this.views.$root && this.views.$root.classList &&
-    typeof this.views.$root.classList.add === "function") {
-    for (var c = this.component; c; c = c.prototype) {
+bender.context.rendered = function (instance) {
+  if (instance.views.$root && instance.views.$root.classList &&
+    typeof instance.views.$root.classList.add === "function") {
+    for (var c = instance.component; c; c = c.prototype) {
       if (c.hasOwnProperty("id")) {
-        this.views.$root.classList.add(c.id);
+        instance.views.$root.classList.add(c.id);
       }
     }
   }
+};
+
+// Link stylesheets
+bender.context.link_stylesheet = function (uri) {
+  document.head.appendChild(flexo.$link({ rel: "stylesheet", href: uri }));
 };
 
 // Run the Bender application given by href
