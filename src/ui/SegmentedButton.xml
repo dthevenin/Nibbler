@@ -1,7 +1,7 @@
 <component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.SegmentedButton">
 
   <property name="items" as="dynamic" value="[]"/>
-  <property name="istogglebuttons" value="true"/>
+  <property name="istogglebuttons" as="boolean" value="true"/>
   <property name="type" value="default"/>
 
   <view xmlns:html="http://www.w3.org/1999/xhtml">
