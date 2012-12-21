@@ -122,7 +122,8 @@ copy_xml:
 ###                     Core
 ##############################################################
 
-vs_core_tmp.js: src/core/Array.js
+vs_core_tmp.js: src/core/Model.js src/core/Array.js
+	$(CAT) src/core/Model.js >> $@
 	$(CAT) src/core/Array.js >> $@
 
 ###                         GUI
