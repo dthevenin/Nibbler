@@ -1,4 +1,4 @@
-nibbler.core.Array = Object.create(bender.instance);
+nibbler.core.Array = Object.create (nibbler.core.Model);
 
 nibbler.core.Array.did_render = function () {
   var instance = this;
