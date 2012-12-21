@@ -97,6 +97,7 @@ nibbler_tmp.js :: vs_core_tmp.js vs_data_tmp.js vs_ui_tmp.js vs_ext_tmp.js
 	
 copy_xml:
 	$(CP) src/core/Array.xml lib/core/
+	$(CP) src/core/Model.xml lib/core/
 	$(CP) src/data/GoogleSearch.xml lib/data/
 	$(CP) src/ui/View.xml lib/ui/
 	$(CP) src/ui/ScrollView.xml lib/ui/
