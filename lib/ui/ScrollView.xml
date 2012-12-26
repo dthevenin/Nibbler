@@ -2,6 +2,8 @@
 
   <property name="src"/>
   <property name="layout" as="string" value=""/>
+  <property name="pinch" as="dynamic" value="vs.ui.ScrollView.NO_PINCH"/>
+  <property name="scroll" as="dynamic" value="vs.ui.ScrollView.NO_SCROLL"/>
 
   <view xmlns:html="http://www.w3.org/1999/xhtml">
     <html:div class="vs_ui_scrollview">
