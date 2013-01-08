@@ -6,6 +6,28 @@
   var A = Array.prototype;
   var browser = typeof window === "object";
 
+
+  if (typeof Function.prototype.bind !== "function") {
+    Function.prototype.bind = function (x) {
+      var f = this;
+      var args = A.slice.call(arguments, 1);
+      return function () {
+        return f.apply(x, args.concat(A.slice.call(arguments)));
+      };
+    };
+    Function.prototype.bind.native = false;
+  }
+
+  // Objects
+
+  // Test whether x is an instance of y (i.e. y is the prototype of x, or the
+  // prototype of its prototype, or...)
+  flexo.instance_of = function (x, y) {
+    var proto = Object.getPrototypeOf(x);
+    return !!proto && (proto === y || flexo.instance_of(proto, y));
+  };
+
+
   // Strings
 
   // Simple format function for messages and templates. Use {0}, {1}...
@@ -171,9 +193,30 @@
 
   // Arrays
 
+  flexo.extract_from_array = function (array, p, that) {
+    var extracted = [];
+    var original = A.slice.call(array);
+    for (var i = array.length - 1; i >= 0; --i) {
+      if (p.call(that, array[i], i, original)) {
+        extracted.unshift(array[i]);
+        A.splice.call(array, i, 1);
+      }
+    }
+    return extracted;
+  };
+
+  // Drop elements of an array while the predicate is true
+  flexo.drop_while = function (a, p, that) {
+    for (var i = 0, n = a.length; i < n && p.call(that, a[i], i, a); ++i);
+    return A.slice.call(a, i);
+  };
+
   // Find the first item x in a such that p(x) is true
-  flexo.find_first = function (a, p) {
-    for (var i = 0, n = a.length; i < n && !p(a[i], i, a); ++i) {}
+  flexo.find_first = function (a, p, that) {
+    if (!Array.isArray(a)) {
+      return;
+    }
+    for (var i = 0, n = a.length; i < n && !p.call(that, a[i], i, a); ++i);
     return a[i];
   };
 
@@ -202,6 +245,18 @@
         return old_item;
       }
     }
+  };
+
+  // Shuffle the array
+  flexo.shuffle_array = function (array) {
+    var shuffled = A.slice.call(array);
+    for (var i = shuffled.length - 1; i > 0; --i) {
+      var j = flexo.random_int(i);
+      var x = shuffled[i];
+      shuffled[i] = shuffled[j];
+      shuffled[j] = x;
+    }
+    return shuffled;
   };
 
 
@@ -434,6 +489,19 @@
   flexo.seq = function () {
     return Object.create(seq)._init();
   };
+
+  if (browser) {
+    flexo.request_animation_frame = (window.requestAnimationFrame ||
+      window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
+      window.msRequestAnimationFrame || function (f) {
+        return window.setTimeout(function () {
+          f(Date.now());
+        }, 16);
+      }).bind(window);
+    flexo.cancel_animation_frame = (window.cancelAnimationFrame ||
+      window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame ||
+      window.msCancelAnimationFrame || window.clearTimeout).bind(window);
+  }
 
 
   // DOM

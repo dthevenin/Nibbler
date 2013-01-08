@@ -7,7 +7,4 @@
 *.gz
 .DS_Store
 
-vstoolkit
-bender
-
 npm-debug.log
