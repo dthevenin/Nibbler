@@ -1,52 +1,48 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+     <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+    <script type="text/javascript" src="http://dthevenin.github.com/javascripts/highlight.pack.js"></script> 
     <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/index.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/bender.css" media="screen" />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" href="http://dthevenin.github.com/stylesheets/index.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="http://dthevenin.github.com/stylesheets/bender.css" media="screen" />
+    <link rel="stylesheet" href="http://dthevenin.github.com/stylesheets/index-responsive.css" media="screen" />
+    <link rel="stylesheet" href="http://dthevenin.github.com/stylesheets/vs.css">
     <title>Nibbler by dthevenin</title>
   </head>
 
   <body>
-    <header>
+    <header class="small">
       <h1>Nibbler</h1>
       <h2>Bender / VS Toolkit wrapper</h2>
     </header>
-    <br>
-    <br>
-    <br>
-    <br>
+    <article>
 
-    <section id="downloads">
-      <a href="https://github.com/dthevenin/Nibbler/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-      <a href="https://github.com/dthevenin/Nibbler/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-      <a href="https://github.com/dthevenin/Nibbler" id="view-on-github" class="button"><span>View on GitHub</span></a>
+     <section id="intro">
+      <h2>Nibble Page</h2>
+      Nibbler is a wrapping of VSToolkit into Bender framework:
+      <ul>
+        <li><a href="http://vinisketch.github.com/VSToolkit/">VSToolkit</a> ia HTML5 framework, created to easily develop Hybrid Applications for mobile devices.
+        <li><a href="http://bender.igel.co.jp/">Bender</a> is an experimental, declarative Web application.
+      </ul>
     </section>
-    <br>
-    <br>
-    <br>
-    <hr>
 
-    <section>
-    <div class="tiles">
-      <div class="text">
+   <section>
+    <h2>Demos</h2>
+    <div class="tiles examples">
+      <div class="text green">
         <span>Widgets</span>
         <p>
           This demo presents widgets the toolkit provides.
           <br />
           <i>Widgets, Components</i>
           <br />
-        <!--a hrefexamples/HelloWorld/index.html">Playground</a-->
-        <a href="demos/Widgets.html">Fullscreen version</a>
+          <br />
+          <a href="demos/Widgets.html" class="button small">Fullscreen version</a>
         </p>
       </div>
-      <div class="text">
+      <div class="text pink">
         <span>
           Google Map
         </span>
@@ -55,11 +51,11 @@
           <br />
           <i>Component, Dataflow (Watcher)</i>
           <br />
-        <!--a hrefexamples/Animations/index.html">Playground</a-->
-        <a href="demos/Map.html">Fullscreen version</a>
+          <br />
+          <a href="demos/Map.html" class="button small">Fullscreen version</a>
         </p>
       </div>
-      <div class="text">
+      <div class="text yellow">
         <span>
         ToDo
         </span>
@@ -70,8 +66,8 @@
             Model, Event (Watcher), JS Code.
           </i>
           <br />
-        <!--a hrefexamples/ExtAnimations/index.html">Playground</a-->
-        <a href="demos/ToDo.html">Fullscreen version</a>
+          <br />
+          <a href="demos/ToDo.html" class="button small">Fullscreen version</a>
         </p>
       </div>
  
@@ -79,10 +75,21 @@
 
     </section>
 
+    <section id="downloads" class="hidden-phone">
+    <hr>
+      <a href="https://github.com/dthevenin/Nibbler/zipball/master" id="download-zip" class="button download"><span>Download .zip</span></a>
+      <a href="https://github.com/dthevenin/Nibbler/tarball/master" id="download-tar-gz" class="button download"><span>Download .tar.gz</span></a>
+      <a href="https://github.com/dthevenin/Nibbler" id="view-on-github" class="button download"><span>View on GitHub</span></a>
+    </section>
+
+    </article>
     <footer>
     <hr>
       Nibbler is maintained by <a href="https://github.com/dthevenin">dthevenin</a>
     </footer>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://dthevenin.github.com/javascripts/waypoints.min.js"></script>
+    <script type="text/javascript" src="http://dthevenin.github.com/javascripts/index.js"></script> 
 
   </body>
 </html>
