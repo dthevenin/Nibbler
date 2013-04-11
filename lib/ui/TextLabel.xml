@@ -1,14 +1,14 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.TextLabel">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" prototype="nibbler.ui.TextLabel">
 
   <property name="text"/>
 
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
+  <view xmlns:html="http://www.w3.org/1999/xhtml" stack="replace">
     <html:div class="vs_ui_textlabel"></html:div>
   </view>
-  
+
   <watch>
-    <get instance="$self" property="text">
-      this.__vs_instance.text = value;
+    <get property="text">
+      this.__vs_instance.text = property;
     </get>
   </watch>
 

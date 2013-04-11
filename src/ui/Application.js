@@ -1,12 +1,10 @@
-nibbler.ui.Application = Object.create (nibbler.ui.View);
-
-nibbler.ui.Application.did_render = function () {
+nibbler.ui.Application = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.ui.Application ({
-    node: instance.views.$root
+    node: instance.rendered.$root
   });
-  
+
   instance.__vs_instance.initComponent = function () {
     vs.Application_applications [this.id] = this;
 
@@ -18,15 +16,15 @@ nibbler.ui.Application.did_render = function () {
     this.view._comp_ = this;
     this.addClassName ('application');
 //    this.addClassName ('absolute_layout');
-    
+
     this.html.removeAttribute ('id');
     this.html.removeAttribute ('x-hag-ref');
     this.html.removeAttribute ('x-hag-comp');
-        
+
     this.view.setAttribute ('id', this.id);
     this.view.setAttribute ('x-hag-ref', this.id);
     this.view.setAttribute ('x-hag-comp', this.id);
-  
+
     var self = this;
     document.addEventListener ('orientationChanged', function (e)
     {
@@ -34,12 +32,12 @@ nibbler.ui.Application.did_render = function () {
       if (pid) { self.propagate ('deviceChanged', pid, null, true); }
     });
   };
-      
+
   instance.__vs_instance.init ();
-  
+
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
-     
-  this.vs_init ();
+
+  nibbler.ui.Application.vs_init.call (this);
 };
 
 nibbler.ui.Application.vs_init = function () {

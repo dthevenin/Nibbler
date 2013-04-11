@@ -1,10 +1,10 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.TextInput">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" prototype="nibbler.ui.TextInput">
 
   <property name="value" as="string"/>
   <property name="placeholder" as="string"/>
   <property name="type" as="string"/>
 
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
+  <view xmlns:html="http://www.w3.org/1999/xhtml" stack="replace">
     <html:div class="vs_ui_inputfield">
       <html:input type="text" value="" placeholder="type ..." incremental="incremental"/>
       <html:div class='clear_button'/>
@@ -12,16 +12,16 @@
   </view>
 
   <watch>
-    <get instance="$self" property="value">
-      this.__vs_instance.value = value;
+    <get property="value">
+      this.__vs_instance.value = property;
     </get>
 
-    <get instance="$self" property="placeholder">
-      this.__vs_instance.placeholder = value;
+    <get property="placeholder">
+      this.__vs_instance.placeholder = property;
     </get>
 
-    <get instance="$self" property="type">
-      this.__vs_instance.type = value;
+    <get property="type">
+      this.__vs_instance.type = property;
     </get>
   </watch>
 

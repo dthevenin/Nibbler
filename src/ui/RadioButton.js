@@ -4,7 +4,7 @@ nibbler.ui.RadioButton.did_render = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.ui.RadioButton ({
-    node: instance.views.$root
+    node: instance.rendered.$root
   }).init ();
 
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
@@ -25,7 +25,7 @@ nibbler.ui.RadioButton.vs_init = function () {
 
   instance.__vs_instance.bind ('change', instance.__vs_instance,
     function (e) {
-    instance.properties.selectedIndex = 
+    instance.properties.selectedIndex =
       instance.__vs_instance._selected_index;
     flexo.notify (instance, '@change', {data: e.data});
   })

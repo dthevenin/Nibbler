@@ -1,28 +1,28 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.SegmentedButton">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" on-render="nibbler.ui.SegmentedButton">
 
   <property name="items" as="dynamic" value="[]"/>
   <property name="istogglebuttons" as="boolean" value="true"/>
   <property name="orientation" value="horizontal"/>
   <property name="type" value="default"/>
 
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
+  <view xmlns:html="http://www.w3.org/1999/xhtml" stack="replace">
     <html:div class="vs_ui_segmentedbutton"></html:div>
   </view>
 
   <watch>
-    <get instance="$self" property="items">
-      this.__vs_instance.items = value;
+    <get property="items">
+      this.__vs_instance.items = property;
     </get>
-    <get instance="$self" property="type">
-      this.__vs_instance.type = value;
+    <get property="type">
+      this.__vs_instance.type = property;
     </get>
-    <get instance="$self" property="orientation">
-      this.__vs_instance.orientation = value;
+    <get property="orientation">
+      this.__vs_instance.orientation = property;
     </get>
-    <get instance="$self" property="istogglebuttons">
-      if (value == "false") value = false;
-      else if (value == "true") value = true;      
-      this.__vs_instance.isToggleButtons = value;
+    <get property="istogglebuttons">
+      if (property == "false") property = false;
+      else if (property == "true") property = true;
+      this.__vs_instance.isToggleButtons = property;
     </get>
   </watch>
 

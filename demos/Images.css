@@ -3,11 +3,11 @@ body {
   font-family: Helvetica;
 }
 
-.images {
+.application {
   padding: 10px;
 }
 
-.images .vs_ui_imageview {
+.application .vs_ui_imageview {
   width: 100px;
   height: 100px;
   position: absolute;
@@ -15,7 +15,7 @@ body {
   border: 1px red solid;
 }
 
-.images .vs_ui_scrollimageview {
+.application .vs_ui_scrollimageview {
   width: 49%;
   height: 49%;
   display: inline-block;

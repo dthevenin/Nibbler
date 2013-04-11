@@ -1,15 +1,13 @@
-nibbler.ui.List = Object.create (nibbler.ui.View);
-
-nibbler.ui.List.did_render = function () {
+nibbler.ui.List = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.ui.List ({
-    node: instance.views.$root
+    node: instance.rendered.$root
   }).init ();
 
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
 
-  this.vs_init ();
+  nibbler.ui.List.vs_init.call (this);
 };
 
 nibbler.ui.List.vs_init = function () {
@@ -28,12 +26,15 @@ nibbler.ui.List.vs_init = function () {
 
   instance.__vs_instance.configure (config);
 
-  this.__vs_instance.bind ('itemselect', instance.__vs_instance,
+  instance.__vs_instance.bind ('itemselect', instance.__vs_instance,
     function (e) {
     instance.properties.selectedIndexes =
       instance.__vs_instance._selected_indexes;
     flexo.notify (instance, '@itemselect', {data: e.data});
   })
+
+  instance.__set_model = nibbler.ui.List.__set_model;
+  instance.__set_data = nibbler.ui.List.__set_data;
 };
 
 nibbler.ui.List.__set_model = function (value) {

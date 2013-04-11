@@ -19,13 +19,13 @@
 ## PRESENT FILE.
 ##############################################################
 
-###                     Declaration 
+###                     Declaration
 ##############################################################
 
 SHELL = /bin/sh
 CHMOD = chmod
 CP = cp
-XTEMP = ../src/manage_template.sh 
+XTEMP = ../src/manage_template.sh
 MV = mv
 NOOP = $(SHELL) -c true
 RM_F = rm -f
@@ -44,7 +44,7 @@ JAVA = java
 COMPILE = $(JAVA) -jar ../src/closurecompiler/compiler.jar --language_in=ECMASCRIPT5
 COMPILE_ADV = $(JAVA) -jar ../src/closurecompiler/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS
 COMPILE_YUI = $(JAVA) -cp ../src/yuicompressor/jargs-1.0.jar:../src/yuicompressor/rhino-1.6R7.jar -jar ../src/yuicompressor/yuicompressor-2.4.2.jar
-GENDOC = $(JAVA) -jar ../src/jsdoc-toolkit/jsrun.jar ../src/jsdoc-toolkit/app/run.js 
+GENDOC = $(JAVA) -jar ../src/jsdoc-toolkit/jsrun.jar ../src/jsdoc-toolkit/app/run.js
 
 ###                         RELEASE
 ##############################################################
@@ -88,13 +88,13 @@ nibbler_tmp.js :: vs_core_tmp.js vs_data_tmp.js vs_ui_tmp.js vs_ext_tmp.js
 	$(CAT) vs_core_tmp.js >> $@
 	$(CAT) vs_data_tmp.js >> $@
 	$(CAT) vs_ui_tmp.js >> $@
-	$(CAT) vs_ext_tmp.js >> $@
+#	$(CAT) vs_ext_tmp.js >> $@
 	$(ECHO) $(EXPORT_FOOTER) >> $@
 	$(RM) vs_core_tmp.js
 	$(RM) vs_data_tmp.js
 	$(RM) vs_ui_tmp.js
 	$(RM) vs_ext_tmp.js
-	
+
 copy_xml:
 	$(CP) src/core/Array.xml lib/core/
 	$(CP) src/core/Model.xml lib/core/
@@ -154,13 +154,13 @@ vs_ui_tmp.js: src/ui/View.js src/ui/Application.js src/ui/TextArea.js src/ui/But
 ###                     FX
 ##############################################################
 
-	
+
 ###                     Data
 ##############################################################
 
 vs_data_tmp.js: src/data/GoogleSearch.js
 	$(CAT) src/data/GoogleSearch.js >> $@
-	
+
 ###                     AV
 ##############################################################
 

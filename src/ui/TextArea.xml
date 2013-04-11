@@ -1,14 +1,14 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.TextArea">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" prototype="nibbler.ui.TextArea">
 
   <property name="value"/>
 
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
+  <view xmlns:html="http://www.w3.org/1999/xhtml" stack="replace">
     <html:textarea class="vs_ui_textarea"></html:textarea>
   </view>
 
   <watch>
-    <get instance="$self" property="value">
-      this.__vs_instance.value = value;
+    <get property="value">
+      this.__vs_instance.value = property;
     </get>
   </watch>
 

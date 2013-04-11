@@ -1,27 +1,23 @@
-nibbler.ui.ScrollImage = Object.create (nibbler.ui.View);
-
-nibbler.ui.ScrollImage.did_render = function () {
+nibbler.ui.ScrollImage = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.ui.ScrollImageView ({
-    node: instance.views.$root
+    node: instance.rendered.$root
   }).init ();
 
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
 
-  this.vs_init ();
+  nibbler.ui.ScrollImage.vs_init.call (this);
 };
 
 nibbler.ui.ScrollImage.vs_init = function () {
   var instance = this;
 
-  nibbler.ui.View.vs_init.call (this);
+  nibbler.ui.ScrollView.vs_init.call (this);
 
   instance.__vs_instance.configure ({
-    node: instance.views.$root,
+    node: instance.rendered.$root,
     src: instance.properties.src,
-    pinch: instance.properties.pinch,
-    scroll: instance.properties.scroll,
     stretch: instance.properties.stretch
   });
 

@@ -1,20 +1,20 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.data.GoogleSearch">
+<component xmlns="http://bender.igel.co.jp" on-render="nibbler.data.GoogleSearch">
 
   <property name="searchEngine" as="dynamic" />
   <property name="address" as="string" />
   <property name="addresses" as="dynamic"/>
   <property name="position" as="dynamic" />
-  
+
   <watch>
-    <get instance="$self" property="searchEngine">
+    <get property="searchEngine">
       this.__vs_instance.setSearchEngine (value);
     </get>
 
-    <get instance="$self" property="address">
+    <get property="address">
       this.__set_address(value);
     </get>
 
-    <get instance="$self" property="position">
+    <get property="position">
       this.__set_position(value);
     </get>
   </watch>

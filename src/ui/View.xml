@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.View">
+<component xmlns="http://bender.igel.co.jp" on-render="nibbler.ui.View">
 
   <property name="src"/>
   <property name="layout" as="string" value=""/>
@@ -8,8 +8,8 @@
   </view>
 
   <watch>
-    <get instance="$self" property="layout">
-      this.__vs_instance.layout = value;
+    <get property="layout">
+      this.__vs_instance.layout = property;
     </get>
   </watch>
 

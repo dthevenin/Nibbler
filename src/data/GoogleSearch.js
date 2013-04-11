@@ -1,12 +1,10 @@
-nibbler.data.GoogleSearch = Object.create (bender.instance);
-
-nibbler.data.GoogleSearch.did_render = function () {
+nibbler.data.GoogleSearch = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.data.GoogleSearch ().init ();
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
 
-  this.vs_init ();
+  nibbler.data.GoogleSearch.vs_init ();
 };
 
 nibbler.data.GoogleSearch.vs_init = function () {

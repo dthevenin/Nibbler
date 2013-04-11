@@ -1,14 +1,14 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.ComboBox">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" prototype="nibbler.ui.ComboBox">
 
   <property name="data" as="dynamic" value="[]"/>
 
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
+  <view xmlns:html="http://www.w3.org/1999/xhtml" stack="replace">
     <html:div class="vs_ui_combobox"></html:div>
   </view>
 
   <watch>
-    <get instance="$self" property="data">
-      this.__vs_instance.data = value;
+    <get property="data">
+      this.__vs_instance.data = property;
     </get>
   </watch>
 

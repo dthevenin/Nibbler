@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.Slider">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" prototype="nibbler.ui.Slider">
 
   <property name="orientation" as="dynamic" value="vs.ui.Slider.HORIZONTAL"/>
   <property name="value" as="number" value="0"/>
@@ -11,13 +11,13 @@
   </view>
 
   <watch>
-    <get instance="$self" property="orientation">
+    <get property="orientation">
       this.__vs_instance.orientation = value;
     </get>
-    <get instance="$self" property="value">
+    <get property="value">
       this.__vs_instance.value = value;
     </get>
-    <get instance="$self" property="range">
+    <get property="range">
       this.__vs_instance.range = value;
     </get>
   </watch>

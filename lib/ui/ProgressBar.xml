@@ -1,24 +1,24 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.ProgresseBar">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" prototype="nibbler.ui.ProgresseBar">
 
   <property name="indeterminate" as="boolean" value="false"/>
   <property name="index" as="number" value="0"/>
   <property name="range" as="dynamic" value="[0, 100]"/>
 
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
+  <view xmlns:html="http://www.w3.org/1999/xhtml" stack="replace">
     <html:div class="vs_ui_progressbar">
       <html:div></html:div>
     </html:div>
   </view>
 
   <watch>
-    <get instance="$self" property="indeterminate">
-      this.__vs_instance.indeterminate = value;
+    <get property="indeterminate">
+      this.__vs_instance.indeterminate = property;
     </get>
-    <get instance="$self" property="index">
-      this.__vs_instance.index = value;
+    <get property="index">
+      this.__vs_instance.index = property;
     </get>
-    <get instance="$self" property="range">
-      this.__vs_instance.range = value;
+    <get property="range">
+      this.__vs_instance.range = property;
     </get>
   </watch>
 

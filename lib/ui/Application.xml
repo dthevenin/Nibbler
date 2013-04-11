@@ -1,16 +1,14 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.Application">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" on-render="nibbler.ui.Application">
 
   <property name="layout" as="string" value=""/>
 
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
-    <html:div x-hag-hole="children">
-      <content />
-    </html:div>
+  <view xmlns:html="http://www.w3.org/1999/xhtml" stack="replace">
+    <html:div x-hag-hole="children"><content /></html:div>
   </view>
-  
+
   <watch>
-    <get instance="$self" property="layout">
-       this.__vs_instance.layout = value;
+    <get property="layout">
+       this.__vs_instance.layout = property;
     </get>
   </watch>
 

@@ -1,15 +1,13 @@
-nibbler.ui.Button = Object.create (nibbler.ui.View);
-
-nibbler.ui.Button.did_render = function () {
+nibbler.ui.Button = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.ui.Button ({
-    node: instance.views.$root
+    node: instance.rendered.$root
   }).init ();
 
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
-  
-  this.vs_init ();
+
+  nibbler.ui.Button.vs_init.call (this);
 };
 
 nibbler.ui.Button.vs_init = function () {

@@ -4,7 +4,7 @@ nibbler.ui.ComboBox.did_render = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.ui.ComboBox ({
-    ndoe: instance.views.$root
+    node: instance.rendered.$root
   }).init ();
 
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);

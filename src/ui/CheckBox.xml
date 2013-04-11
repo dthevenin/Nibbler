@@ -1,22 +1,22 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.CheckBox">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" prototype="nibbler.ui.CheckBox">
 
   <property name="data" as="dynamic" value="[]"/>
   <property name="selectedIndexes" as="dynamic"/>
   <property name="model" as="dynamic"/>
 
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
+  <view xmlns:html="http://www.w3.org/1999/xhtml" stack="replace">
     <html:div class="vs_ui_checkbox">
       <html:fieldset x-hag-hole="item_children" />
     </html:div>
   </view>
-  
+
   <watch>
-    <get instance="$self" property="data">
-      this.__set_data(value)
+    <get property="data">
+      this.__set_data(property)
     </get>
 
-    <get instance="$self" property="model">
-      this.__set_model(value)
+    <get property="model">
+      this.__set_model(property)
     </get>
   </watch>
 

@@ -1,6 +1,4 @@
-nibbler.core.Array = Object.create (nibbler.core.Model);
-
-nibbler.core.Array.did_render = function () {
+nibbler.core.Array = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.core.Array ().init ();

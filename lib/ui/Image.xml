@@ -1,14 +1,14 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.Image">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" on-render="nibbler.ui.Image">
 
   <property name="src"/>
 
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
+  <view xmlns:html="http://www.w3.org/1999/xhtml" stack="replace">
     <html:img class="vs_ui_imageview"></html:img>
   </view>
 
   <watch>
-    <get instance="$self" property="src">
-      this.__vs_instance.src = value;
+    <get property="src">
+      this.__vs_instance.src = property;
     </get>
   </watch>
 
