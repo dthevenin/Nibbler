@@ -1,6 +1,4 @@
-nibbler.ui.Picker = Object.create (nibbler.ui.View);
-
-nibbler.ui.Picker.did_render = function () {
+nibbler.ui.Picker = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.ui.Picker ({
@@ -9,7 +7,7 @@ nibbler.ui.Picker.did_render = function () {
 
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
 
-  this.vs_init ();
+  nibbler.ui.Picker.vs_init.call (this);
 };
 
 nibbler.ui.Picker.vs_init = function () {

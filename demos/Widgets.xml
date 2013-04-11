@@ -1,38 +1,44 @@
-<component xmlns="http://bender.igel.co.jp" prototype="bender.$.Widgets"
-  href="../lib/ui/Application.xml">
-  <component id="main_navbar" href="../lib/ui/NavigationBar.xml">
-    <component id="back_button" href="../lib/ui/Button.xml" text="Back" type="nav_back" style="silver_style"/>
-    <component id="nav_title" href="../lib/ui/TextLabel.xml" text="Back" />
-  </component>
+<component xmlns="http://bender.igel.co.jp" href="../lib/ui/Application.xml" on-render="Widgets">
+  <link rel="stylesheet" href="Widgets.css"/>
+  <view>
+    <component id="main_navbar" href="../lib/ui/NavigationBar.xml">
+      <view>
+        <component id="back_button" href="../lib/ui/Button.xml" text="Back" type="nav_back" style="silver_style"/>
+        <component id="nav_title" href="../lib/ui/TextLabel.xml" text="Back" />
+      </view>
+    </component>
 
-  <component id="panels" href="../lib/ui/View.xml">
-    <component id="buttons" href="Buttons.xml" />
-    <component id="inputs" href="Inputs.xml" />
-    <component id="selectors" href="Selectors.xml" />
-    <component id="sliders" href="Sliders.xml" />
-    <component id="standard_list" href="StandardList.xml" />
-    <component id="tab_list" href="TabList.xml" />
-    <component id="block_list" href="BlockList.xml" />
-    <component id="map" href="Map.xml" />
-    <component id="todo" href="ToDo.xml" />
-  </component>
+    <component id="panels" href="../lib/ui/View.xml">
+      <view>
+        <component id="buttons" href="Buttons.xml" />
+        <component id="inputs" href="Inputs.xml" />
+        <component id="selectors" href="Selectors.xml" />
+        <component id="sliders" href="Sliders.xml" />
+        <component id="standard_list" href="StandardList.xml" />
+        <component id="tab_list" href="TabList.xml" />
+        <component id="block_list" href="BlockList.xml" />
+        <component id="map" href="Map.xml" />
+        <component id="todo" href="ToDo.xml" />
+      </view>
+    </component>
 
-  <component id="widgets_list" href="../lib/ui/List.xml"
-    data='[\{"title": "Buttons"\}, \{"title": "Fields and Combobox"\},
-      \{"title": "Selectors"\}, \{"title": "Sliders"\},
-      \{"title": "List"\}, \{"title": "TabList"\},
-      \{"title": "BlockList"\}, \{"title": "Map"\},
-      \{"title": "ToDo"\}]' hasArrow="true">
-  </component>
+    <component id="widgets_list" href="../lib/ui/List.xml"
+      data='[{"title": "Buttons"}, {"title": "Fields and Combobox"},
+        {"title": "Selectors"}, {"title": "Sliders"},
+        {"title": "List"}, {"title": "TabList"},
+        {"title": "BlockList"}, {"title": "Map"},
+        {"title": "ToDo"}]' hasArrow="true">
+    </component>
+  </view>
 
   <watch>
-    <get instance="widgets_list" event="@itemselect">
-      this.onListSelect (value.data);
+    <get component="widgets_list" event="@itemselect">
+      this.onListSelect (event.data);
     </get>
   </watch>
 
   <watch>
-    <get instance="back_button" event="@select">
+    <get component="back_button" event="@select">
       this.onBack ();
     </get>
   </watch>

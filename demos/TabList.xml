@@ -1,7 +1,10 @@
 <component xmlns="http://bender.igel.co.jp" href="../lib/ui/Application.xml"
   id="tablist">
-  <component href="../lib/ui/List.xml"
-    type="TabList" hasArrow="true" scroll="true"
-    data='["First tab",\{"title":"one"\},\{"title":"two"\},"Second tab",\{"title":"two","label":"two"\},\{"title":"three","label":"two"\},\{"title":"one"\},\{"title":"two"\},\{"title":"tree","label":"two"\},"Third tab",\{"title":"one"\},\{"title":"two"\},\{"title":"tree","label":"two"\}]'
-  />
+  <link rel="stylesheet" href="List.css"/>
+  <view>
+    <component href="../lib/ui/List.xml"
+      type="TabList" hasArrow="true" scroll="true"
+      data='["First tab",{"title":"one"},{"title":"two"},"Second tab",{"title":"two","label":"two"},{"title":"three","label":"two"},{"title":"one"},{"title":"two"},{"title":"tree","label":"two"},"Third tab",{"title":"one"},{"title":"two"},{"title":"tree","label":"two"}]'
+    />
+  </view>
 </component>

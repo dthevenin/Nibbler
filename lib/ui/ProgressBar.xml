@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp" href="View.xml" prototype="nibbler.ui.ProgresseBar">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" on-render="nibbler.ui.ProgresseBar">
 
   <property name="indeterminate" as="boolean" value="false"/>
   <property name="index" as="number" value="0"/>

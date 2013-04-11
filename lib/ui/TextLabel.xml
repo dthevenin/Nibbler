@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp" href="View.xml" prototype="nibbler.ui.TextLabel">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" on-render="nibbler.ui.TextLabel">
 
   <property name="text"/>
 

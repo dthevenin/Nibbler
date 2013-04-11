@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp" href="View.xml" prototype="nibbler.ui.CheckBox">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" on-render="nibbler.ui.CheckBox">
 
   <property name="data" as="dynamic" value="[]"/>
   <property name="selectedIndexes" as="dynamic"/>

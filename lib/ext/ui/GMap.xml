@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ext.ui.GMap">
+<component xmlns="http://bender.igel.co.jp" href="../../ui/View.xml" on-render="nibbler.ext.ui.GMap">
 
   <property name="center" as="dynamic" value="[0,0]"/>
   <property name="maxZoom" as="number" value="0"/>
@@ -10,7 +10,7 @@
   <property name="zoom" as="number" value="0"/>
   <property name="zoomControl" as="boolean" value="true"/>
 
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
+  <view xmlns:html="http://www.w3.org/1999/xhtml" stack="replace">
     <html:div class="vs_ext_ui_gmap"></html:div>
   </view>
 

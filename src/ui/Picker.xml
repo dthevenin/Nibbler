@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp" href="View.xml" prototype="nibbler.ui.Picker">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" on-render="nibbler.ui.Picker">
 
   <property name="data" as="dynamic" value="[]"/>
   <property name="selectedKeys" as="dynamic"/>

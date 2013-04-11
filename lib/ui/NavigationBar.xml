@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp" href="View.xml" prototype="nibbler.ui.NavigationBar">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" on-render="nibbler.ui.NavigationBar">
 
   <property name="style" as="dynamic" value="vs.ui.NavigationBar.DEFAULT_STYLE"/>
 

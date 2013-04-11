@@ -1,6 +1,4 @@
-nibbler.ui.Switch = Object.create (nibbler.ui.View);
-
-nibbler.ui.Switch.did_render = function () {
+nibbler.ui.Switch = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.ui.Switch ({
@@ -9,7 +7,7 @@ nibbler.ui.Switch.did_render = function () {
 
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
 
-  this.vs_init ();
+  nibbler.ui.Switch.vs_init.call (this);
 };
 
 nibbler.ui.Switch.vs_init = function () {

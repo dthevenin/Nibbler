@@ -1,27 +1,29 @@
 <component xmlns="http://bender.igel.co.jp" href="../lib/ui/Application.xml"
   id="sliders">
-  <component href="../lib/ui/ProgressBar.xml" indeterminate="true"/>
-  <component id="pb1" href="../lib/ui/ProgressBar.xml" index="50"/>
-  <component id="slider1" href="../lib/ui/Slider.xml" index="50"/>
-  <component id="slider2" href="../lib/ui/Slider.xml" orientation="vs.ui.Slider.VERTICAL"/>
-  <component id="label2" href="../lib/ui/TextLabel.xml"/>
-  <component id="slider3" href="../lib/ui/Slider.xml" orientation="vs.ui.Slider.VERTICAL"/>
-  <component id="label3" href="../lib/ui/TextLabel.xml"/>
+  <view>
+    <component href="../lib/ui/ProgressBar.xml" indeterminate="true"/>
+    <component id="pb1" href="../lib/ui/ProgressBar.xml" index="50"/>
+    <component id="slider1" href="../lib/ui/Slider.xml" index="50"/>
+    <component id="slider2" href="../lib/ui/Slider.xml" orientation="vs.ui.Slider.VERTICAL"/>
+    <component id="label2" href="../lib/ui/TextLabel.xml"/>
+    <component id="slider3" href="../lib/ui/Slider.xml" orientation="vs.ui.Slider.VERTICAL"/>
+    <component id="label3" href="../lib/ui/TextLabel.xml"/>
+  </view>
 
   <watch>
-    <get instance="slider1" property="value" />
-    <set instance="pb1" property="index" />
+    <get component="slider1" property="value" />
+    <set component="pb1" property="index" />
   </watch>
 
   <watch>
-    <get instance="slider2" property="value" />
-    <set instance="label2" property="text" />
-    <set instance="slider3" property="value" />
+    <get component="slider2" property="value" />
+    <set component="label2" property="text" />
+    <set component="slider3" property="value" />
   </watch>
 
   <watch>
-    <get instance="slider3" property="value" />
-    <set instance="label3" property="text" />
+    <get component="slider3" property="value" />
+    <set component="label3" property="text" />
   </watch>
 
 </component>

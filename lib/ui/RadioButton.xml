@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp" href="View.xml" prototype="nibbler.ui.RadioButton">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" on-render="nibbler.ui.RadioButton">
 
   <property name="data" as="dynamic" value="[]"/>
   <property name="selectedIndex" as="dynamic"/>

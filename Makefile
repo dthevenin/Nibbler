@@ -88,7 +88,7 @@ nibbler_tmp.js :: vs_core_tmp.js vs_data_tmp.js vs_ui_tmp.js vs_ext_tmp.js
 	$(CAT) vs_core_tmp.js >> $@
 	$(CAT) vs_data_tmp.js >> $@
 	$(CAT) vs_ui_tmp.js >> $@
-#	$(CAT) vs_ext_tmp.js >> $@
+	$(CAT) vs_ext_tmp.js >> $@
 	$(ECHO) $(EXPORT_FOOTER) >> $@
 	$(RM) vs_core_tmp.js
 	$(RM) vs_data_tmp.js

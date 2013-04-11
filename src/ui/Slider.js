@@ -1,6 +1,4 @@
-nibbler.ui.Slider = Object.create (nibbler.ui.View);
-
-nibbler.ui.Slider.did_render = function () {
+nibbler.ui.Slider = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.ui.Slider ({
@@ -9,7 +7,7 @@ nibbler.ui.Slider.did_render = function () {
 
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
 
-  this.vs_init ();
+  nibbler.ui.Slider.vs_init.call (this);
 };
 
 nibbler.ui.Slider.vs_init = function () {

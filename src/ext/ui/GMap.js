@@ -1,6 +1,4 @@
-nibbler.ext.ui.GMap = Object.create(bender.instance);
-
-nibbler.ext.ui.GMap.did_render = function () {
+nibbler.ext.ui.GMap = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.ext.ui.GMap ({
@@ -9,11 +7,13 @@ nibbler.ext.ui.GMap.did_render = function () {
 
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
 
-  this.vs_init ();
+  nibbler.ext.ui.GMap.vs_init.call (this);
 };
 
 nibbler.ext.ui.GMap.vs_init = function () {
   var instance = this;
+
+  nibbler.ui.View.vs_init.call (this);
 
   instance.__vs_instance.configure ({
     center: instance.properties.center,

@@ -1,6 +1,4 @@
-nibbler.ui.TextInput = Object.create (nibbler.ui.View);
-
-nibbler.ui.TextInput.did_render = function () {
+nibbler.ui.TextInput = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.ui.InputField ({
@@ -9,7 +7,7 @@ nibbler.ui.TextInput.did_render = function () {
 
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
 
-  this.vs_init ();
+  nibbler.ui.TextInput.vs_init.call (this);
 };
 
 nibbler.ui.TextInput.vs_init = function () {

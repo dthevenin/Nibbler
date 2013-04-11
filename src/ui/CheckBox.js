@@ -1,6 +1,4 @@
-nibbler.ui.CheckBox = Object.create (nibbler.ui.View);
-
-nibbler.ui.CheckBox.did_render = function () {
+nibbler.ui.CheckBox = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.ui.CheckBox ({
@@ -9,7 +7,7 @@ nibbler.ui.CheckBox.did_render = function () {
 
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
 
-  this.vs_init ();
+  nibbler.ui.CheckBox.vs_init.call (this);
 };
 
 nibbler.ui.CheckBox.vs_init = function () {
@@ -29,6 +27,9 @@ nibbler.ui.CheckBox.vs_init = function () {
       instance.__vs_instance._selected_indexes;
     flexo.notify (instance, '@change', {data: e.data});
   })
+
+  instance.__set_model = nibbler.ui.CheckBox.__set_model;
+  instance.__set_data = nibbler.ui.CheckBox.__set_data;
 };
 
 nibbler.ui.CheckBox.__set_model = function (value) {

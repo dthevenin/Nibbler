@@ -1,27 +1,29 @@
 <component xmlns="http://bender.igel.co.jp" href="../lib/ui/Application.xml"
   id="pickers">
-  <component id="picker1" href="../lib/ui/Picker.xml"
-    data='[
-      \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\},
-      \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\}]'
-  />
-  <component id="picker2" href="../lib/ui/Picker.xml"
-    data='[
-      \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\},
-      \{"values": \{1:"one",2:"two",3:"three",4:"four",\}, "style": "right shrink"\},
-      \{"values": vs.ui.Picker.NUMBERS, "style": "right shrink"\}]'
-  />
-  <component id="label1" href="../lib/ui/TextLabel.xml"/>
-  <component id="label2" href="../lib/ui/TextLabel.xml"/>
+  <view>
+    <component id="picker1" href="../lib/ui/Picker.xml"
+      data='[
+        {"values": vs.ui.Picker.NUMBERS, "style": "right shrink"},
+        {"values": vs.ui.Picker.NUMBERS, "style": "right shrink"}]'
+    />
+    <component id="picker2" href="../lib/ui/Picker.xml"
+      data='[
+        {"values": vs.ui.Picker.NUMBERS, "style": "right shrink"},
+        {"values": {1:"one",2:"two",3:"three",4:"four",}, "style": "right shrink"},
+        {"values": vs.ui.Picker.NUMBERS, "style": "right shrink"}]'
+    />
+    <component id="label1" href="../lib/ui/TextLabel.xml"/>
+    <component id="label2" href="../lib/ui/TextLabel.xml"/>
+  </view>
 
   <watch>
-    <get instance="picker1" property="selectedKeys" />
-    <set instance="label1" property="text" />
+    <get component="picker1" property="selectedKeys" />
+    <set component="label1" property="text" />
   </watch>
 
   <watch>
-    <get instance="picker2" property="selectedKeys" />
-    <set instance="label2" property="text"/>
+    <get component="picker2" property="selectedKeys" />
+    <set component="label2" property="text"/>
   </watch>
 
 </component>

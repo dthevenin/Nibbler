@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp" href="View.xml" prototype="nibbler.ui.TextInput">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" on-render="nibbler.ui.TextInput">
 
   <property name="value" as="string"/>
   <property name="placeholder" as="string"/>

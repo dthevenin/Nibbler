@@ -7,15 +7,15 @@
 
   <watch>
     <get property="searchEngine">
-      this.__vs_instance.setSearchEngine (value);
+      this.__vs_instance.setSearchEngine (property);
     </get>
 
     <get property="address">
-      this.__set_address(value);
+      this.__set_address(property);
     </get>
 
     <get property="position">
-      this.__set_position(value);
+      this.__set_position(property);
     </get>
   </watch>
 

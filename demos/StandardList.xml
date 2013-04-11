@@ -1,7 +1,10 @@
 <component xmlns="http://bender.igel.co.jp" href="../lib/ui/Application.xml"
   id="standardlist">
-  <component href="../lib/ui/List.xml"
-    type="DefaultList" hasArrow="true" scroll="true"
-    data='[\{"title":"one"\},\{"title":"two"\},\{"title":"tree","label":"two"\},\{"title":"one"\},\{"title":"two"\},\{"title":"tree","label":"two"\},\{"title":"one"\},\{"title":"two"\},\{"title":"tree","label":"two"\},\{"title":"one"\},\{"title":"two"\},\{"title":"tree","label":"two"\}]'
-  />
+  <link rel="stylesheet" href="List.css"/>
+  <view>
+    <component href="../lib/ui/List.xml"
+      type="DefaultList" hasArrow="true" scroll="true"
+      data='[{"title":"one"},{"title":"two"},{"title":"tree","label":"two"},{"title":"one"},{"title":"two"},{"title":"tree","label":"two"},{"title":"one"},{"title":"two"},{"title":"tree","label":"two"},{"title":"one"},{"title":"two"},{"title":"tree","label":"two"}]'
+    />
+  </view>
 </component>

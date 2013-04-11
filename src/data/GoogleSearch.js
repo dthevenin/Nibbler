@@ -4,7 +4,7 @@ nibbler.data.GoogleSearch = function () {
   instance.__vs_instance = new vs.data.GoogleSearch ().init ();
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
 
-  nibbler.data.GoogleSearch.vs_init ();
+  nibbler.data.GoogleSearch.vs_init.call (this);
 };
 
 nibbler.data.GoogleSearch.vs_init = function () {
@@ -18,6 +18,9 @@ nibbler.data.GoogleSearch.vs_init = function () {
   if (instance.properties.searchEngine) {
     instance.setSearchEngine (instance.properties.searchEngine);
   }
+
+  instance.__set_address = nibbler.data.GoogleSearch.__set_address;
+  instance.__set_position = nibbler.data.GoogleSearch.__set_position;
 };
 
 nibbler.data.GoogleSearch.__set_address = function (value) {

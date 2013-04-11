@@ -1,6 +1,4 @@
-nibbler.ui.TextLabel = Object.create (nibbler.ui.View);
-
-nibbler.ui.TextLabel.did_render = function () {
+nibbler.ui.TextLabel = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.ui.TextLabel ({
@@ -9,7 +7,7 @@ nibbler.ui.TextLabel.did_render = function () {
 
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
 
-  this.vs_init ();
+  nibbler.ui.TextLabel.vs_init.call (this);
 };
 
 nibbler.ui.TextLabel.vs_init = function () {

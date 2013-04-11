@@ -1,6 +1,4 @@
-nibbler.ui.TextArea = Object.create (nibbler.ui.View);
-
-nibbler.ui.TextArea.did_render = function () {
+nibbler.ui.TextArea = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.ui.TextArea ({
@@ -9,7 +7,7 @@ nibbler.ui.TextArea.did_render = function () {
 
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
 
-  this.vs_init ();
+  nibbler.ui.TextArea.vs_init.call (this);
 };
 
 nibbler.ui.TextArea.vs_init = function () {

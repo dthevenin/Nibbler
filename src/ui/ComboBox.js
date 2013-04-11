@@ -1,6 +1,4 @@
-nibbler.ui.ComboBox = Object.create (nibbler.ui.View);
-
-nibbler.ui.ComboBox.did_render = function () {
+nibbler.ui.ComboBox = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.ui.ComboBox ({
@@ -9,7 +7,7 @@ nibbler.ui.ComboBox.did_render = function () {
 
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
 
-  this.vs_init ();
+  nibbler.ui.ComboBox.vs_init.call (this);
 };
 
 nibbler.ui.ComboBox.vs_init = function () {

@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp" href="View.xml" prototype="nibbler.ui.Switch">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" on-render="nibbler.ui.Switch">
 
   <property name="textOff" as="string" value="Off" />
   <property name="textOn" as="string" value="On" />

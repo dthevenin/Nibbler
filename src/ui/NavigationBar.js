@@ -1,6 +1,4 @@
-nibbler.ui.NavigationBar = Object.create (nibbler.ui.View);
-
-nibbler.ui.NavigationBar.did_render = function () {
+nibbler.ui.NavigationBar = function () {
   var instance = this;
 
   instance.__vs_instance = new vs.ui.NavigationBar ({
@@ -9,7 +7,7 @@ nibbler.ui.NavigationBar.did_render = function () {
 
   vs.util.extendsBenderInstance (instance, instance.__vs_instance);
 
-  this.vs_init ();
+  nibbler.ui.NavigationBar.vs_init.call (this);
 };
 
 nibbler.ui.NavigationBar.vs_init = function () {

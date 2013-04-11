@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp" href="View.xml" prototype="nibbler.ui.TextArea">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" on-render="nibbler.ui.TextArea">
 
   <property name="value"/>
 
