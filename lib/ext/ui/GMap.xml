@@ -1,4 +1,4 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ext.ui.GMap">
+<component xmlns="http://bender.igel.co.jp" href="../../ui/View.xml" on-render="nibbler.ext.ui.GMap">
 
   <property name="center" as="dynamic" value="[0,0]"/>
   <property name="maxZoom" as="number" value="0"/>
@@ -10,37 +10,37 @@
   <property name="zoom" as="number" value="0"/>
   <property name="zoomControl" as="boolean" value="true"/>
 
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
+  <view xmlns:html="http://www.w3.org/1999/xhtml" stack="replace">
     <html:div class="vs_ext_ui_gmap"></html:div>
   </view>
-  
+
   <watch>
-    <get instance="$self" property="center">
-      this.__vs_instance.center = value;
+    <get property="center">
+      this.__vs_instance.center = property;
     </get>
-    <get instance="$self" property="maxZoom">
-      this.__vs_instance.maxZoom = value;
+    <get property="maxZoom">
+      this.__vs_instance.maxZoom = property;
     </get>
-    <get instance="$self" property="minZoom">
-      this.__vs_instance.minZoom = value;
+    <get property="minZoom">
+      this.__vs_instance.minZoom = property;
     </get>
-    <get instance="$self" property="scroll">
-      this.__vs_instance.scroll = value;
+    <get property="scroll">
+      this.__vs_instance.scroll = property;
     </get>
-    <get instance="$self" property="streetViewControl">
-      this.__vs_instance.streetViewControl = value;
+    <get property="streetViewControl">
+      this.__vs_instance.streetViewControl = property;
     </get>
-    <get instance="$self" property="tapToZoom">
-      this.__vs_instance.tapToZoom = value;
+    <get property="tapToZoom">
+      this.__vs_instance.tapToZoom = property;
     </get>
-    <get instance="$self" property="tilt">
-      this.__vs_instance.tilt = value;
+    <get property="tilt">
+      this.__vs_instance.tilt = property;
     </get>
-    <get instance="$self" property="zoom">
-      this.__vs_instance.zoom = value;
+    <get property="zoom">
+      this.__vs_instance.zoom = property;
     </get>
-    <get instance="$self" property="zoomControl">
-      this.__vs_instance.zoomControl = value;
+    <get property="zoomControl">
+      this.__vs_instance.zoomControl = property;
     </get>
   </watch>
 

@@ -1,19 +1,19 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.Picker">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" on-render="nibbler.ui.Picker">
 
   <property name="data" as="dynamic" value="[]"/>
   <property name="selectedKeys" as="dynamic"/>
   <property name="selectedValues" as="dynamic"/>
 
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
+  <view xmlns:html="http://www.w3.org/1999/xhtml" stack="replace">
     <html:div class="vs_ui_picker">
       <html:div class="slots" />
       <html:div class="frame" />
     </html:div>
   </view>
-  
+
   <watch>
-    <get instance="$self" property="data">
-      this.__vs_instance.data = value;
+    <get property="data">
+      this.__vs_instance.data = property;
     </get>
   </watch>
 

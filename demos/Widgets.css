@@ -7,8 +7,12 @@
 @import url("ToDo.css");
 @import url("Map.css");
 
+.application {
+  padding: 0px;
+}
+
 body {
-  background-color: rgb(67,107,118);
+  background-color: white !important;
   margin: 0px;
 }
 
@@ -34,8 +38,8 @@ body {
 }
 
 .panels {
-  -webkit-transform: translate3d(100%,0,0);
-  overflow: visible;
+//  -webkit-transform: translate3d(100%,0,0);
+//  overflow: visible;
 }
 
 .panels > *, .widgets_list {
@@ -50,13 +54,13 @@ body {
 }
 
 .panels > * {
-  -webkit-transform: translate3d(0,0,0);
+//  -webkit-transform: translate3d(0,0,0);
 }
 
 .panels > *.show {
-  -webkit-transform: translate3d(-100%,0,0);
+//  -webkit-transform: translate3d(-100%,0,0);
 }
 
 .widgets_list.hide {
-  -webkit-transform: translate3d(-100%,0,0);
+//  -webkit-transform: translate3d(-100%,0,0);
 }

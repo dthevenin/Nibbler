@@ -1,14 +1,14 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.NavigationBar">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" on-render="nibbler.ui.NavigationBar">
 
   <property name="style" as="dynamic" value="vs.ui.NavigationBar.DEFAULT_STYLE"/>
 
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
+  <view xmlns:html="http://www.w3.org/1999/xhtml" stack="replace">
     <html:div class="vs_ui_navbar" x-hag-hole="children"><content /></html:div>
   </view>
 
   <watch>
-    <get instance="$self" property="style">
-      this.__vs_instance.style = value;
+    <get property="style">
+      this.__vs_instance.style = property;
     </get>
   </watch>
 

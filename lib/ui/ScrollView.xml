@@ -1,11 +1,11 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.View">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" on-render="nibbler.ui.View">
 
   <property name="src"/>
   <property name="layout" as="string" value=""/>
   <property name="pinch" as="dynamic" value="vs.ui.ScrollView.NO_PINCH"/>
   <property name="scroll" as="dynamic" value="vs.ui.ScrollView.NO_SCROLL"/>
 
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
+  <view xmlns:html="http://www.w3.org/1999/xhtml" stack="replace">
     <html:div class="vs_ui_scrollview">
       <html:div x-hag-hole="top_bar"></html:div>
       <html:div class="content" x-hag-hole="children"><content /></html:div>
@@ -14,8 +14,8 @@
   </view>
 
   <watch>
-    <get instance="$self" property="layout">
-      this.__vs_instance.layout = value;
+    <get property="layout">
+      this.__vs_instance.layout = property;
     </get>
   </watch>
 

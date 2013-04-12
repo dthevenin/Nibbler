@@ -1,2 +1,2 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.core.Model">
+<component xmlns="http://bender.igel.co.jp" on-render="nibbler.core.Model">
 </component>

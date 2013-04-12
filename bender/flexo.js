@@ -1,108 +1,78 @@
-// General purpose Javascript support library; as used by Bender
-
 (function (flexo) {
   "use strict";
 
-  var A = Array.prototype;
-  var browser = typeof window === "object";
+  var foreach = Array.prototype.forEach;
+  var map = Array.prototype.map;
+  var slice = Array.prototype.slice;
+  var splice = Array.prototype.splice;
 
+  var browserp = typeof window === "object";
 
   if (typeof Function.prototype.bind !== "function") {
     Function.prototype.bind = function (x) {
       var f = this;
-      var args = A.slice.call(arguments, 1);
+      var args = slice.call(arguments, 1);
       return function () {
-        return f.apply(x, args.concat(A.slice.call(arguments)));
+        return f.apply(x, args.concat(slice.call(arguments)));
       };
     };
     Function.prototype.bind.native = false;
   }
+
 
   // Objects
 
   // Test whether x is an instance of y (i.e. y is the prototype of x, or the
   // prototype of its prototype, or...)
   flexo.instance_of = function (x, y) {
-    var proto = Object.getPrototypeOf(x);
+    var proto = typeof x === "object" && Object.getPrototypeOf(x);
     return !!proto && (proto === y || flexo.instance_of(proto, y));
+  };
+
+  // Define a property named `name` on object `obj` and make it read-only (i.e.
+  // it only has a get.)
+  flexo.make_readonly = function (obj, name, get) {
+    Object.defineProperty(obj, name, { enumerable: true,
+      get: typeof get === "function" ? get : function () { return get; }
+    });
+  };
+
+  // Define a property named `name` on object `obj` with the custom setter `set`
+  // The setter gets three parameters (<new value>, <current value>, <cancel>)
+  // and returns the new value to be set. If cancel is called with no value or a
+  // true value, there is no update. An initial value may be provided, that does
+  // not trigger the setter.
+  flexo.make_property = function (obj, name, set, value) {
+    Object.defineProperty(obj, name, { enumerable: true,
+      get: function () { return value; },
+      set: function (v) {
+        try {
+          value = set.call(this, v, value, flexo.cancel);
+        } catch (e) {
+          if (e !== "cancel") {
+            throw e;
+          }
+        }
+      }
+    });
   };
 
 
   // Strings
 
-  // Simple format function for messages and templates. Use {0}, {1}...
-  // as slots for parameters. Null and undefined are replaced by an empty
-  // string.
+  // Simple format function for messages and templates. Use %0, %1... as slots
+  // for parameters. %% is also replaced by %. Null and undefined are replaced
+  // by an empty string.
+  // TODO "%(0)0".fmt(1) should be "10"
   String.prototype.fmt = function () {
     var args = arguments;
-    return this.replace(/\{(\d+)\}/g, function (_, p) {
-      return args[p] == null ? "" : args[p];
+    return this.replace(/%(\d+|%)/g, function (_, p) {
+      return p === "%" ? "%" : args[p] == null ? "" : args[p];
     });
   };
 
-  // Another format function for messages and templates; this time, the only
-  // argument is an object and string parameters are keys.
-  String.prototype.format = function (args) {
-    return flexo.format.call(args, this, args);
-  };
-
-  // Can be called as flexo.format as well, giving the string and the arguments
-  // object as parameters.
-  flexo.format = function (string, args) {
-    var stack = [""];
-    var current = stack;
-    if (typeof string !== "string") {
-      string = string.toString();
-    }
-    string.split(/(\{|\}|\\[{}\\])/).forEach(function (token) {
-      if (token === "{") {
-        var chunk = [""];
-        chunk.__parent = current;
-        current.push(chunk);
-        current = chunk;
-      } else if (token === "}") {
-        var parent = current.__parent;
-        if (parent) {
-          var p = parent.pop();
-          if (args && args.hasOwnProperty(p)) {
-            if (args[p] != null) {
-              parent[0] += args[p];
-            }
-          } else {
-            try {
-              var v = new Function("return " + p).call(this);
-              if (v != null) {
-                parent[0] += v;
-              }
-            } catch (e) {
-            }
-          }
-          current = parent;
-        } else {
-          if (typeof current[current.length - 1] !== "string") {
-            current.push(token);
-          } else {
-            current[current.length - 1] += token;
-          }
-        }
-      } else {
-        token = token.replace(/^\\([{}\\])/, "$1");
-        if (typeof current[current.length - 1] !== "string") {
-          current.push(token);
-        } else {
-          current[current.length - 1] += token;
-        }
-      }
-    }, this);
-    while (current.__parent) {
-      current = current.__parent;
-      current[0] += "{" + current.pop();
-    }
-    return stack.join();
-  }
-
   // Chop the last character of a string iff it's a newline
-  flexo.chomp = function(string) {
+  flexo.chomp = function (string) {
     return string.replace(/\n$/, "");
   };
 
@@ -114,7 +84,7 @@
 
   // Pad a string to the given length with the given padding (defaults to 0)
   // if it is shorter. The padding is added at the beginning of the string.
-  flexo.pad = function(string, length, padding) {
+  flexo.pad = function (string, length, padding) {
     if (typeof padding !== "string") {
       padding = "0";
     }
@@ -125,9 +95,16 @@
     return l > 0 ? (Array(l).join(padding)) + string : string;
   };
 
+  // Quote a string, escaping quotes properly. Uses " by default, but can be
+  // changed to '
+  flexo.quote = function (string, q) {
+    q = q || '"';
+    return "%0%1%0".fmt(q, string.replace(new RegExp(q, "g"), "\\" + q));
+  };
+
   // Convert a number to roman numerals (integer part only; n must be positive
   // or zero.) Now that's an important function to have in any framework.
-  flexo.to_roman = function(n) {
+  flexo.to_roman = function (n) {
     var unit = function (n, i, v, x) {
       var r = "";
       if (n % 5 === 4) {
@@ -160,6 +137,14 @@
     }
   };
 
+  // Convert a string with dash to camel case: remove dashes and capitalize the
+  // following letter (e.g., convert foo-bar to fooBar)
+  flexo.undash = function (s) {
+    return s.replace(/-+(.?)/g, function (_, p) {
+      return p.toUpperCase();
+    });
+  };
+
 
   // Numbers
 
@@ -171,7 +156,7 @@
   };
 
   // Linear interpolation
-  flexo.lerp = function(from, to, ratio) {
+  flexo.lerp = function (from, to, ratio) {
     return from + (to - from) * ratio;
   };
 
@@ -193,13 +178,20 @@
 
   // Arrays
 
+  // Return a new array without the given item
+  flexo.array_without = function (array, item) {
+    var a = array.slice();
+    flexo.remove_from_array(a, item);
+    return a;
+  };
+
   flexo.extract_from_array = function (array, p, that) {
     var extracted = [];
-    var original = A.slice.call(array);
+    var original = slice.call(array);
     for (var i = array.length - 1; i >= 0; --i) {
       if (p.call(that, array[i], i, original)) {
         extracted.unshift(array[i]);
-        A.splice.call(array, i, 1);
+        splice.call(array, i, 1);
       }
     }
     return extracted;
@@ -208,7 +200,7 @@
   // Drop elements of an array while the predicate is true
   flexo.drop_while = function (a, p, that) {
     for (var i = 0, n = a.length; i < n && p.call(that, a[i], i, a); ++i);
-    return A.slice.call(a, i);
+    return slice.call(a, i);
   };
 
   // Find the first item x in a such that p(x) is true
@@ -218,6 +210,17 @@
     }
     for (var i = 0, n = a.length; i < n && !p.call(that, a[i], i, a); ++i);
     return a[i];
+  };
+
+  // Partition `a` according to predicate `p` and return and array of two arrays
+  // (first one is the array of elements for which p is true.)
+  flexo.partition = function (a, p, that) {
+    var ins = [];
+    var outs = [];
+    for (var i = 0, n = a.length; i < n; ++i) {
+      (p.call(that, a[i], i, a) ? ins : outs).push(a[i]);
+    }
+    return [ins, outs];
   };
 
   // Return a random element from an array
@@ -247,9 +250,10 @@
     }
   };
 
-  // Shuffle the array
+  // Shuffle the array into a new array (the original array is not changed and
+  // the new, shuffled array is returned.)
   flexo.shuffle_array = function (array) {
-    var shuffled = A.slice.call(array);
+    var shuffled = slice.call(array);
     for (var i = shuffled.length - 1; i > 0; --i) {
       var j = flexo.random_int(i);
       var x = shuffled[i];
@@ -257,6 +261,50 @@
       shuffled[j] = x;
     }
     return shuffled;
+  };
+
+  // Pick random elements from an array and remove them from the array. When the
+  // array is empty, recreate the initial array. The urn can also be emptied at
+  // any moment, which resets is state completely.
+  flexo.Urn = {
+    pick: function () {
+      if (!this.remaining || this.remaining.length === 0) {
+        this.remaining = slice.call(this.array);
+      }
+      var i = flexo.random_int(this.remaining.length - 1);
+      if (this.non_repeatable && this.array.length > 1) {
+        while (this.remaining[i] === this.last_pick) {
+          i = flexo.random_int(this.remaining.length - 1);
+        }
+      }
+      this.last_pick = this.remaining.splice(i, 1)[0];
+      return this.last_pick;
+    },
+    empty: function () {
+      delete this.remaining;
+      delete this.last_pick;
+      return this;
+    }
+  };
+
+  // Create a new urn to pick from. The first argument is the array for the urn,
+  // then a flag to prevent successive repeating values when the urn is refilled
+  // (defaults to false.)
+  flexo.urn = function (a, non_repeatable) {
+    var urn = Object.create(flexo.Urn);
+    flexo.make_property(urn, "array", function (a_) {
+      this.empty();
+      return a_;
+    }, a);
+    urn.non_repeatable = !!non_repeatable;
+    return urn;
+  };
+
+  // Return all the values of an object (presumably used as a dictionary)
+  flexo.values = function (object) {
+    return Object.keys(object).map(function (key) {
+      return object[key];
+    });
   };
 
 
@@ -379,6 +427,11 @@
     if (params.hasOwnProperty("responseType")) {
       req.responseType = params.responseType;
     }
+    if (params.hasOwnProperty("headers")) {
+      for (var h in params.headers) {
+        req.setRequestHeader(h, params.headers[h]);
+      }
+    }
     req.onload = req.onerror = function () { f(req); };
     req.send(params.data || "");
   };
@@ -405,26 +458,31 @@
 
   // Custom events
 
+  function call_listener(listener, e) {
+    if (typeof listener.handleEvent === "function") {
+      listener.handleEvent.call(listener, e);
+    } else {
+      listener(e);
+    }
+  }
+
   // Listen to a custom event. Listener is a function or an object whose
-  // "handleEvent" function will then be invoked.
+  // "handleEvent" function will then be invoked. The listener is returned.
   flexo.listen = function (target, type, listener) {
     if (!(target.hasOwnProperty(type))) {
       target[type] = [];
     }
     target[type].push(listener);
+    return listener;
   };
 
-  // Listen to an event only once
+  // Listen to an event only once. The listener is returned.
   flexo.listen_once = function (target, type, listener) {
     var h = function (e) {
       flexo.unlisten(target, type, h);
-      if (typeof listener.handleEvent === "function") {
-        listener.handleEvent.call(listener, e);
-      } else {
-        listener(e);
-      }
+      call_listener(listener, e);
     };
-    flexo.listen(target, type, h);
+    return flexo.listen(target, type, h);
   };
 
   // Can be called as notify(e), notify(source, type) or notify(source, type, e)
@@ -439,58 +497,75 @@
     }
     if (e.source.hasOwnProperty(e.type)) {
       e.source[e.type].slice().forEach(function (listener) {
-        if (typeof listener.handleEvent === "function") {
-          listener.handleEvent.call(listener, e);
-        } else {
-          listener(e);
-        }
+        call_listener(listener, e);
       });
     }
   };
 
-  // Stop listening
+  // Stop listening and return the removed listener. If the listener was not set
+  // in the first place, do and return nothing.
   flexo.unlisten = function (target, type, listener) {
-    flexo.remove_from_array(target[type], listener);
+    return flexo.remove_from_array(target[type], listener);
   };
 
 
   // Functions and Asynchronicity
 
+  // This function gets passed to input and output value functions so that the
+  // input or output can be cancelled. If called with no parameter or a single
+  // parameter evaluating to a truthy value, throw a cancel exception;
+  // otherwise, return false.
+  flexo.cancel = function (p) {
+    if (arguments.length === 0 || !!p) {
+      throw "cancel";
+    }
+    return false;
+  };
+
+  // No-op function, returns nothing
+  flexo.nop = function () {
+  };
+
   // Identity function
-  flexo.id = function (x) { return x; };
+  flexo.id = function (x) {
+    return x;
+  };
+
 
   // Seq object for chaining asynchronous calls
-  var seq = {
-    _init: function () {
-      this._queue = [];
-      this._flushing = false;
-      return this;
-    },
+  flexo.Seq = {};
 
-    _flush: function () {
-      var f = this._queue.shift();
-      if (f) {
-        f(this._flush.bind(this));
-      } else {
-        this._flushing = false;
-        flexo.notify(this, "@done");
-      }
-    },
-
-    add: function(f) {
-      this._queue.push(f);
-      if (!this._flushing) {
-        this._flushing = true;
-        this._flush();
+  flexo.Seq.add = function (f) {
+    if (typeof f === "function") {
+      this.queue.push(f);
+      if (!this.flushing) {
+        this.flushing = true;
+        this.timeout = setTimeout(this.flush.bind(this), 0);
       }
     }
   };
 
-  flexo.seq = function () {
-    return Object.create(seq)._init();
+  flexo.Seq.flush = function () {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+      delete this.timeout;
+    }
+    var f = this.queue.shift();
+    if (f) {
+      f(this.flush.bind(this));
+    } else {
+      delete this.flushing;
+    }
   };
 
-  if (browser) {
+  flexo.seq = function () {
+    var seq = Object.create(flexo.Seq);
+    seq.queue = [];
+    return seq;
+  };
+
+
+  if (browserp) {
     flexo.request_animation_frame = (window.requestAnimationFrame ||
       window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
       window.msRequestAnimationFrame || function (f) {
@@ -506,10 +581,44 @@
 
   // DOM
 
+  // Make a (text) HTML tag; the first argument is the tag name. Following
+  // arguments are the contents (as text; must be properly escaped.) If the last
+  // argument is a boolean, it is treated as a flag to *not* close the element
+  // when true (i.e. for elements that are incomplete or HTML elements that do
+  // not need to be closed)
+  // TODO handle encoding (at least of attribute values)
+  flexo.html_tag = function (tag) {
+    var out = "<" + tag;
+    var contents = slice.call(arguments, 1);
+    if (typeof contents[0] === "object" && !Array.isArray(contents[0])) {
+      var attrs = contents.shift();
+      for (var a in attrs) {
+        if (attrs.hasOwnProperty(a)) {
+          var v = attrs[a];
+          // true and false/null/undefined act as special values: when true,
+          // just output the attribute name (without any value); when false,
+          // null or undefined, skip the attribute altogether
+          if (v != null && v !== false) {
+            out += (v === true ? " %0" : " %0=\"%1\"").fmt(a, v);
+          }
+        }
+      }
+    }
+    out += ">";
+    var keep_open = typeof contents[contents.length - 1] === "boolean" ?
+        contents.pop() : false;
+    out += contents.join("");
+    if (!keep_open) {
+      out += "</%0>".fmt(tag);
+    }
+    return out;
+  };
+
   // Known XML namespaces and their prefixes for use with create_element below.
   // For convenience both "html" and "xhtml" are defined as prefixes for XHTML.
   flexo.ns = {
     html: "http://www.w3.org/1999/xhtml",
+    m: "http://www.w3.org/1998/Math/MathML",
     svg: "http://www.w3.org/2000/svg",
     xhtml: "http://www.w3.org/1999/xhtml",
     xlink: "http://www.w3.org/1999/xlink",
@@ -530,114 +639,153 @@
     } else if (ch instanceof window.Node) {
       node.appendChild(ch);
     }
-  }
+  };
 
-  // Simple way to create elements, giving ns, id and classes directly within
-  // the name of the element (e.g. svg:rect#background.test) If id is defined,
-  // it must follow the element name and precede the class names; in this
-  // shorthand syntax, the id cannot contain a period. The second argument may
-  // be an object giving the attribute definitions (including id and class, if
-  // the shorthand syntax is not suitable) Beware of calling this function with
-  // `this` set to the target document.
+  // Simple way to create elements. The first argument is a string with the name
+  // of the element (e.g., "rect"), and may also contain a namespace prefix as
+  // defined in flexo.ns (e.g., "html:p"; the default is the namespace URI of
+  // the document), class names, using "." as a separator similarly to CSS
+  // (e.g., "html:p.important.description") and an id preceded by # (e.g.,
+  // "html:p.important.description#rule; not that this id may not contain a .)
+  // The second argument is optional and is an object defining attributes of the
+  // element; its properties are names of attributes, and the values are the
+  // values for the attribute. Note that a false, null or undefined value will
+  // *not* set the attribute. Attributes may have namespace prefixes so that we
+  // can use "xlink:href" for instance (e.g., flexo.create_element("svg:use",
+  // { "xlink:href": "#foo" });) Beware of calling this function with `this` set
+  // to the target document.
   flexo.create_element = function (name, attrs) {
     var contents;
-    if (typeof attrs === "object" && !(attrs instanceof Node)) {
-      contents = A.slice.call(arguments, 2);
+    if (typeof attrs === "object" && !(attrs instanceof Node) &&
+        !Array.isArray(attrs)) {
+      contents = slice.call(arguments, 2);
     } else {
-      contents = A.slice.call(arguments, 1);
+      contents = slice.call(arguments, 1);
       attrs = {};
     }
-    var classes = name.trim().split(".");
+    var classes = name.trim().split(".").map(function (x) {
+      var m = x.match(/#(.*)$/);
+      if (m) {
+        attrs.id = m[1];
+        return x.substr(0, m.index);
+      }
+      return x;
+    });
     name = classes.shift();
     if (classes.length > 0) {
       attrs["class"] =
-        (attrs.hasOwnProperty("class") ? attrs["class"] + " " : "")
+        (typeof attrs["class"] === "string" ? attrs["class"] + " " : "")
         + classes.join(" ");
     }
-    var m = name.match(/^(?:([^:]+):)?([^#]+)(?:#(.+))?$/);
-    if (m) {
-      var ns = (m[1] && flexo.ns[m[1].toLowerCase()]) ||
-        this.documentElement.namespaceURI;
-      var elem = ns ? this.createElementNS(ns, m[2]) : this.createElement(m[2]);
-      if (m[3]) {
-        attrs.id = m[3];
-      }
-      Object.keys(attrs).forEach(function (a) {
-        if (attrs[a] !== null && attrs[a] !== undefined && attrs[a] !== false) {
-          var sp = a.split(":");
-          var ns = sp[1] && flexo.ns[sp[0].toLowerCase()];
-          if (ns) {
-            elem.setAttributeNS(ns, sp[1], attrs[a]);
-          } else {
-            elem.setAttribute(a, attrs[a]);
-          }
+    var m = name.match(/^(?:([^:]+):)?/);
+    var ns = (m[1] && flexo.ns[m[1].toLowerCase()]) ||
+      this.documentElement.namespaceURI;
+    var elem = this.createElementNS(ns, m[1] ? name.substr(m[0].length) : name);
+    for (var a in attrs) {
+      if (attrs[a] != null && attrs[a] !== false) {
+        var sp = a.split(":");
+        ns = sp[1] && flexo.ns[sp[0].toLowerCase()];
+        if (ns) {
+          elem.setAttributeNS(ns, sp[1], attrs[a]);
+        } else {
+          elem.setAttribute(a, attrs[a]);
         }
-      });
-      contents.forEach(function (ch) {
-        flexo.append_child(elem, ch);
-      });
-      return elem;
+      }
     }
-  };
-
-  // Shorthand to create elements, e.g. flexo.$("svg#main.content")
-  flexo.$ = function () {
-    return flexo.create_element.apply(window.document, arguments);
-  };
-
-  // Shorthand to create a document fragment
-  flexo.$$ = function () {
-    var fragment = window.document.createDocumentFragment();
-    A.forEach.call(arguments, function (ch) {
-      flexo.append_child(fragment, ch);
+    contents.forEach(function (ch) {
+      flexo.append_child(elem, ch);
     });
-    return fragment;
-  }
+    return elem;
+  };
 
-  if (browser) {
-    // Shorthand for HTML elements: the element name prefixed by a $ sign
-    // Cf. http://dev.w3.org/html5/spec/section-index.html#elements-1
-    ["a", "abbr", "address", "area", "article", "aside", "audio", "b", "base",
-      "bdi", "bdo", "blockquote", "body", "br", "button", "canvas", "caption",
-      "cite", "code", "col", "colgroup", "command", "datalist", "dd", "del",
-      "details", "dfn", "dialog", "div", "dl", "dt", "em", "embed", "fieldset",
-      "figcaption", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5",
-      "h6", "head", "header", "hgroup", "hr", "html", "i", "iframe", "img",
-      "input", "ins", "kbd", "keygen", "label", "legend", "li", "link", "map",
-      "mark", "menu", "meta", "meter", "nav", "noscript", "object", "ol",
+  flexo.tags = {
+    html: ["a", "abbr", "address", "area", "article", "aside", "audio", "b",
+      "base", "bdi", "bdo", "blockquote", "body", "br", "button", "canvas",
+      "caption", "cite", "code", "col", "colgroup", "command", "datalist", "dd",
+      "del", "details", "dfn", "dialog", "div", "dl", "dt", "em", "embed",
+      "fieldset", "figcaption", "figure", "footer", "form", "h1", "h2", "h3",
+      "h4", "h5", "h6", "head", "header", "hgroup", "hr", "html", "i", "iframe",
+      "img", "input", "ins", "kbd", "keygen", "label", "legend", "li", "link",
+      "map", "mark", "menu", "meta", "meter", "nav", "noscript", "object", "ol",
       "optgroup", "option", "output", "p", "param", "pre", "progress", "q",
       "rp", "rt", "ruby", "s", "samp", "script", "section", "select", "small",
       "source", "span", "strong", "style", "sub", "summary", "sup", "table",
       "tbody", "td", "textarea", "tfoot", "th", "thead", "time", "title", "tr",
-      "tref", "track", "u", "ul", "var", "video", "wbr"
-    ].forEach(function (tag) {
-      flexo["$" + tag] = flexo.create_element.bind(window.document, tag);
-    });
-
-    // SVG elements (a, color-profile, font-face, font-face-format,
-    // font-face-name, font-face-src, font-face-uri, missing-glyph, script,
-    // style, and title are omitted because of clashes with the HTML namespace
-    // or lexical issues with Javascript)
-    // Cf. http://www.w3.org/TR/SVG/eltindex.html
-    ["altGlyph", "altGlyphDef", "altGlyphItem", "animate", "animateColor",
-      "animateMotion", "animateTransform", "circle", "clipPath", "cursor",
-      "defs", "desc", "ellipse", "feBlend", "feColorMatrix",
-      "feComponentTransfer", "feComposite", "feConvolveMatrix",
+      "tref", "track", "u", "ul", "var", "video", "wbr"],
+    svg: ["altGlyph", "altGlyphDef", "altGlyphItem", "animate", "animateColor",
+      "animateMotion", "animateTransform", "circle", "clipPath",
+      "color-profile", "cursor", "defs", "desc", "ellipse", "feBlend",
+      "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix",
       "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feFlood",
       "feFuncA", "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage",
       "feMerge", "feMergeNode", "feMorphology", "feOffset", "fePointLight",
       "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence", "filter",
-      "font", "foreignObject", "g", "glyph", "glyphRef", "hkern", "image",
-      "line", "linearGradient", "marker", "mask", "metadata", "mpath", "path",
-      "pattern", "polygon", "polyline", "radialGradient", "rect", "set", "stop",
-      "svg", "switch", "symbol", "text", "textPath", "tref", "tspan", "use",
-      "view", "vkern"
-    ].forEach(function (tag) {
-      flexo["$" + tag] = flexo.create_element.bind(window.document,
-        "svg:" + tag);
-    });
+      "font", "font-face", "font-face-format", "font-face-name",
+      "font-face-src", "font-face-uri", "foreignObject", "g", "glyph",
+      "glyphRef", "hkern", "image", "line", "linearGradient", "marker", "mask",
+      "metadata", "missing-glyph", "mpath", "path", "pattern", "polygon",
+      "polyline", "radialGradient", "rect", "set", "stop", "svg", "switch",
+      "symbol", "text", "textPath", "tref", "tspan", "use", "view", "vkern"],
+    m: ["abs", "and", "annotation", "annotation-xml", "apply", "approx",
+      "arccos", "arccosh", "arccot", "arccoth", "arccsc", "arccsch", "arcsec",
+      "arcsech", "arcsin", "arcsinh", "arctan", "arctanh", "arg", "bind",
+      "bvar", "card", "cartesianproduct", "cbytes", "ceiling", "cerror", "ci",
+      "cn", "codomain", "complexes", "compose", "condition", "conjugate", "cos",
+      "cosh", "cot", "coth", "cs", "csc", "csch", "csymbol", "curl", "declare",
+      "degree", "determinant", "diff", "divergence", "divide", "domain",
+      "domainofapplication", "el", "emptyset", "eq", "equivalent", "eulergamma",
+      "exists", "exp", "exponentiale", "factorial", "factorof", "false",
+      "floor", "fn", "forall", "gcd", "geq", "grad", "gt", "ident", "imaginary",
+      "imaginaryi", "implies", "in", "infinity", "int", "integers", "intersect",
+      "interval", "inverse", "lambda", "laplacian", "lcm", "leq", "limit",
+      "list", "ln", "log", "logbase", "lowlimi", "lt", "maction", "malign",
+      "maligngroup", "malignmark", "malignscope", "math", "matrix", "matrixrow",
+      "max", "mean", "median", "menclose", "merror", "mfenced", "mfrac",
+      "mfraction", "mglyph", "mi", "minus", "mlabeledtr", "mlongdiv",
+      "mmultiscripts", "mn", "mo", "mode", "moment", "momentabout", "mover",
+      "mpadded", "mphantom", "mprescripts", "mroot", "mrow", "ms", "mscarries",
+      "mscarry", "msgroup", "msline", "mspace", "msqrt", "msrow", "mstack",
+      "mstyle", "msub", "msubsup", "msup", "mtable", "mtd", "mtext", "mtr",
+      "munder", "munderover", "naturalnumbers", "neq", "none", "not",
+      "notanumber", "note", "notin", "notprsubset", "notsubset", "or",
+      "otherwise", "outerproduct", "partialdiff", "pi", "piece", "piecewise",
+      "plus", "power", "primes", "product", "prsubset", "quotient", "rationals",
+      "real", "reals", "reln", "rem", "root", "scalarproduct", "sdev", "sec",
+      "sech", "selector", "semantics", "sep", "setdiff", "share", "sin",
+      "subset", "sum", "tan", "tanh", "tendsto", "times", "transpose", "true",
+      "union", "uplimit", "variance", "vector", "vectorproduct", "xor"]
+  };
 
-    // TODO MathML
+  if (browserp) {
+
+    // Shorthand to create elements, e.g. flexo.$("svg#main.content")
+    flexo.$ = function () {
+      return flexo.create_element.apply(window.document, arguments);
+    };
+
+    // Shorthand to create a document fragment
+    flexo.$$ = function () {
+      var fragment = window.document.createDocumentFragment();
+      foreach.call(arguments, function (ch) {
+        flexo.append_child(fragment, ch);
+      });
+      return fragment;
+    };
+
+    // Make shorthands for known HTML, SVG and MathML elements, e.g. flexo.$p,
+    // flexo.$fontFaceFormat (for svg:font-face-format), &c.
+    for (var ns in flexo.tags) {
+      flexo.tags[ns].forEach(function (tag) {
+        flexo["$" + flexo.undash(tag)] = flexo.create_element
+          .bind(window.document, "%0:%1".fmt(ns, tag));
+      });
+    }
+  } else {
+    for (var ns in flexo.tags) {
+      flexo.tags[ns].forEach(function (tag) {
+        flexo["$" + flexo.undash(tag)] = flexo.html_tag.bind(this, tag);
+      });
+    }
   }
 
   // Get clientX/clientY as an object { x: ..., y: ... } for events that may
@@ -690,13 +838,13 @@
 
 
   // Graphics
-  
+
   // Color
 
   // Convert a color from hsv space (hue in radians, saturation and brightness
   // in the [0, 1] interval) to RGB, returned as an array of RGB values in the
   // [0, 256[ interval.
-  flexo.hsv_to_rgb = function(h, s, v) {
+  flexo.hsv_to_rgb = function (h, s, v) {
     s = flexo.clamp(s, 0, 1);
     v = flexo.clamp(v, 0, 1);
     if (s === 0) {
@@ -717,16 +865,21 @@
 
   // Convert a color from hsv space (hue in degrees, saturation and brightness
   // in the [0, 1] interval) to an RGB hex value
-  flexo.hsv_to_hex = function(h, s, v) {
+  flexo.hsv_to_hex = function (h, s, v) {
     return flexo.rgb_to_hex.apply(this, flexo.hsv_to_rgb(h, s, v));
   };
 
   // Convert an RGB color (3 values in the [0, 256[ interval) to a hex value
-  flexo.rgb_to_hex = function() {
-    return "#" + A.map.call(arguments,
+  flexo.rgb_to_hex = function () {
+    return "#" + map.call(arguments,
       function (x) {
         return flexo.pad(flexo.clamp(Math.floor(x), 0, 255).toString(16), 2);
       }).join("");
+  };
+
+  // Convert a number to a color hex string. Use only the lower 24 bits.
+  flexo.num_to_hex = function (n) {
+    return "#" +  flexo.pad((n & 0xffffff).toString(16), 6);
   };
 
 
@@ -750,7 +903,7 @@
   };
 
   // Find the closest <svg> ancestor for a given element
-  flexo.find_svg = function(elem) {
+  flexo.find_svg = function (elem) {
     if (!elem) {
       return;
     }
@@ -761,42 +914,92 @@
       elem.localName === "svg" ? elem : flexo.find_svg(elem.parentNode);
   };
 
-  // Create a regular polygon with the number of sides inscribed in a circle of
-  // the given radius, with an optional starting phase (use Math.PI / 2 to have
-  // it pointing up at all times)
-  flexo.svg_polygon = function (sides, radius, phase) {
-    return $polygon({ points: flexo.svg_polygon_points(sides, radius, phase) });
+  flexo.deg2rad = function (degrees) {
+    return degrees * Math.PI / 180;
   };
 
-  flexo.svg_polygon_points = function (sides, radius, phase) {
-    if (phase === undefined) {
-      phase = 0;
-    }
+  // Make a list of points for a regular polygon with `sides` sides (should be
+  // at least 3) inscribed in a circle of radius `r`. The first point is at
+  // angle `phase`, which defaults to 0. The center of the circle may be set
+  // with `x` and `y` (both default to 0.)
+  flexo.poly_points = function (sides, r, phase, x, y) {
+    phase = phase || 0;
+    x = x || 0;
+    y = y || 0;
     var points = [];
     for (var i = 0, ph = 2 * Math.PI / sides; i < sides; ++i) {
-      points.push(radius * Math.cos(phase + ph * i));
-      points.push(-radius * Math.sin(phase + ph * i));
+      points.push(x + r * Math.cos(phase + ph * i));
+      points.push(y - r * Math.sin(phase + ph * i));
     }
     return points.join(" ");
   };
 
-  // Same as above but create a star with the given inner radius
-  flexo.svg_star = function (sides, ro, ri, phase) {
-    return $polygon({ points: flexo.svg_star_points(sides, ro, ri, phase) });
+  // Create a regular polygon with the `sides` sides (should be at least 3),
+  // inscribed in a circle of radius `r`, with an optional starting phase
+  // (in degrees)
+  flexo.$poly = function (attrs) {
+    var sides = parseFloat(attrs.sides) || 0;
+    var r = parseFloat(attrs.r) || 0;
+    var phase = flexo.deg2rad(parseFloat(attrs.phase || 0));
+    var x = parseFloat(attrs.x) || 0;
+    var y = parseFloat(attrs.y) || 0;
+    delete attrs.sides;
+    delete attrs.r;
+    delete attrs.phase;
+    delete attrs.x;
+    delete attrs.y;
+    attrs.points = flexo.poly_points(sides, r, phase, x, y);
+    return flexo.$polygon.apply(this, arguments);
   };
 
-  flexo.svg_star_points = function (sides, ro, ri, phase) {
-    if (phase === undefined) {
-      phase = 0;
-    }
-    sides *= 2;
+  // Create a star with `branches` branches inscribed in a circle of radius `r`,
+  // with an optional starting phase (in degrees)
+  flexo.$star = function (attrs) {
+    var branches = parseFloat(attrs.branches) || 0;
+    var r = parseFloat(attrs.r) || 0;
+    var phase = parseFloat(attrs.phase || 0);
+    var x = parseFloat(attrs.x) || 0;
+    var y = parseFloat(attrs.y) || 0;
+    delete attrs.branches;
+    delete attrs.r;
+    delete attrs.phase;
+    delete attrs.x;
+    delete attrs.y;
     var points = [];
-    for (var i = 0, ph = 2 * Math.PI / sides; i < sides; ++i) {
-      var r = i % 2 === 0 ? ro : ri;
-      points.push(r * Math.cos(phase + ph * i));
-      points.push(-r * Math.sin(phase + ph * i));
+    if (branches % 2 === 0) {
+      var sides = branches / 2;
+      return flexo.$g(attrs,
+          flexo.$poly({ sides: sides, x: x, y: y, r: r, phase: phase }),
+          flexo.$poly({ sides: sides, x: x, y: y, r: r,
+            phase: phase + 360 / branches }));
     }
-    return points.join(" ");
+    phase = flexo.deg2rad(phase);
+    for (var i = 0, ph = 4 * Math.PI / branches; i < branches; ++i) {
+      points.push(x + r * Math.cos(phase + ph * i));
+      points.push(y - r * Math.sin(phase + ph * i));
+    }
+    points.push(points[0]);
+    points.push(points[1]);
+    attrs.points = points.join(" ");
+    return flexo.$polyline.apply(this, arguments);
   };
 
-}(typeof exports === "object" ? exports : window.flexo = {}));
+  // Triangle strips. The list of points should be at least 6 long (i.e. 3 pairs
+  // of coordinates)
+  flexo.$strip = function (attrs) {
+    var points = (attrs.points || "").split(/\s*,\s*|\s+/);
+    delete attrs.points;
+    var g = flexo.$g.apply(this, arguments);
+    for (var i = 0, n = points.length / 2 - 2; i < n; ++i) {
+      g.appendChild(flexo.$polygon({ points:
+        [points[2 * i], points[2 * i + 1],
+         points[2 * i + 2], points[2 * i + 3],
+         points[2 * i + 4], points[2 * i + 5],
+         points[2 * i], points[2 * i + 1]
+        ].join(" ")
+      }));
+    }
+    return g;
+  };
+
+}(typeof exports === "object" ? exports : this.flexo = {}));

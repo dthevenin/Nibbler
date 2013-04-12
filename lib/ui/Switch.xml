@@ -1,10 +1,10 @@
-<component xmlns="http://bender.igel.co.jp" prototype="nibbler.ui.Switch">
+<component xmlns="http://bender.igel.co.jp" href="View.xml" on-render="nibbler.ui.Switch">
 
   <property name="textOff" as="string" value="Off" />
   <property name="textOn" as="string" value="On" />
   <property name="toggled" as="boolean" value="true"/>
 
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
+  <view xmlns:html="http://www.w3.org/1999/xhtml" stack="replace">
     <html:div class="vs_ui_switch">
       <html:div />
       <html:div>
@@ -16,14 +16,14 @@
   </view>
 
   <watch>
-    <get instance="$self" property="textOff">
-      this.__vs_instance.textOff = value;
+    <get property="textOff">
+      this.__vs_instance.textOff = property;
     </get>
-    <get instance="$self" property="textOn">
-      this.__vs_instance.textOn = value;
+    <get property="textOn">
+      this.__vs_instance.textOn = property;
     </get>
-    <get instance="$self" property="toggled">
-      this.__vs_instance.toggled = value;
+    <get property="toggled">
+      this.__vs_instance.toggled = property;
     </get>
   </watch>
 

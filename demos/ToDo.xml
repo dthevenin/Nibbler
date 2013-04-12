@@ -1,38 +1,36 @@
-<component xmlns="http://bender.igel.co.jp">
-  <view xmlns:html="http://www.w3.org/1999/xhtml">
-    <component id="todo" href="../lib/ui/Application.xml">
-      <component id="my_data" href="../lib/core/Array.xml"/>
-      <component id="my_input" href="../lib/ui/TextInput.xml" placeholder="What needs to be done?"/>
-      <component id="my_check_box" href="../lib/ui/CheckBox.xml"/>
-      <component id="my_button1" href="../lib/ui/Button.xml" text="Remove"/>
-    </component>
+<component xmlns="http://bender.igel.co.jp" href="../lib/ui/Application.xml"
+  id="todo">
+  <view>
+    <component id="my_data" href="../lib/core/Array.xml"/>
+    <component id="my_input" href="../lib/ui/TextInput.xml" placeholder="What needs to be done?"/>
+    <component id="my_check_box" href="../lib/ui/CheckBox.xml"/>
+    <component id="my_button1" href="../lib/ui/Button.xml" text="Remove"/>
   </view>
 
   <watch>
-    <get instance="$self" event="@rendered"/>
+    <get event="@running"/>
     <set>
       var instance = this;
-      var my_data = this.instances.my_data;
-      var my_check_box = this.instances.my_check_box;
-
+      var my_data = this.components.my_data;
+      var my_check_box = this.components.my_check_box;
       my_check_box.properties.model = my_data;
     </set>
   </watch>
 
   <watch>
-    <get instance="my_input" event="@change">
-      var my_data = this.instances.my_data;
-      var my_check_box = this.instances.my_check_box;
-      var my_input = this.instances.my_input;
+    <get component="my_input" event="@change">
+      var my_data = this.components.my_data;
+      var my_check_box = this.components.my_check_box;
+      var my_input = this.components.my_input;
       my_input.properties.value = "";
-      my_data.add (value.data);
+      my_data.add (event.data);
     </get>
-    
-    <get instance="my_button1" event="@select">
-      var my_data = this.instances.my_data;
-      var my_check_box = this.instances.my_check_box;
 
-	
+    <get component="my_button1" event="@select">
+      var my_data = this.components.my_data;
+      var my_check_box = this.components.my_check_box;
+
+
       my_data.stopPropagation ();
       var selectedIndexes = my_check_box.properties.selectedIndexes;
       selectedIndexes.sort ();
@@ -42,8 +40,8 @@
       }
       my_data.change ();
     </get>
-    <get instance="my_check_box" event="@change">
-      console.log (value);
+    <get component="my_check_box" event="@change">
+      console.log (event);
     </get>
   </watch>
 </component>
