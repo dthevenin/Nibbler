@@ -2,10 +2,6 @@ body {
   background-color: rgb(67,107,118);
 }
 
-.tabs {
-  padding: 10px;
-}
-
 .tabs .my_tab > *{
   top:6px;
 }

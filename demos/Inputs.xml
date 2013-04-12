@@ -15,7 +15,7 @@
 
   <watch>
     <get component="combo" event="@change">
-      console.log (value);
+      console.log (event);
     </get>
   </watch>
 

@@ -2,6 +2,12 @@ Widgets = function () {
 
   nibbler.ui.Application.call (this);
 
+  for (var i = 0; i < this.components.panels.children.length; i++)
+  {
+    var child = this.components.panels.children [i];
+    child.hide ();
+  }
+
   this._current_panel = this.components.widgets_list;
   this.components.back_button.hide ();
   this.components.nav_title.hide ();
@@ -11,17 +17,16 @@ Widgets = function () {
 };
 
 Widgets.onBack = function (e) {
-  // HACK should be this._current_panel.show ();
-  this._current_panel.views.$root.classList.remove ('show');
+  this._current_panel.hide ();
   this.components.back_button.hide ();
   this.components.nav_title.hide ();
   this._current_panel = this.components.widgets_list;
-  this._current_panel.removeClassName ('hide');
+  this._current_panel.show ();
 };
 
 
 Widgets.onListSelect = function (e) {
-  this._current_panel.addClassName ('hide');
+  this._current_panel.hide ();
 
   switch (e.index) {
     case 0: this._current_panel = this.components.buttons; break;
@@ -34,8 +39,9 @@ Widgets.onListSelect = function (e) {
     case 7: this._current_panel = this.components.map; break;
     case 8: this._current_panel = this.components.todo; break;
   }
-  // HACK should be this._current_panel.show ();
-  this._current_panel.views.$root.classList.add ('show');
+  this._current_panel.show ();
+  this._current_panel.refresh ();
+
   this.components.back_button.show ();
   this.components.nav_title.properties.text = e.item.title;
   this.components.nav_title.show ();
