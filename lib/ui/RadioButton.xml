@@ -12,7 +12,7 @@
 
   <watch>
     <get instance="$self" property="data">
-      this.__set_data(value)
+      this.__vs_instance.data = value;
     </get>
 
     <get instance="$self" property="model">

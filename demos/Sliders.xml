@@ -1,12 +1,15 @@
-<component xmlns="http://bender.igel.co.jp" href="../lib/ui/Application.xml"
-  id="sliders">
-  <component href="../lib/ui/ProgressBar.xml" indeterminate="true"/>
-  <component id="pb1" href="../lib/ui/ProgressBar.xml" index="50"/>
-  <component id="slider1" href="../lib/ui/Slider.xml" index="50"/>
-  <component id="slider2" href="../lib/ui/Slider.xml" orientation="vs.ui.Slider.VERTICAL"/>
-  <component id="label2" href="../lib/ui/TextLabel.xml"/>
-  <component id="slider3" href="../lib/ui/Slider.xml" orientation="vs.ui.Slider.VERTICAL"/>
-  <component id="label3" href="../lib/ui/TextLabel.xml"/>
+<component xmlns="http://bender.igel.co.jp">
+  <view xmlns:html="http://www.w3.org/1999/xhtml">
+    <component id="sliders" href="../lib/ui/Application.xml">
+      <component href="../lib/ui/ProgressBar.xml" indeterminate="true"/>
+      <component id="pb1" href="../lib/ui/ProgressBar.xml" index="50"/>
+      <component id="slider1" href="../lib/ui/Slider.xml" index="50"/>
+      <component id="slider2" href="../lib/ui/Slider.xml" orientation="vs.ui.Slider.VERTICAL"/>
+      <component id="label2" href="../lib/ui/TextLabel.xml"/>
+      <component id="slider3" href="../lib/ui/Slider.xml" orientation="vs.ui.Slider.VERTICAL"/>
+      <component id="label3" href="../lib/ui/TextLabel.xml"/>
+    </component>
+  </view>
 
   <watch>
     <get instance="slider1" property="value" />
